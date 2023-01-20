@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Guns.cs" />
+    <Compile Include="Items.cs" />
     <Compile Include="StatsPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -94,6 +96,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\whitePanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thirstBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\healthBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hungerBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\radiationBar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

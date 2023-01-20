@@ -15,6 +15,7 @@ namespace AxesAndShoesTWO
         public static PictureBox healthBar = new PictureBox();
         public static PictureBox thirstBar = new PictureBox();
         public static PictureBox hungerBar = new PictureBox();
+        public static PictureBox radiationBar = new PictureBox();
         public StatsPanel(int Width, int Height)
         {
             InitializeComponent();
@@ -22,27 +23,29 @@ namespace AxesAndShoesTWO
             healthBar.Location = new Point(0, 0);
             thirstBar.Location = new Point(0,  Height / 16);
             hungerBar.Location = new Point(0, (Height / 16) * 2);
+            radiationBar.Location = new Point(0, (Height / 16) * 3);
 
             healthBar.Size = new Size(Width/4, Height / 16);
             thirstBar.Size = new Size(Width/4, Height / 16);
             hungerBar.Size = new Size(Width/4, Height / 16);
+            radiationBar.Size = new Size(Width / 4, Height / 16);
 
-            healthBar.Image = Properties.Resources.blackPanel;
-            thirstBar.Image = Properties.Resources.whitePanel;
-            hungerBar.Image = Properties.Resources.blackPanel;
+            healthBar.Image = Properties.Resources.healthBar;
+            thirstBar.Image = Properties.Resources.thirstBar;
+            hungerBar.Image = Properties.Resources.hungerBar;
+            radiationBar.Image = Properties.Resources.radiationBar;
 
             healthBar.SizeMode = PictureBoxSizeMode.StretchImage;
             thirstBar.SizeMode = PictureBoxSizeMode.StretchImage;
             hungerBar.SizeMode = PictureBoxSizeMode.StretchImage;
-            
+            radiationBar.SizeMode = PictureBoxSizeMode.StretchImage;
             
             this.Controls.Add(healthBar);
             this.Controls.Add(thirstBar);
             this.Controls.Add(hungerBar);
+            this.Controls.Add(radiationBar);
 
             this.Size = new Size(480,270);
-            MessageBox.Show(healthBar.Size.ToString());
-            MessageBox.Show(healthBar.Location.ToString());
         }
 
         protected override void OnPaint(PaintEventArgs pe)
