@@ -26,6 +26,8 @@ namespace AxesAndShoesTWO
         Thread loadTimer = new Thread(new ThreadStart(loadTimer_Tick));
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
+        public static Panel mainGamePanel = new Panel();
+        
         static void mainGameTimer_Tick()
         {
             Thread.Sleep(16); //Main game is set to ~60 fps
@@ -44,15 +46,12 @@ namespace AxesAndShoesTWO
             loadPanel.Size = new Size(WidthSet, HeightSet);
             loadPanel.BackColor = Color.Black;
 
-
-
-
-
-
             statsPanel.Location = new Point(WidthSet/2 + WidthSet/4, HeightSet/2 + HeightSet/4);
             statsPanel.Visible = false;
             this.Controls.Add(statsPanel);
             this.Controls.Add(loadPanel);
+
+            this.Controls.Add(mainGamePanel);
         }
         
     }
