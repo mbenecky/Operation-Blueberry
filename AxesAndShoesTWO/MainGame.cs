@@ -27,23 +27,31 @@ namespace AxesAndShoesTWO
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
-        
+        public static int loadColor = 0;
         static void mainGameTimer_Tick()
         {
             Thread.Sleep(16); //Main game is set to ~60 fps
         }
         static void loadTimer_Tick()
         {
-            Thread.Sleep(3000);
-            loadPanel.Dispose();
-            loadTimer.Abort();
+            if (loadColor >= 255)
+            {
+                Thread.Sleep(2000);
+                loadPanel.Dispose();
+                loadTimer.Abort();
+            } else
+            {
+                loadLabel.BackColor = Color.FromArgb(loadColor);
+                Thread.Sleep(50);
+                loadColor += 10;
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             loadLabel.Location = new Point(WidthSet/2, HeightSet/2);
-            loadLabel.Text = "Loading...";
-            loadLabel.ForeColor = Color.White;
+            loadLabel.Text = "I know not with what weapons World War III will be fought, but World War IV will be fought with sticks and stone \n -Albert Einstein";
             loadPanel.Controls.Add(loadLabel);
+            loadPanel.Location = new Point(0, 0);
             loadPanel.Size = new Size(WidthSet, HeightSet);
             loadPanel.BackColor = Color.Black;
 
@@ -51,7 +59,6 @@ namespace AxesAndShoesTWO
             statsPanel.Visible = false;
             this.Controls.Add(statsPanel);
             this.Controls.Add(loadPanel);
-            this.Controls.Add(mainGamePanel);
         }
         
     }
