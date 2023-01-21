@@ -73,6 +73,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buttonTemp {
+            get {
+                object obj = ResourceManager.GetObject("buttonTemp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap healthBar {
             get {
                 object obj = ResourceManager.GetObject("healthBar", resourceCulture);
@@ -86,6 +96,16 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap hungerBar {
             get {
                 object obj = ResourceManager.GetObject("hungerBar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap opBlueberryTempLogo {
+            get {
+                object obj = ResourceManager.GetObject("opBlueberryTempLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

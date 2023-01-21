@@ -112,5 +112,11 @@
   <ItemGroup>
     <None Include="Resources\radiationBar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonTemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\opBlueberryTempLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
