@@ -12,7 +12,6 @@ namespace AxesAndShoesTWO
         Random rnd = new Random();
         public string Name;
         public int Damage;
-        public static Thread DamageWait = new Thread(new ThreadStart(Attack));
         public static int WaitTime;
         public PictureBox pbImage;
         public List<Items> Drops;
@@ -30,15 +29,13 @@ namespace AxesAndShoesTWO
             this.pbImage = pbImage;
             this.Drops = Drops; 
         }
-        public static void Attack()
+        async Task Attack()
         {
-            Thread.Sleep(WaitTime*1000);
+
+            await Task.Delay(WaitTime*1000);
             //attack on player
         }
-        public static void Death()
-        {
-            DamageWait.Abort();
-        }
+        
 
     }
 }
