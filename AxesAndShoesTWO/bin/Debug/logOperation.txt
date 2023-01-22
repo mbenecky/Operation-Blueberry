@@ -1,4 +1,0 @@
-22.01.2023 14:34:53: Wrong characterInteraction, Maybe currentInteraction value is wrong?Index je mimo rozsah. Index musí být nezáporný a musí být menší než velikost kolekce.
-Název parametru: index
-22.01.2023 14:34:53: Wrong characterInteraction, Maybe currentInteraction value is wrong?Index je mimo rozsah. Index musí být nezáporný a musí být menší než velikost kolekce.
-Název parametru: index

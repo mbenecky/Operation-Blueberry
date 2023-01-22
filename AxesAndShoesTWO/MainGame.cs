@@ -12,6 +12,15 @@ namespace AxesAndShoesTWO
 {
     public partial class MainGame : Form
     {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED      
+                return handleParam;
+            }
+        }
         public int WidthSet = Screen.PrimaryScreen.Bounds.Width, HeightSet = Screen.PrimaryScreen.Bounds.Height;
 
         StatsPanel statsPanel = new StatsPanel(1920, 1080);
@@ -234,6 +243,7 @@ namespace AxesAndShoesTWO
             list.Add("You're in safe hands that's for sure, welcome to the bunker, after the nuclear bombs this is the only place where humans live far and wide...");
             list.Add("Yeah I know... pretty sick. Forgot to introduce myself, I am Sargeant Blueberry, in command of this whole bunker.");
             list.Add("Why don't you get off this ground and help us a bit, will ya?");
+            list.Add("NEXT");
             return list;
         }
 
@@ -252,7 +262,8 @@ namespace AxesAndShoesTWO
 
             try 
             { 
-                await writeOutLines(CharacterInteractions[currentInteraction]);
+                if(CharacterInteractions[currentInteraction] != "NEXT") { await writeOutLines(CharacterInteractions[currentInteraction]); }
+                else { }
                 currentInteraction++;
             } 
             catch(Exception ex)
@@ -261,8 +272,15 @@ namespace AxesAndShoesTWO
             }
         }
 
-
-
+        private void MainGame_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case Keys.Escape: break; //pauses
+                case Keys.M: break; //opens map
+                case Keys.R: break; //reload
+            }
+        }
 
         private void OKButton_Click(object sender, EventArgs e)
         {
@@ -281,8 +299,8 @@ namespace AxesAndShoesTWO
 
 
 
-    public enum Keys
-    {
+    public enum KeysRoom
+    {   
         Catacombs,          //base mistnost na nauceni controls
         ElectricityRoom,    //second level mistnost s mensima enemies
         EngineRoom,         //third level mistnost s vetsima enemies a lepsimy dropy
