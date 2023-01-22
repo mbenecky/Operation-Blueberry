@@ -1,4 +1,5 @@
 ﻿
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AxesAndShoesTWO
@@ -7,14 +8,12 @@ namespace AxesAndShoesTWO
     {
         public string Name;
         public string Text;
-        public PictureBox pBox;
-        public Button OkButton;
-        public Characters(string Name, string Text, PictureBox pBox, Button OkButton)
+        public Image img;
+        public Characters(string Name, string Text, Image img)
         {
             this.Name = Name;
             this.Text = Text;
-            this.pBox = pBox;
-            this.OkButton = OkButton;
+            this.img = img;
         }
         public Characters()
         {

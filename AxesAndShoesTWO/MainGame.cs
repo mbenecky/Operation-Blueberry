@@ -15,7 +15,10 @@ namespace AxesAndShoesTWO
         public int WidthSet = 1920, HeightSet = 1080;
 
         StatsPanel statsPanel = new StatsPanel(1920, 1080);
-        
+
+        public static List<Characters> Chars = new List<Characters>();
+
+
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
@@ -37,6 +40,8 @@ namespace AxesAndShoesTWO
             {
                 File.Delete("logOperation.txt");
             }
+
+            Chars = CharactersLoad();
 
             characterInteractPanel.Size = new Size(WidthSet, HeightSet);
             characterInteractPanel.BackgroundImage = Properties.Resources.voiceLineTestBedImage;
@@ -160,6 +165,26 @@ namespace AxesAndShoesTWO
                 }
                 sw.WriteLine(DateTime.Now + ": " + message);
             }
+        }
+
+        public List<Characters> CharactersLoad()
+        {
+            List<Characters> list = new List<Characters>();
+            Characters SgtBory = new Characters("Sgt. Bory", "Hey, you're finally awake", Properties.Resources.voiceLineTestBedImage);
+            Characters EndBossBory = new Characters("Sgt. Bory", "Well, you've found out", Properties.Resources.voiceLineTestBedImage);
+            Characters Korky = new Characters("Mr. Korky", "Wanna try some meth?", Properties.Resources.voiceLineTestBedImage);
+            Characters Medved = new Characters("Medved", "bpffff", Properties.Resources.voiceLineTestBedImage);
+            Characters Horkymi = new Characters("Horkymi", "damn", Properties.Resources.voiceLineTestBedImage);
+            Characters Mako = new Characters("Mako", "parno", Properties.Resources.voiceLineTestBedImage);
+            
+            list.Add(SgtBory);
+            list.Add(EndBossBory);
+            list.Add(Korky);
+            list.Add(Medved);
+            list.Add(Horkymi);
+            list.Add(Mako);
+            
+            return list;
         }
 
         //END OF METHODS

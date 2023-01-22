@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters.cs" />
+    <Compile Include="Clothes.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Enemy.cs" />
