@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Enemy.cs" />
@@ -120,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\OPbLUEBERRYTEMPLOGO2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voiceLineTestBedImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

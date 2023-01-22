@@ -19,6 +19,13 @@ namespace AxesAndShoesTWO
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
+        
+        
+        public static Panel characterInteractPanel = new Panel();
+        public static Label characterInteractLabel = new Label();
+        public static Label characterInteractLabelName = new Label();
+
+
         public int loadColor = 0;
         public int loadOpacity = 255;
 
@@ -30,6 +37,10 @@ namespace AxesAndShoesTWO
             {
                 File.Delete("logOperation.txt");
             }
+
+            characterInteractPanel.Size = new Size(WidthSet, HeightSet);
+            characterInteractPanel.BackgroundImage = Properties.Resources.voiceLineTestBedImage;
+            
 
 
             loadPanel.Location = new Point(0, 0);
