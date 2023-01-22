@@ -27,7 +27,7 @@ namespace AxesAndShoesTWO
         public static Panel characterInteractPanel = new Panel();
         public static Label characterInteractLabel = new Label();
         public static Label characterInteractLabelName = new Label();
-
+        public static Button characterInteractButton = new Button();
 
         public int loadColor = 0;
         public int loadOpacity = 255;
@@ -43,10 +43,31 @@ namespace AxesAndShoesTWO
 
             Chars = CharactersLoad();
 
-            characterInteractPanel.Size = new Size(WidthSet, HeightSet);
-            characterInteractPanel.BackgroundImage = Properties.Resources.voiceLineTestBedImage;
-            
+            characterInteractButton.Text = "Next";
+            characterInteractButton.Location = new Point(WidthSet - WidthSet / 10, HeightSet -HeightSet / 10);
+            characterInteractButton.Size = new Size(WidthSet / 10, HeightSet / 10);
+            characterInteractButton.BackgroundImage = Properties.Resources.buttonTemp;
 
+
+            characterInteractPanel.Size = new Size(WidthSet, HeightSet);
+            characterInteractPanel.BackgroundImage = Chars[0].img;
+
+            characterInteractLabel.Text = Chars[0].Text;
+            characterInteractLabel.Location = new Point(0,HeightSet/2);
+            characterInteractLabel.BackColor = Color.Transparent;
+            characterInteractLabel.AutoSize = true;
+            characterInteractLabel.Font = new Font(characterInteractLabel.Font.FontFamily, 36);
+
+            characterInteractLabelName.Text = Chars[0].Name;
+            characterInteractLabelName.AutoSize = true;
+            characterInteractLabelName.Location = new Point(0, 0);
+            characterInteractLabelName.BackColor = Color.Transparent;
+            characterInteractLabelName.Font = new Font(characterInteractLabelName.Font.FontFamily, 50);
+
+            characterInteractPanel.Visible = false;
+            characterInteractPanel.Controls.Add(characterInteractLabel);
+            characterInteractPanel.Controls.Add(characterInteractLabelName);
+            characterInteractPanel.Controls.Add(characterInteractButton);
 
             loadPanel.Location = new Point(0, 0);
             loadPanel.Size = new Size(WidthSet, HeightSet);
@@ -92,11 +113,11 @@ namespace AxesAndShoesTWO
             mainGamePanel.Controls.Add(newGameButton);
             mainGamePanel.Controls.Add(optionsButton);
             mainGamePanel.Controls.Add(creditsButton);
-
-
+            this.Controls.Add(loadPanel);
+            this.Controls.Add(characterInteractPanel);
             this.Controls.Add(statsPanel);
             this.Controls.Add(mainGamePanel);
-            this.Controls.Add(loadPanel);
+            
 
             Task.Run(() => mainGameTimer_Tick());
         }
@@ -120,6 +141,7 @@ namespace AxesAndShoesTWO
                 Log("Task was delayed successfuly and the code of loadColor is: " + loadColor.ToString());
             }
             await Task.Delay(5000);
+            characterInteractPanel.Visible = true;
             while(loadOpacity >0)
             {
                 loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
