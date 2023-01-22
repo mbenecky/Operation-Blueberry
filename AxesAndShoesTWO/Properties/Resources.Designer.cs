@@ -113,6 +113,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OPbLUEBERRYTEMPLOGO2 {
+            get {
+                object obj = ResourceManager.GetObject("OPbLUEBERRYTEMPLOGO2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap radiationBar {
             get {
                 object obj = ResourceManager.GetObject("radiationBar", resourceCulture);

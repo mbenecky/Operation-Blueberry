@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace AxesAndShoesTWO
@@ -18,54 +19,74 @@ namespace AxesAndShoesTWO
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
-
-
+        public int loadColor = 0;
+        public int loadOpacity = 255;
 
         public MainGame()
         {
             InitializeComponent();
+
+            if (File.Exists("logOperation.txt"))
+            {
+                File.Delete("logOperation.txt");
+            }
+
+
+            loadPanel.Location = new Point(0, 0);
+            loadPanel.Size = new Size(WidthSet, HeightSet);
+            loadPanel.BackColor = Color.Black;
+
             loadLabel.Text = "I know not with what weapons World War III will be fought, but World War IV will be fought with sticks and stones. \n -Albert Einstein";
             loadLabel.Size = new Size(WidthSet, HeightSet);
             loadLabel.TextAlign = ContentAlignment.MiddleCenter;
             loadPanel.Controls.Add(loadLabel);
-            loadPanel.Location = new Point(0, 0);
-            loadPanel.Size = new Size(WidthSet, HeightSet);
-            loadPanel.BackColor = Color.Black;
+            
 
             statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4, HeightSet / 2 + HeightSet / 4);
             statsPanel.Visible = false;
             loadPanel.Visible = false;
 
             mainGamePanel.Size = new Size(WidthSet, HeightSet);
+
             PictureBox logoPicBox = new PictureBox();
             Button newGameButton = new Button();
-            Button testButton1 = new Button();
-            Button testButton2 = new Button(); //change these asap :)
+            Button optionsButton = new Button();
+            Button creditsButton = new Button(); //change these asap :)
 
-            logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 4);
-            logoPicBox.Size = new Size(960, 540);
+            logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 4-200);
+            logoPicBox.Size = new Size(960, 270);
+            logoPicBox.Image = Properties.Resources.OPbLUEBERRYTEMPLOGO2;
+            logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            logoPicBox.BackColor = Color.Transparent;
 
-            newGameButton.Location = new Point(WidthSet - WidthSet / 2  -WidthSet/6,  HeightSet / 2);
-            newGameButton.Size = new Size(320,135);
+            newGameButton.Size = new Size(320, 135);
+            newGameButton.Location = new Point(WidthSet/2 - newGameButton.Size.Width/2,  HeightSet / 2); 
+            newGameButton.BackgroundImage = Properties.Resources.buttonTemp;
+            newGameButton.Click += new EventHandler(newGameButton_Click);
+
+            optionsButton.Size = newGameButton.Size;
+            optionsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 +newGameButton.Size.Height + HeightSet/20);
+            optionsButton.BackgroundImage = Properties.Resources.buttonTemp;
+
+            creditsButton.Size = newGameButton.Size;
+            creditsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2,HeightSet / 2 + newGameButton.Size.Height + optionsButton.Size.Height +HeightSet / 10);
+            creditsButton.BackgroundImage = Properties.Resources.buttonTemp;
+
             mainGamePanel.Controls.Add(logoPicBox);
             mainGamePanel.Controls.Add(newGameButton);
+            mainGamePanel.Controls.Add(optionsButton);
+            mainGamePanel.Controls.Add(creditsButton);
+
 
             this.Controls.Add(statsPanel);
             this.Controls.Add(mainGamePanel);
             this.Controls.Add(loadPanel);
-            loadColor = 0;
-
-           
-           
-
-
-
 
             Task.Run(() => mainGameTimer_Tick());
         }
 
-        public static int loadColor;
-
+        
+        //START OF TASKS
         async Task mainGameTimer_Tick()
         {
             while (true)
@@ -78,15 +99,22 @@ namespace AxesAndShoesTWO
             while (loadColor < 255)
             {
                 loadLabel.ForeColor = Color.FromArgb(loadColor, loadColor, loadColor);
-                loadLabel.Refresh();
                 loadColor += 10;
-                await Task.Delay(50);
+                await Task.Delay(100);
+                Log("Task was delayed successfuly and the code of loadColor is: " + loadColor.ToString());
             }
             await Task.Delay(5000);
+            while(loadOpacity >0)
+            {
+                loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
+                loadOpacity -= 5;
+                await Task.Delay(50);
+                Log("Task was delayed successfuly and the value of loadOpacity is: " + loadOpacity.ToString());
+            }
             loadPanel.Visible = false;
-            CreateMessage("This is a test");
         }
-        
+        //END OF TASKS
+        //START OF METHODS
         public void CreateMessage(string Message)
         {
             Panel panelMessage = new Panel();
@@ -110,10 +138,39 @@ namespace AxesAndShoesTWO
             this.Controls.Add(panelMessage);
         }
 
+
+        void Log(string message)
+        {
+            using (StreamWriter sw = new StreamWriter("logOperation.txt", true))
+            {
+                if (!File.Exists("logOperation.txt"))
+                {
+                    File.Create("logOperation.txt");
+                }
+                sw.WriteLine(DateTime.Now + ": " + message);
+            }
+        }
+
+        //END OF METHODS
+        //START OF EVENTS
+
+        private async void newGameButton_Click(object sender, EventArgs e)
+        {
+            loadPanel.Visible = true;
+            mainGamePanel.Visible = false;
+            await loadTimer_Tick();
+        }
+
+
+
+
+
+
         private void OKButton_Click(object sender, EventArgs e)
         {
             (sender as Button).Parent.Visible = false;
         }
+        //END OF EVENTS
     }
 
 

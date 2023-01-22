@@ -118,5 +118,8 @@
   <ItemGroup>
     <None Include="Resources\opBlueberryTempLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OPbLUEBERRYTEMPLOGO2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
