@@ -103,6 +103,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mapBackGround {
+            get {
+                object obj = ResourceManager.GetObject("mapBackGround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap opBlueberryTempLogo {
             get {
                 object obj = ResourceManager.GetObject("opBlueberryTempLogo", resourceCulture);

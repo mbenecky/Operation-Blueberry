@@ -31,8 +31,15 @@ namespace AxesAndShoesTWO
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
-        
-        
+
+        public static Panel mapPanel = new Panel();
+        public static PictureBox catacombsPB = new PictureBox();
+        public static PictureBox electricityRoomPB = new PictureBox();
+        public static PictureBox engineRoomPB = new PictureBox();
+        public static PictureBox entrancePB = new PictureBox();
+        public static PictureBox rogersShrinePB = new PictureBox();
+        public static PictureBox boryHQPB = new PictureBox();
+
         public static Panel characterInteractPanel = new Panel();
         public static Label characterInteractLabel = new Label();
         public static Label characterInteractLabelName = new Label();
@@ -128,10 +135,17 @@ namespace AxesAndShoesTWO
             creditsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2,HeightSet / 2 + newGameButton.Size.Height + optionsButton.Size.Height +HeightSet / 10);
             creditsButton.BackgroundImage = Properties.Resources.buttonTemp;
 
+            mainGamePanel.BackColor = Color.FromArgb(64, 64, 64);
+
             mainGamePanel.Controls.Add(logoPicBox);
             mainGamePanel.Controls.Add(newGameButton);
             mainGamePanel.Controls.Add(optionsButton);
             mainGamePanel.Controls.Add(creditsButton);
+
+            mapPanel.BackgroundImage = Properties.Resources.mapBackGround;
+            mapPanel.Size = new Size(WidthSet, HeightSet);
+            mapPanel.Location = new Point(0, 0);
+
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(statsPanel);
@@ -168,18 +182,19 @@ namespace AxesAndShoesTWO
             {
                 loadLabel.ForeColor = Color.FromArgb(loadColor, loadColor, loadColor);
                 loadColor += 10;
-                await Task.Delay(100);
-                
+                await Task.Delay(80);
+
             }
-            await Task.Delay(5000);
+            await Task.Delay(4000);
             characterInteractPanel.Visible = true;
-            while(loadOpacity >0)
+            while (loadOpacity > 0)
             {
                 loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
                 loadOpacity -= 5;
                 await Task.Delay(50);
-                
             }
+            loadLabel.Visible = false;
+            await Task.Delay(2000);
             loadPanel.Visible = false;
             
         }
@@ -264,7 +279,7 @@ namespace AxesAndShoesTWO
             try 
             { 
                 if(CharacterInteractions[currentInteraction] != "NEXT") { await writeOutLines(CharacterInteractions[currentInteraction]); }
-                else { }
+                else { characterInteractPanel.Visible = false; }
                 currentInteraction++;
             } 
             catch(Exception ex)

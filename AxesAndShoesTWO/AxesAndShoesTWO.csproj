@@ -126,5 +126,8 @@
   <ItemGroup>
     <None Include="Resources\voiceLineTestBedImage.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mapBackGround.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
