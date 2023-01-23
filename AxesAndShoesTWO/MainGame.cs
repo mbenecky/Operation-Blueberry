@@ -53,7 +53,7 @@ namespace AxesAndShoesTWO
             {
                 File.Delete("logOperation.txt");
             }
-
+            MessageBox.Show(WidthSet.ToString() + " " + HeightSet.ToString());
             Chars = CharactersLoad();
             CharacterInteractions = InteractionsLoad();
 
@@ -65,14 +65,15 @@ namespace AxesAndShoesTWO
 
             characterInteractPanel.Size = new Size(WidthSet, HeightSet);
             characterInteractPanel.BackgroundImage = Chars[0].img;
+            characterInteractPanel.BackgroundImageLayout = ImageLayout.Stretch;
             characterInteractButton.BackgroundImageLayout = ImageLayout.Stretch;
             characterInteractButton.Click += new EventHandler(interactButton_Click);
 
             characterInteractLabel.Location = new Point(0,HeightSet/2);
             characterInteractLabel.BackColor = Color.Transparent;
             characterInteractLabel.Font = new Font(characterInteractLabel.Font.FontFamily, 36);
-            characterInteractLabel.Size = new Size(1800, 500);
-            characterInteractLabel.MaximumSize = new Size(1800, 500);
+            characterInteractLabel.Size = new Size(WidthSet - WidthSet / 10, HeightSet);
+            characterInteractLabel.MaximumSize = new Size(WidthSet-WidthSet/10, HeightSet);
             characterInteractLabel.BackColor = Color.Transparent;
 
             characterInteractLabelName.Text = Chars[0].Name;
@@ -108,13 +109,13 @@ namespace AxesAndShoesTWO
             Button optionsButton = new Button();
             Button creditsButton = new Button(); //change these asap :)
 
-            logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 4-200);
-            logoPicBox.Size = new Size(960, 270);
+            logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 6);
+            logoPicBox.Size = new Size(WidthSet/2, HeightSet/4);
             logoPicBox.Image = Properties.Resources.OPbLUEBERRYTEMPLOGO2;
             logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
             logoPicBox.BackColor = Color.Transparent;
 
-            newGameButton.Size = new Size(320, 135);
+            newGameButton.Size = new Size(WidthSet/6, HeightSet/8);
             newGameButton.Location = new Point(WidthSet/2 - newGameButton.Size.Width/2,  HeightSet / 2); 
             newGameButton.BackgroundImage = Properties.Resources.buttonTemp;
             newGameButton.Click += new EventHandler(newGameButton_Click);
@@ -199,7 +200,7 @@ namespace AxesAndShoesTWO
 
             labelMessage.Text = Message;
             labelMessage.Location = new Point(0, 0);
-            labelMessage.AutoSize = true;
+            labelMessage.MaximumSize = new Size(WidthSet / 4, HeightSet / 4);
             
             OKButton.Text = "OK";
             OKButton.Location = new Point(panelMessage.Size.Width - panelMessage.Size.Width / 8, panelMessage.Size.Height - panelMessage.Size.Height / 8);

@@ -1,0 +1,2 @@
+23.01.2023 17:55:15: Wrong characterInteraction, Maybe currentInteraction value is wrong?Index je mimo rozsah. Index musí být nezáporný a musí být menší než velikost kolekce.
+Název parametru: index
