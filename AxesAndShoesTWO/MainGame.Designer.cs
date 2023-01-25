@@ -38,10 +38,11 @@
             this.ClientSize = new System.Drawing.Size(1704, 873);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainGame";
             this.Text = "Operation Blueberry";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainGame_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainGame_KeyDown);
             this.ResumeLayout(false);
 

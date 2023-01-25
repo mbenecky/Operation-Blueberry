@@ -236,13 +236,15 @@ namespace AxesAndShoesTWO
         public List<Characters> CharactersLoad()
         {
             List<Characters> list = new List<Characters>();
-            Characters SgtBory = new Characters("Sgt. Bory", "Hey, you're finally awake", Properties.Resources.voiceLineTestBedImage);
-            Characters EndBossBory = new Characters("Sgt. Bory", "Well, you've found out", Properties.Resources.voiceLineTestBedImage);
-            Characters Korky = new Characters("Mr. Korky", "Wanna try some meth?", Properties.Resources.voiceLineTestBedImage);
-            Characters Medved = new Characters("Medved", "bpffff", Properties.Resources.voiceLineTestBedImage);
-            Characters Horkymi = new Characters("Horkymi", "damn", Properties.Resources.voiceLineTestBedImage);
-            Characters Mako = new Characters("Mako", "parno", Properties.Resources.voiceLineTestBedImage);
-            
+            Characters SgtBory = new Characters("Sgt. Bory",  Properties.Resources.voiceLineTestBedImage);
+            Characters EndBossBory = new Characters("Sgt. Bory",  Properties.Resources.voiceLineTestBedImage);
+            Characters Korky = new Characters("Mr. Korky",  Properties.Resources.voiceLineTestBedImage);
+            Characters Medved = new Characters("Medved",  Properties.Resources.voiceLineTestBedImage);
+            Characters Horkymi = new Characters("Horkymi", Properties.Resources.voiceLineTestBedImage);
+            Characters Mako = new Characters("Mako", Properties.Resources.voiceLineTestBedImage);
+            Characters Nacelnik = //dopdelat
+
+
             list.Add(SgtBory);
             list.Add(EndBossBory);
             list.Add(Korky);
@@ -255,11 +257,19 @@ namespace AxesAndShoesTWO
         public List<string> InteractionsLoad()
         {
             List<string> list = new List<string>();
+            //LIST MA 3 MOZNY STAVY:
+            //A) NORMALNI TEXT, NEOBSAHUJICI NEXT
+            //B) NEXT s cislem za pro urceni postavy
+            // C) END, vypne panel.
+
+
+
             list.Add("Hey, I thought you were dead, we were about to transport you outside, lucky you woke up");
             list.Add("You're in safe hands that's for sure, welcome to the bunker, after the nuclear bombs this is the only place where humans live far and wide...");
             list.Add("Yeah I know... pretty sick. Forgot to introduce myself, I am Sargeant Blueberry, in command of this whole bunker.");
             list.Add("Why don't you get off this ground and help us a bit, will ya?");
-            list.Add("NEXT");
+            list.Add("NEXT 3");
+            list.Add("END");
             return list;
         }
 
@@ -275,11 +285,24 @@ namespace AxesAndShoesTWO
 
         private async void interactButton_Click(object sender, EventArgs e)
         {
-
-            try 
-            { 
-                if(CharacterInteractions[currentInteraction] != "NEXT") { await writeOutLines(CharacterInteractions[currentInteraction]); }
-                else { characterInteractPanel.Visible = false; }
+           
+            try
+            {
+                if (!CharacterInteractions[currentInteraction].Contains("NEXT") && !CharacterInteractions[currentInteraction].Contains("END"))
+                {
+                    await writeOutLines(CharacterInteractions[currentInteraction]);
+                }
+                else
+                if (CharacterInteractions[currentInteraction].Contains("NEXT"))
+                {
+                    string[] args = CharacterInteractions[currentInteraction].Split(' ');
+                    characterInteractLabel.Text = String.Empty;
+                    characterInteractLabelName.Text = Chars[Convert.ToInt32(args[1])].Name;
+                    characterInteractPanel.BackgroundImage = Chars[Convert.ToInt32(args[1])].img;
+                } else
+                {
+                    characterInteractPanel.Visible = false;
+                }
                 currentInteraction++;
             } 
             catch(Exception ex)
@@ -296,6 +319,11 @@ namespace AxesAndShoesTWO
                 case Keys.M: break; //opens map
                 case Keys.R: break; //reload
             }
+        }
+
+        private void MainGame_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void OKButton_Click(object sender, EventArgs e)

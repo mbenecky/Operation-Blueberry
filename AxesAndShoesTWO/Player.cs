@@ -11,9 +11,7 @@ namespace AxesAndShoesTWO
         public Inventory PlayerInventory;
         public Inventory HotBar;
         public Player()
-        {
-
-        }
+        {}
         public Player(int Health, int Thirst, int Hunger, int Radiation, Inventory PlayerClothes, Inventory PlayerInventory, Inventory Hotbar)
         {
             this.Health = Health;
@@ -24,6 +22,15 @@ namespace AxesAndShoesTWO
             this.PlayerInventory = PlayerInventory;
             this.HotBar = Hotbar;
         }
+        public bool IsAlive()
+        {
+            if(this.Health <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool
         public override string ToString()
         {
             return "BasePlayerName";
