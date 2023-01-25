@@ -1,4 +1,4 @@
-﻿
+﻿using System.Threading.Tasks;
 namespace AxesAndShoesTWO
 {
     public class Player
@@ -11,7 +11,7 @@ namespace AxesAndShoesTWO
         public Inventory PlayerInventory;
         public Inventory HotBar;
         public Player()
-        {}
+        { }
         public Player(int Health, int Thirst, int Hunger, int Radiation, Inventory PlayerClothes, Inventory PlayerInventory, Inventory Hotbar)
         {
             this.Health = Health;
@@ -24,13 +24,29 @@ namespace AxesAndShoesTWO
         }
         public bool IsAlive()
         {
-            if(this.Health <= 0)
+            if (this.Health <= 0)
             {
                 return true;
             }
             return false;
         }
-        public bool
+        public bool IsTorH()
+        {
+            if (this.Thirst <= 0 || this.Hunger <= 0)
+            {
+                return true;
+            }
+            return false;
+
+        }
+        async Task DegradeHealth()
+        {
+            while(IsTorH())
+            {
+                this.Health -= 1;
+                await Task.Delay(1000);
+            }
+        }
         public override string ToString()
         {
             return "BasePlayerName";

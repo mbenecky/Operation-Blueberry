@@ -236,14 +236,13 @@ namespace AxesAndShoesTWO
         public List<Characters> CharactersLoad()
         {
             List<Characters> list = new List<Characters>();
-            Characters SgtBory = new Characters("Sgt. Bory",  Properties.Resources.voiceLineTestBedImage);
-            Characters EndBossBory = new Characters("Sgt. Bory",  Properties.Resources.voiceLineTestBedImage);
+            Characters SgtBory = new Characters("Sgt. Blueberry",  Properties.Resources.voiceLineTestBedImage);
+            Characters EndBossBory = new Characters("Blueberry",  Properties.Resources.voiceLineTestBedImage);
             Characters Korky = new Characters("Mr. Korky",  Properties.Resources.voiceLineTestBedImage);
             Characters Medved = new Characters("Medved",  Properties.Resources.voiceLineTestBedImage);
             Characters Horkymi = new Characters("Horkymi", Properties.Resources.voiceLineTestBedImage);
             Characters Mako = new Characters("Mako", Properties.Resources.voiceLineTestBedImage);
-            Characters Nacelnik = //dopdelat
-
+            Characters ChiefPear = new Characters("Chief Pear", Properties.Resources.voiceLineTestBedImage);
 
             list.Add(SgtBory);
             list.Add(EndBossBory);
@@ -251,6 +250,7 @@ namespace AxesAndShoesTWO
             list.Add(Medved);
             list.Add(Horkymi);
             list.Add(Mako);
+            list.Add(ChiefPear);
             
             return list;
         }
@@ -268,7 +268,6 @@ namespace AxesAndShoesTWO
             list.Add("You're in safe hands that's for sure, welcome to the bunker, after the nuclear bombs this is the only place where humans live far and wide...");
             list.Add("Yeah I know... pretty sick. Forgot to introduce myself, I am Sargeant Blueberry, in command of this whole bunker.");
             list.Add("Why don't you get off this ground and help us a bit, will ya?");
-            list.Add("NEXT 3");
             list.Add("END");
             return list;
         }
