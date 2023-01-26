@@ -8,7 +8,7 @@ namespace AxesAndShoesTWO
 {
     public class Items
     {
-        
+        public int ID;
         public string Name;
         public string Description;
         public int Count;
@@ -16,8 +16,9 @@ namespace AxesAndShoesTWO
         public Rarity Rarity;
         public Image img;
         public Items() { }
-        public Items( string Name, string Description, Rarity Rarity, Image img)
+        public Items(int ID, string Name, string Description, Rarity Rarity, Image img)
         {
+            this.ID = ID;
             this.Name= Name;
             this.Description= Description;
             this.Rarity = Rarity;

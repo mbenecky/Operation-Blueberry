@@ -11,10 +11,11 @@ namespace AxesAndShoesTWO
        
         public int NumberOfRounds;
         public int Damage;
-        public int WaitTime;
+        public int WaitTime; //in milisecodns
         public Guns() { }
-        public Guns(string Name, string Description, Rarity Rarity,Image img,int NumberOfRounds, int Damage, int WaitTime) : base("NULL", "NULL",Rarity.Common, Properties.Resources.whitePanel)
+        public Guns(int ID ,string Name, string Description, Rarity Rarity,Image img,int NumberOfRounds, int Damage, int WaitTime) : base(0,"NULL", "NULL",Rarity.Common, Properties.Resources.whitePanel)
         {
+            base.ID = ID;
             base.Name = Name;
             base.Description = Description; 
             base.Rarity = Rarity;

@@ -63,6 +63,26 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backgroundItem {
+            get {
+                object obj = ResourceManager.GetObject("backgroundItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap backgroundItemFree {
+            get {
+                object obj = ResourceManager.GetObject("backgroundItemFree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blackPanel {
             get {
                 object obj = ResourceManager.GetObject("blackPanel", resourceCulture);
@@ -86,6 +106,16 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap crateTest {
             get {
                 object obj = ResourceManager.GetObject("crateTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gunTest {
+            get {
+                object obj = ResourceManager.GetObject("gunTest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

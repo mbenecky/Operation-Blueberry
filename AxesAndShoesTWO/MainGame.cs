@@ -27,6 +27,12 @@ namespace AxesAndShoesTWO
 
         public static List<Characters> Chars = new List<Characters>();
         public static List<string> CharacterInteractions = new List<string>();
+        public static List<Items> AllItems = new List<Items>();
+
+        public static Panel InventoryToStorage = new Panel();
+        public static PictureBox pbTest = new PictureBox();
+        public static PictureBox pbTest2 = new PictureBox();
+        public static PictureBox lastPb = new PictureBox();
 
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
@@ -51,6 +57,7 @@ namespace AxesAndShoesTWO
 
         public int currentMoney = 10;
 
+        public bool isSelected = false;
         public bool isWriting = false;
         public bool isPaused = false;
 
@@ -65,9 +72,10 @@ namespace AxesAndShoesTWO
             MessageBox.Show(WidthSet.ToString() + " " + HeightSet.ToString());
             Chars = CharactersLoad();
             CharacterInteractions = InteractionsLoad();
+            AllItems = ItemsLoad();
 
             characterInteractButton.Text = "Next";
-            characterInteractButton.Location = new Point(WidthSet - WidthSet / 10, HeightSet -HeightSet / 10);
+            characterInteractButton.Location = new Point(WidthSet - WidthSet / 10, HeightSet - HeightSet / 10);
             characterInteractButton.Size = new Size(WidthSet / 10, HeightSet / 10);
             characterInteractButton.BackgroundImage = Properties.Resources.buttonTemp;
 
@@ -78,11 +86,11 @@ namespace AxesAndShoesTWO
             characterInteractButton.BackgroundImageLayout = ImageLayout.Stretch;
             characterInteractButton.Click += new EventHandler(interactButton_Click);
 
-            characterInteractLabel.Location = new Point(0,HeightSet/2);
+            characterInteractLabel.Location = new Point(0, HeightSet / 2);
             characterInteractLabel.BackColor = Color.Transparent;
             characterInteractLabel.Font = new Font(characterInteractLabel.Font.FontFamily, 36);
             characterInteractLabel.Size = new Size(WidthSet - WidthSet / 10, HeightSet);
-            characterInteractLabel.MaximumSize = new Size(WidthSet-WidthSet/10, HeightSet);
+            characterInteractLabel.MaximumSize = new Size(WidthSet - WidthSet / 10, HeightSet);
             characterInteractLabel.BackColor = Color.Transparent;
 
             characterInteractLabelName.Text = Chars[0].Name;
@@ -105,6 +113,7 @@ namespace AxesAndShoesTWO
             loadLabel.Size = new Size(WidthSet, HeightSet);
             loadLabel.TextAlign = ContentAlignment.MiddleCenter;
             loadPanel.Controls.Add(loadLabel);
+
             
 
             statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4, HeightSet / 2 + HeightSet / 4);
@@ -119,22 +128,22 @@ namespace AxesAndShoesTWO
             Button creditsButton = new Button(); //change these asap :)
 
             logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 6);
-            logoPicBox.Size = new Size(WidthSet/2, HeightSet/4);
+            logoPicBox.Size = new Size(WidthSet / 2, HeightSet / 4);
             logoPicBox.Image = Properties.Resources.OPbLUEBERRYTEMPLOGO2;
             logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
             logoPicBox.BackColor = Color.Transparent;
 
-            newGameButton.Size = new Size(WidthSet/6, HeightSet/8);
-            newGameButton.Location = new Point(WidthSet/2 - newGameButton.Size.Width/2,  HeightSet / 2); 
+            newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
+            newGameButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2);
             newGameButton.BackgroundImage = Properties.Resources.buttonTemp;
             newGameButton.Click += new EventHandler(newGameButton_Click);
 
             optionsButton.Size = newGameButton.Size;
-            optionsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 +newGameButton.Size.Height + HeightSet/20);
+            optionsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 + newGameButton.Size.Height + HeightSet / 20);
             optionsButton.BackgroundImage = Properties.Resources.buttonTemp;
 
             creditsButton.Size = newGameButton.Size;
-            creditsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2,HeightSet / 2 + newGameButton.Size.Height + optionsButton.Size.Height +HeightSet / 10);
+            creditsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 + newGameButton.Size.Height + optionsButton.Size.Height + HeightSet / 10);
             creditsButton.BackgroundImage = Properties.Resources.buttonTemp;
 
             mainGamePanel.BackColor = Color.FromArgb(64, 64, 64);
@@ -148,11 +157,31 @@ namespace AxesAndShoesTWO
             mapPanel.Size = new Size(WidthSet, HeightSet);
             mapPanel.Location = new Point(0, 0);
 
+            InventoryToStorage.Size = new Size(1920, 1080);
+            InventoryToStorage.Location = new Point(0, 0);
+            InventoryToStorage.BackgroundImage = Properties.Resources.mapBackGround;
+
+            pbTest.BackgroundImage = Properties.Resources.backgroundItem;
+            pbTest.Image = Properties.Resources.gunTest;
+            pbTest.Size = new Size(92,108);
+            pbTest.Location = new Point(92, 108);
+            pbTest.Tag = "1";
+            pbTest.Click += new EventHandler(inventoryCheck);
+
+            pbTest2.BackgroundImage = Properties.Resources.backgroundItem;
+            pbTest2.Size = new Size(92, 108);
+            pbTest2.Tag = "0";
+            pbTest2.Location = new Point(500, 500);
+            pbTest2.Click += new EventHandler(inventoryCheck);
+
+            InventoryToStorage.Controls.Add(pbTest);
+            InventoryToStorage.Controls.Add(pbTest2);
+
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(statsPanel);
             this.Controls.Add(mainGamePanel);
-            
+            this.Controls.Add(InventoryToStorage);
 
             Task.Run(() => mainGameTimer_Tick());
         }
@@ -167,7 +196,7 @@ namespace AxesAndShoesTWO
             for(int i = 0; i!= Message.Length;i++)
             {
                 characterInteractLabel.Text+=Message[i];
-                await Task.Delay(50);
+                await Task.Delay(1);
             }
             isWriting = false;
         }
@@ -184,19 +213,19 @@ namespace AxesAndShoesTWO
             {
                 loadLabel.ForeColor = Color.FromArgb(loadColor, loadColor, loadColor);
                 loadColor += 10;
-                await Task.Delay(80);
+                await Task.Delay(1);
 
             }
-            await Task.Delay(4000);
+            await Task.Delay(1);
             characterInteractPanel.Visible = true;
             while (loadOpacity > 0)
             {
                 loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
                 loadOpacity -= 5;
-                await Task.Delay(50);
+                await Task.Delay(1);
             }
             loadLabel.Visible = false;
-            await Task.Delay(2000);
+            await Task.Delay(1);
             loadPanel.Visible = false;
             
         }
@@ -258,23 +287,24 @@ namespace AxesAndShoesTWO
         }
         public List<Items> ItemsLoad()
         {
+
             List<Items> list = new List<Items>(); 
-            list.Add(new Items("Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("First Aid Kit", "Tool for immediate help with injuries", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Portable Generator", "Tool for generating electricity in combat situations", Rarity.Rare, Properties.Resources.itemTest));
-            list.Add(new Items("Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items("Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items("Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest));
-            return list;
+            list.Add(new Guns(1, "The Enforcer", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
+            list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
+            list.Add(new Items(28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
         }
         public List<string> InteractionsLoad()
         {
@@ -302,7 +332,42 @@ namespace AxesAndShoesTWO
 
         //END OF METHODS
         //START OF EVENTS
-
+        private void inventoryCheck(object sender, EventArgs e)
+        {
+            Panel parentPanel = ((sender as PictureBox).Parent as Panel);
+            PictureBox pictureBox =(sender as PictureBox);
+            if (!isSelected)
+            {
+                if(pictureBox.Tag.ToString() != "0")
+                {
+                    lastPb = pictureBox;
+                }
+                else { return; }
+                isSelected = true;
+                foreach(Control c in parentPanel.Controls)
+                {
+                    if ((c.Tag).ToString() == "0")
+                    {
+                        c.BackgroundImage = Properties.Resources.backgroundItemFree;
+                    }
+                }
+                return;
+            }
+            if(pictureBox.Tag.ToString() == "0")
+            {
+                (sender as PictureBox).Image = lastPb.Image;
+                (sender as PictureBox).Tag = lastPb.Tag;
+                lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                lastPb.Tag = "0";
+                lastPb.Image = null;
+            } 
+            isSelected = false;
+            foreach (Control c in parentPanel.Controls)
+            {
+                c.BackgroundImage = Properties.Resources.backgroundItem;
+            }
+            
+        }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
             loadPanel.Visible = true;
