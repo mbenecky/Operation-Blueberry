@@ -83,6 +83,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap crateTest {
+            get {
+                object obj = ResourceManager.GetObject("crateTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap healthBar {
             get {
                 object obj = ResourceManager.GetObject("healthBar", resourceCulture);
@@ -96,6 +106,16 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap hungerBar {
             get {
                 object obj = ResourceManager.GetObject("hungerBar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap itemTest {
+            get {
+                object obj = ResourceManager.GetObject("itemTest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

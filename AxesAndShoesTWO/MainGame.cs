@@ -49,6 +49,8 @@ namespace AxesAndShoesTWO
         public int loadOpacity = 255;
         public int currentInteraction = 0;
 
+        public int currentMoney = 10;
+
         public bool isWriting = false;
         public bool isPaused = false;
 
@@ -232,7 +234,6 @@ namespace AxesAndShoesTWO
                 sw.WriteLine(DateTime.Now + ": " + message);
             }
         }
-
         public List<Characters> CharactersLoad()
         {
             List<Characters> list = new List<Characters>();
@@ -244,6 +245,7 @@ namespace AxesAndShoesTWO
             Characters Mako = new Characters("Mako", Properties.Resources.voiceLineTestBedImage);
             Characters ChiefPear = new Characters("Chief Pear", Properties.Resources.voiceLineTestBedImage);
 
+
             list.Add(SgtBory);
             list.Add(EndBossBory);
             list.Add(Korky);
@@ -252,6 +254,26 @@ namespace AxesAndShoesTWO
             list.Add(Mako);
             list.Add(ChiefPear);
             
+            return list;
+        }
+        public List<Items> ItemsLoad()
+        {
+            List<Items> list = new List<Items>(); 
+            list.Add(new Items("Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("First Aid Kit", "Tool for immediate help with injuries", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Portable Generator", "Tool for generating electricity in combat situations", Rarity.Rare, Properties.Resources.itemTest));
+            list.Add(new Items("Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items("Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items("Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest));
             return list;
         }
         public List<string> InteractionsLoad()
@@ -270,6 +292,12 @@ namespace AxesAndShoesTWO
             list.Add("Why don't you get off this ground and help us a bit, will ya?");
             list.Add("END");
             return list;
+        }
+
+        public Inventory CreateRandomDrops(Rarity rarity)
+        {
+            Inventory inventory = new Inventory();
+            return inventory;
         }
 
         //END OF METHODS
@@ -340,7 +368,14 @@ namespace AxesAndShoesTWO
 
 
 
-
+    public enum Rarity
+    {
+        Common, //prodej za 3
+        Uncommon, //prodej za 6
+        Rare, //prodej za 15
+        Epic, //prodej za 40
+        Legendary //prodej za 125
+    };
 
     public enum KeysRoom
     {   
