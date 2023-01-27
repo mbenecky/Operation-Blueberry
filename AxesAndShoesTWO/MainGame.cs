@@ -323,7 +323,8 @@ namespace AxesAndShoesTWO
 
             List<Items> list = new List<Items>(); 
             list.Add(new Guns(1, "The Enforcer", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            
+            //ID: 12, Název: "The Hellraiser", Deskripce: "Silný revolver s vysokým poškozením na krátkou vzdálenost", Rarita: Legendary, Velikost zásobníku: 6, Damage: 5
+            list.Add(new Guns(2, "The Hellraiser", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
             list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -358,11 +359,7 @@ namespace AxesAndShoesTWO
             return list;
         }
 
-        public Inventory CreateRandomDrops(Rarity rarity)
-        {
-            Inventory inventory = new Inventory();
-            return inventory;
-        }
+     
 
         //END OF METHODS
         //START OF EVENTS

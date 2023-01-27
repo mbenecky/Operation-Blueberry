@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
+using System.Runtime.Remoting.Messaging;
 
 namespace AxesAndShoesTWO
 {
@@ -29,8 +31,44 @@ namespace AxesAndShoesTWO
         public KeysRoom ReceivedKey;
         public List<Enemy> Enemies;
         public List<Items> Drops;
-        public Image img;
+        public Image Img;
         public Rooms() { }
-        
+        public Rooms(int ID, string Name, string Description, bool GR, KeysRoom RequiredKey, KeysRoom ReceivedKey, List<Enemy> Enemies, List<Items> Drops, Image Img)
+        {
+            this.ID= ID;
+            this.Name= Name;
+            this.Description= Description;
+            this.GasmaskRequire= GR;
+            this.RequiredKey= RequiredKey;
+            this.ReceivedKey= ReceivedKey;
+            this.Enemies= Enemies;
+            this.Drops= Drops;
+            this.Img= Img;
+        }
+        public void CreateDrops(KeysRoom RequiredKey, Rarity MaxRarity, List<Items> DropTable)
+        {
+            switch (RequiredKey) 
+            {
+                case KeysRoom.Catacombs:        //100% Common
+                    
+                    break;
+                case KeysRoom.ElectricityRoom:  //75% Common 25% Uncommon
+
+                    break;
+                case KeysRoom.EngineRoom:       //50% Common 50% Uncommon
+
+                    break;
+                case KeysRoom.VaultDoor:        //10% Common 50% Uncommon 40% Rare
+
+                    break;
+                case KeysRoom.RogersShrineDoor: //10% Uncommon 60% Rare 30% Legendary
+
+                    break;
+                case KeysRoom.BorysHQDoor:      //END. doesn't have to be anything lol
+                    return;
+            }
+
+
+        }
     }
 }
