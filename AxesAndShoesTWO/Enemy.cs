@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Forms;
+using System.Drawing;
 namespace AxesAndShoesTWO
 {
     public class Enemy
@@ -13,27 +13,23 @@ namespace AxesAndShoesTWO
         public string Name;
         public int Damage;
         public static int WaitTime;
-        public PictureBox pbImage;
-        public List<Items> Drops;
+        public Image Img;
         public Enemy()
         {
-            pbImage = new PictureBox();
-            Drops = new List<Items>();
-            WaitTime = rnd.Next(0, 4);
+
         }
-        public Enemy(string Name, int Damage,PictureBox pbImage, List<Items> Drops)
+        public Enemy(string Name, int Damage,Image Img)
         {
             WaitTime = rnd.Next(0, 5);
             this.Name = Name;
             this.Damage = Damage;
-            this.pbImage = pbImage;
-            this.Drops = Drops; 
+            this.Img = Img;
         }
         async Task Attack()
         {
 
             await Task.Delay(WaitTime*1000);
-            //attack on player
+            //attack player
         }
         
 

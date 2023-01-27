@@ -34,6 +34,9 @@ namespace AxesAndShoesTWO
         public static Panel StorageSpace = new Panel();
         public static PictureBox lastPb = new PictureBox();
 
+        public static Panel CurrentRoom = new Panel();
+
+
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
@@ -198,14 +201,14 @@ namespace AxesAndShoesTWO
                     StorageSpace.Controls.Add(pb);
                 }
             }
+            InventoryToStorage.Visible = false;
 
-
-
+            //Test Batch
             InventorySpace.Controls[0].Tag = "1";
             (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.gunTest;
             InventorySpace.Controls[1].Tag = "16";
-            (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest ;
-
+            (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest;
+            //Test Batch
 
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
@@ -365,7 +368,6 @@ namespace AxesAndShoesTWO
         //START OF EVENTS
         private void inventoryCheck(object sender, EventArgs e)
         {
-            Panel parentPanel = ((sender as PictureBox).Parent as Panel);
             PictureBox pictureBox =(sender as PictureBox);
             if (!isSelected)
             {
@@ -488,11 +490,11 @@ namespace AxesAndShoesTWO
 
     public enum KeysRoom
     {   
-        Catacombs,          //base mistnost na nauceni controls
-        ElectricityRoom,    //second level mistnost s mensima enemies
-        EngineRoom,         //third level mistnost s vetsima enemies a lepsimy dropy
-        VaultDoor,          //fourth a vetsi level mistnost s moznym vstupem jen s gasmaskou
-        RogersShrineDoor,   //fifth level mistnost kde najdes jak korky zemre :(
-        BorysHQDoor         //last boss kde budes muset porazit sgt. boryho a end :)
+        Catacombs = 1,          //base mistnost na nauceni controls
+        ElectricityRoom = 2,    //second level mistnost s mensima enemies
+        EngineRoom = 3,         //third level mistnost s vetsima enemies a lepsimy dropy
+        VaultDoor = 4,          //fourth a vetsi level mistnost s moznym vstupem jen s gasmaskou
+        RogersShrineDoor = 5,   //fifth level mistnost kde najdes jak korky zemre :(
+        BorysHQDoor = 6         //last boss kde budes muset porazit sgt. boryho a end :)
     };
 }
