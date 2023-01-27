@@ -30,8 +30,8 @@ namespace AxesAndShoesTWO
         public static List<Items> AllItems = new List<Items>();
 
         public static Panel InventoryToStorage = new Panel();
-        public static PictureBox pbTest = new PictureBox();
-        public static PictureBox pbTest2 = new PictureBox();
+        public static Panel InventorySpace = new Panel();
+        public static Panel StorageSpace = new Panel();
         public static PictureBox lastPb = new PictureBox();
 
         public static Label loadLabel = new Label();
@@ -64,12 +64,11 @@ namespace AxesAndShoesTWO
         public MainGame()
         {
             InitializeComponent();
-
+            this.KeyPreview = true;
             if (File.Exists("logOperation.txt"))
             {
                 File.Delete("logOperation.txt");
             }
-            MessageBox.Show(WidthSet.ToString() + " " + HeightSet.ToString());
             Chars = CharactersLoad();
             CharacterInteractions = InteractionsLoad();
             AllItems = ItemsLoad();
@@ -161,21 +160,52 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Location = new Point(0, 0);
             InventoryToStorage.BackgroundImage = Properties.Resources.mapBackGround;
 
-            pbTest.BackgroundImage = Properties.Resources.backgroundItem;
-            pbTest.Image = Properties.Resources.gunTest;
-            pbTest.Size = new Size(92,108);
-            pbTest.Location = new Point(92, 108);
-            pbTest.Tag = "1";
-            pbTest.Click += new EventHandler(inventoryCheck);
+            InventorySpace.Size = new Size(WidthSet / 2, HeightSet);
+            InventorySpace.Location = new Point(0, 0);
+            InventorySpace.BackColor = Color.Transparent;
 
-            pbTest2.BackgroundImage = Properties.Resources.backgroundItem;
-            pbTest2.Size = new Size(92, 108);
-            pbTest2.Tag = "0";
-            pbTest2.Location = new Point(500, 500);
-            pbTest2.Click += new EventHandler(inventoryCheck);
+            StorageSpace.Size = new Size(WidthSet / 2, HeightSet);
+            StorageSpace.Location = new Point(WidthSet / 2, 0);
+            StorageSpace.BackColor = Color.Transparent;
 
-            InventoryToStorage.Controls.Add(pbTest);
-            InventoryToStorage.Controls.Add(pbTest2);
+            InventoryToStorage.Controls.Add(InventorySpace);
+            InventoryToStorage.Controls.Add(StorageSpace);
+
+            for(int i = 0; i != 5;i++)
+            {
+                for(int j = 0;j!=2;j++)
+                {
+                    PictureBox pb = new PictureBox();
+                    pb.BackgroundImage = Properties.Resources.backgroundItem;
+                    pb.Size = new Size(WidthSet / 20, HeightSet / 10);
+                    pb.Location = new Point((WidthSet / 20) * j + WidthSet / 4 + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
+                    pb.Tag = "0";
+                    pb.Click += new EventHandler(inventoryCheck);
+                    InventorySpace.Controls.Add(pb);
+               }
+            }
+
+            for (int i = 0; i != 5; i++)
+            {
+                for (int j = 0; j != 5; j++)
+                {
+                    PictureBox pb = new PictureBox();
+                    pb.BackgroundImage = Properties.Resources.backgroundItem;
+                    pb.Size = new Size(WidthSet / 20, HeightSet / 10);
+                    pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
+                    pb.Tag = "0";
+                    pb.Click += new EventHandler(inventoryCheck);
+                    StorageSpace.Controls.Add(pb);
+                }
+            }
+
+
+
+            InventorySpace.Controls[0].Tag = "1";
+            (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.gunTest;
+            InventorySpace.Controls[1].Tag = "16";
+            (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest ;
+
 
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
@@ -290,6 +320,7 @@ namespace AxesAndShoesTWO
 
             List<Items> list = new List<Items>(); 
             list.Add(new Guns(1, "The Enforcer", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
+            
             list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -344,7 +375,14 @@ namespace AxesAndShoesTWO
                 }
                 else { return; }
                 isSelected = true;
-                foreach(Control c in parentPanel.Controls)
+                foreach(Control c in InventorySpace.Controls)
+                {
+                    if ((c.Tag).ToString() == "0")
+                    {
+                        c.BackgroundImage = Properties.Resources.backgroundItemFree;
+                    }
+                }
+                foreach (Control c in StorageSpace.Controls)
                 {
                     if ((c.Tag).ToString() == "0")
                     {
@@ -362,7 +400,11 @@ namespace AxesAndShoesTWO
                 lastPb.Image = null;
             } 
             isSelected = false;
-            foreach (Control c in parentPanel.Controls)
+            foreach (Control c in InventorySpace.Controls)
+            {
+                c.BackgroundImage = Properties.Resources.backgroundItem;
+            }
+            foreach (Control c in StorageSpace.Controls)
             {
                 c.BackgroundImage = Properties.Resources.backgroundItem;
             }
@@ -405,10 +447,12 @@ namespace AxesAndShoesTWO
 
         private void MainGame_KeyDown(object sender, KeyEventArgs e)
         {
+            Log("Something was pressed!");
             switch(e.KeyCode)
             {
                 case Keys.Escape: break; //pauses
-                case Keys.M: break; //opens map
+                case Keys.M: break; //Opens map
+                case Keys.E: InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
                 case Keys.R: break; //reload
             }
         }

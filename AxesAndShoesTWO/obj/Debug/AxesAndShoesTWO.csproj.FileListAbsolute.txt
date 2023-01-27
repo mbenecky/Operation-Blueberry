@@ -34,3 +34,15 @@ C:\Users\games\OneDrive\Plocha\evyuka\actual maturita and shit\OperationBlueberr
 C:\Users\games\OneDrive\Plocha\evyuka\actual maturita and shit\OperationBlueberry\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.csproj.CoreCompileInputs.cache
 C:\Users\games\OneDrive\Plocha\evyuka\actual maturita and shit\OperationBlueberry\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.exe
 C:\Users\games\OneDrive\Plocha\evyuka\actual maturita and shit\OperationBlueberry\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.pdb
+C:\PRG\ubmrnc\AxesAndShoesTWO\bin\Debug\AxesAndShoesTWO.exe.config
+C:\PRG\ubmrnc\AxesAndShoesTWO\bin\Debug\AxesAndShoesTWO.exe
+C:\PRG\ubmrnc\AxesAndShoesTWO\bin\Debug\AxesAndShoesTWO.pdb
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.csproj.AssemblyReference.cache
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.csproj.SuggestedBindingRedirects.cache
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.MainGame.resources
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.StatsPanel.resources
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.Properties.Resources.resources
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.csproj.GenerateResource.cache
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.csproj.CoreCompileInputs.cache
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.exe
+C:\PRG\ubmrnc\AxesAndShoesTWO\obj\Debug\AxesAndShoesTWO.pdb
