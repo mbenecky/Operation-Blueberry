@@ -25,9 +25,17 @@ namespace AxesAndShoesTWO
 
         StatsPanel statsPanel = new StatsPanel(1920, 1080);
 
+        public static List<Clothes> Clothes = new List<Clothes>();
+        public static List<Items> pItems = new List<Items>();
+        public static List<Guns> pGuns = new List<Guns>();
+        public static List<KeysRoom> pKeys = new List<KeysRoom>();
+
+        public Player CurrentPlayer = new Player(85, 30, 30, 0, Clothes, pItems, pGuns, pKeys);
+
         public static List<Characters> Chars = new List<Characters>();
         public static List<string> CharacterInteractions = new List<string>();
         public static List<Items> AllItems = new List<Items>();
+        public static List<Enemy> AllEnemies = new List<Enemy>();
 
         public static Panel InventoryToStorage = new Panel();
         public static Panel InventorySpace = new Panel();
@@ -40,6 +48,8 @@ namespace AxesAndShoesTWO
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
+
+
 
         public static Panel mapPanel = new Panel();
         public static PictureBox catacombsPB = new PictureBox();
@@ -75,6 +85,13 @@ namespace AxesAndShoesTWO
             Chars = CharactersLoad();
             CharacterInteractions = InteractionsLoad();
             AllItems = ItemsLoad();
+            AllEnemies= EnemiesLoad();
+
+
+
+            CurrentRoom.Size = new Size(WidthSet, HeightSet);
+            CurrentRoom.Location = new Point(0, 0);
+
 
             characterInteractButton.Text = "Next";
             characterInteractButton.Location = new Point(WidthSet - WidthSet / 10, HeightSet - HeightSet / 10);
@@ -212,8 +229,8 @@ namespace AxesAndShoesTWO
 
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
-            this.Controls.Add(statsPanel);
             this.Controls.Add(mainGamePanel);
+            this.Controls.Add(statsPanel);
             this.Controls.Add(InventoryToStorage);
 
             Task.Run(() => mainGameTimer_Tick());
@@ -343,7 +360,13 @@ namespace AxesAndShoesTWO
         }
         public List<Enemy> EnemiesLoad()
         {
+            List<Enemy> list = new List<Enemy>();
 
+            list.Add(new Enemy(
+                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(192,108),Properties.Resources.enemyTest
+                ));
+
+            return list;
         }
         public List<string> InteractionsLoad()
         {
@@ -457,6 +480,7 @@ namespace AxesAndShoesTWO
                 case Keys.M: break; //Opens map
                 case Keys.E: InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
                 case Keys.R: break; //reload
+                case Keys.F: statsPanel.Visible = !statsPanel.Visible; break;
             }
         }
 

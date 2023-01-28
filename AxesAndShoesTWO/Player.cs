@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Drawing;
+using System;
+
 namespace AxesAndShoesTWO
 {
     public class Player
@@ -10,11 +14,11 @@ namespace AxesAndShoesTWO
         public int Radiation;
         public List<Clothes> PlayerClothes;
         public List<Items> PlayerInventory;
-        public List<Items> HotBar;
+        public List<Guns> HotBar;
         public List<KeysRoom> CurrentKeys;
         public Player()
         { }
-        public Player(int Health, int Thirst, int Hunger, int Radiation, List<Clothes> PlayerClothes, List<Items> PlayerInventory, List<Items> HotBar, List<KeysRoom> CurrentKeys)
+        public Player(int Health, int Thirst, int Hunger, int Radiation, List<Clothes> PlayerClothes, List<Items> PlayerInventory, List<Guns> HotBar, List<KeysRoom> CurrentKeys)
         {
             this.Health = Health;
             this.Thirst = Thirst;
@@ -42,14 +46,7 @@ namespace AxesAndShoesTWO
             return false;
 
         }
-        public bool IsAbleToAccess(KeysRoom GivenKey)
-        {
-            if(this.CurrentKeys.Contains(GivenKey))
-            {
-                return true;
-            }
-            return false;
-        }
+        
         async Task DegradeHealth()
         {
             while(IsTorH())
@@ -59,6 +56,14 @@ namespace AxesAndShoesTWO
             }
         }
         
+        public void ChangeStats(StatsPanel sp)
+        {
+            sp.healthBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Health)), sp.healthBar.Height);
+            sp.hungerBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Hunger)), sp.hungerBar.Height);
+            sp.thirstBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Thirst)), sp.thirstBar.Height);
+            sp.radiationBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Radiation)), sp.radiationBar.Height);
+        }
+
         public override string ToString()
         {
             return "BasePlayerName";

@@ -66,10 +66,10 @@ namespace AxesAndShoesTWO
                     if (player.CurrentKeys.Contains(KeysRoom.EngineRoom)) return true;
                     else return false;
                 case KeysRoom.VaultDoor:
-                    if (player.CurrentKeys.Contains(KeysRoom.VaultDoor)) return true;
+                    if (player.CurrentKeys.Contains(KeysRoom.VaultDoor) && player.PlayerInventory.Contains(new Items())) return true;
                     else return false;
                 case KeysRoom.RogersShrineDoor:
-                    if (player.CurrentKeys.Contains(KeysRoom.RogersShrineDoor)) return true;
+                    if (player.CurrentKeys.Contains(KeysRoom.RogersShrineDoor) && player.PlayerInventory.Contains(new Items())) return true;
                     else return false;
                 case KeysRoom.BorysHQDoor:
                     if (player.CurrentKeys.Contains(KeysRoom.BorysHQDoor)) return true;
@@ -112,7 +112,7 @@ namespace AxesAndShoesTWO
                     }
                     break;
                 case KeysRoom.RogersShrineDoor: //10% Uncommon 60% Rare 30% Legendary
-                    helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Rare) || x.Rarity.Equals(Rarity.Legendary)).ToList();
+                    helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Epic) || x.Rarity.Equals(Rarity.Legendary)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
                         this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
@@ -121,30 +121,52 @@ namespace AxesAndShoesTWO
                 case KeysRoom.BorysHQDoor:      //END. doesn't have to be anything lol
                     break;
             }
+
         }
-        public void CreateEnemies(KeysRoom RequiredKey)
+        public void CreateEnemies(KeysRoom RequiredKey, List<Enemy> Enemies)
         {
+            int amount = rnd.Next(5, 10);
+            List<Enemy> helpList = new List<Enemy>();
             switch (RequiredKey)
             {
-                case KeysRoom.Catacombs:
-                    
+                case KeysRoom.Catacombs: //Common
+                    helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Common)).ToList();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                    }
                     break;
-                case KeysRoom.ElectricityRoom:
-
+                case KeysRoom.ElectricityRoom: //Uncommon
+                    helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Uncommon)).ToList();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                    }
                     break;
-                case KeysRoom.EngineRoom:
-
+                case KeysRoom.EngineRoom: //Rare
+                    helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Rare)).ToList();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                    }
                     break;
-                case KeysRoom.VaultDoor:
-
+                case KeysRoom.VaultDoor: //Epic
+                    helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Epic)).ToList();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                    }
                     break;
-                case KeysRoom.RogersShrineDoor:
-
+                case KeysRoom.RogersShrineDoor: //Legendary
+                    helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Legendary)).ToList();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                    }
                     break;
-                case KeysRoom.BorysHQDoor:
+                case KeysRoom.BorysHQDoor: //Final Boss Fight
                     break;
             }
-
         }
     }
 }

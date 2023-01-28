@@ -12,14 +12,16 @@ namespace AxesAndShoesTWO
 {
     public partial class StatsPanel : Control
     {
-        public static PictureBox healthBar = new PictureBox();
-        public static PictureBox thirstBar = new PictureBox();
-        public static PictureBox hungerBar = new PictureBox();
-        public static PictureBox radiationBar = new PictureBox();
+        public  PictureBox healthBar = new PictureBox();
+        public  PictureBox thirstBar = new PictureBox();
+        public  PictureBox hungerBar = new PictureBox();
+        public  PictureBox radiationBar = new PictureBox();
+        public  int MaxWidth;
         public StatsPanel(int Width, int Height)
         {
             InitializeComponent();
-            
+            MaxWidth = Width / 4;
+
             healthBar.Location = new Point(0, 0);
             thirstBar.Location = new Point(0,  Height / 16);
             hungerBar.Location = new Point(0, (Height / 16) * 2);
