@@ -14,11 +14,11 @@ namespace AxesAndShoesTWO
         public int Radiation;
         public List<Clothes> PlayerClothes;
         public List<Items> PlayerInventory;
-        public List<Guns> HotBar;
+        public Guns HotBar;
         public List<KeysRoom> CurrentKeys;
         public Player()
         { }
-        public Player(int Health, int Thirst, int Hunger, int Radiation, List<Clothes> PlayerClothes, List<Items> PlayerInventory, List<Guns> HotBar, List<KeysRoom> CurrentKeys)
+        public Player(int Health, int Thirst, int Hunger, int Radiation, List<Clothes> PlayerClothes, List<Items> PlayerInventory, Guns HotBar, List<KeysRoom> CurrentKeys)
         {
             this.Health = Health;
             this.Thirst = Thirst;
@@ -56,7 +56,7 @@ namespace AxesAndShoesTWO
             }
         }
         
-        public void ChangeStats(StatsPanel sp)
+        private void ChangeStats(StatsPanel sp)
         {
             sp.healthBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Health)), sp.healthBar.Height);
             sp.hungerBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Hunger)), sp.hungerBar.Height);

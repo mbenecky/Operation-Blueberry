@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.Remoting.Messaging;
+using System.Reflection.Emit;
+using System.Windows.Forms;
 
 namespace AxesAndShoesTWO
 {
@@ -26,24 +28,20 @@ namespace AxesAndShoesTWO
         public int ID;
         public string Name;
         public string Description;
-        public bool GasmaskRequire;
         public KeysRoom RequiredKey;
         public KeysRoom ReceivedKey;
-        public List<Enemy> Enemies;
-        public List<Items> Drops;
+        public static List<Enemy> Enemies;
+        public static List<Items> Drops;
         public Image Img;
         public Rooms() { }
-        public Rooms(int ID, string Name, string Description, bool GR, KeysRoom RequiredKey, KeysRoom ReceivedKey, List<Enemy> Enemies, List<Items> Drops, Image Img)
+        public Rooms(int ID, string Name, string Description,KeysRoom RequiredKey, KeysRoom ReceivedKey,  Image Img)
         {
             this.ID = ID;
             this.Name = Name;
             this.Description = Description;
-            this.GasmaskRequire = GR;
             this.RequiredKey = RequiredKey;
             this.ReceivedKey = ReceivedKey;
-            this.Enemies = Enemies;
-            this.Drops = Drops;
-            this.Img = Img;
+            this.Img = Img; 
         }
 
         public bool AreThereEnemies()
@@ -77,6 +75,7 @@ namespace AxesAndShoesTWO
             }
             return true;
         }
+        
         public void CreateDrops(KeysRoom RequiredKey, List<Items> DropTable)
         {
             List<Items> helpList = new List<Items>();
@@ -168,5 +167,7 @@ namespace AxesAndShoesTWO
                     break;
             }
         }
+        
+
     }
 }

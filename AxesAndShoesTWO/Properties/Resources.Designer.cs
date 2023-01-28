@@ -113,6 +113,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap enemyDeathTest {
+            get {
+                object obj = ResourceManager.GetObject("enemyDeathTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap enemyTest {
             get {
                 object obj = ResourceManager.GetObject("enemyTest", resourceCulture);

@@ -27,7 +27,7 @@ namespace AxesAndShoesTWO
 
         public static List<Clothes> Clothes = new List<Clothes>();
         public static List<Items> pItems = new List<Items>();
-        public static List<Guns> pGuns = new List<Guns>();
+        public static Guns pGuns = new Guns();
         public static List<KeysRoom> pKeys = new List<KeysRoom>();
 
         public Player CurrentPlayer = new Player(85, 30, 30, 0, Clothes, pItems, pGuns, pKeys);
@@ -36,6 +36,7 @@ namespace AxesAndShoesTWO
         public static List<string> CharacterInteractions = new List<string>();
         public static List<Items> AllItems = new List<Items>();
         public static List<Enemy> AllEnemies = new List<Enemy>();
+        public static List<Rooms> AllRooms = new List<Rooms>();
 
         public static Panel InventoryToStorage = new Panel();
         public static Panel InventorySpace = new Panel();
@@ -86,11 +87,12 @@ namespace AxesAndShoesTWO
             CharacterInteractions = InteractionsLoad();
             AllItems = ItemsLoad();
             AllEnemies= EnemiesLoad();
-
+            AllRooms = RoomsLoad();
 
 
             CurrentRoom.Size = new Size(WidthSet, HeightSet);
             CurrentRoom.Location = new Point(0, 0);
+            CurrentRoom.BackgroundImage = Properties.Resources.roomTest;
 
 
             characterInteractButton.Text = "Next";
@@ -231,6 +233,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
             this.Controls.Add(statsPanel);
+            this.Controls.Add(CurrentRoom);
             this.Controls.Add(InventoryToStorage);
 
             Task.Run(() => mainGameTimer_Tick());
@@ -363,7 +366,7 @@ namespace AxesAndShoesTWO
             List<Enemy> list = new List<Enemy>();
 
             list.Add(new Enemy(
-                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(192,108),Properties.Resources.enemyTest
+                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(192,108),Properties.Resources.enemyTest, 50, Properties.Resources.enemyDeathTest
                 ));
 
             return list;
@@ -386,7 +389,37 @@ namespace AxesAndShoesTWO
             return list;
         }
 
-     
+        public List<Rooms> RoomsLoad()
+        {
+            List<Rooms> list = new List<Rooms>();
+
+            list.Add(new Rooms(1, "Catacombs", "NULL", KeysRoom.Catacombs, KeysRoom.ElectricityRoom, Properties.Resources.roomTest));
+            list.Add(new Rooms(2, "Electricity Room", "NULL", KeysRoom.ElectricityRoom, KeysRoom.EngineRoom, Properties.Resources.roomTest));
+            list.Add(new Rooms(3, "Engine Room", "NULL", KeysRoom.EngineRoom, KeysRoom.VaultDoor, Properties.Resources.roomTest));
+            list.Add(new Rooms(4, "Vault Air-Lock", "NULL", KeysRoom.VaultDoor, KeysRoom.RogersShrineDoor, Properties.Resources.roomTest));
+            list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.roomTest));
+            list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.roomTest));
+
+            return list;
+
+        }
+
+        public void SpawnARoom(Rooms GivenRoom)
+        {
+            GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
+            GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
+            foreach (Enemy enemy in AllEnemies)
+            {
+                PictureBox pb = new PictureBox();
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Image = enemy.Img;
+                pb.Size = enemy.Size;
+                pb.Tag = enemy.Health.ToString();
+                pb.Location = new Point(30, 30);
+                pb.Click += new EventHandler(pbClick);
+                CurrentRoom.Controls.Add(pb);
+            }
+        }
 
         //END OF METHODS
         //START OF EVENTS
@@ -462,6 +495,7 @@ namespace AxesAndShoesTWO
                 } else
                 {
                     characterInteractPanel.Visible = false;
+                    SpawnARoom(AllRooms[0]);
                 }
                 currentInteraction++;
             } 
@@ -483,7 +517,15 @@ namespace AxesAndShoesTWO
                 case Keys.F: statsPanel.Visible = !statsPanel.Visible; break;
             }
         }
-
+        private void pbClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("it worked");
+            (sender as PictureBox).Tag = Convert.ToInt32((sender as PictureBox).Tag) - 10;
+            if (Convert.ToInt32((sender as PictureBox).Tag) <= 0)
+            {
+                (sender as PictureBox).Dispose();
+            }
+        }
         private void MainGame_Load(object sender, EventArgs e)
         {
 
