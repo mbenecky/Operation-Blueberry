@@ -13,17 +13,24 @@ namespace AxesAndShoesTWO
         public string Name;
         public int Damage;
         public static int WaitTime;
+        public Rarity RarityOfEnemy;
+        public Types Type;
+        public Size Size;
         public Image Img;
         public Enemy()
         {
 
         }
-        public Enemy(string Name, int Damage,Image Img)
+        public Enemy(string Name, int Damage,Rarity RarityOfEnemy,Types Type,Size Size,Image Img)
         {
             WaitTime = rnd.Next(0, 5);
             this.Name = Name;
             this.Damage = Damage;
+            this.RarityOfEnemy= RarityOfEnemy;
+            this.Type = Type;
+            this.Size = Size;
             this.Img = Img;
+
         }
         async Task Attack()
         {
@@ -32,6 +39,10 @@ namespace AxesAndShoesTWO
             //attack player
         }
         
-
+        public enum Types
+        {
+            Flying,
+            Ground
+        };
     }
 }

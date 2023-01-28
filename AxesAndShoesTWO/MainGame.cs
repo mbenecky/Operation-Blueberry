@@ -341,6 +341,10 @@ namespace AxesAndShoesTWO
             list.Add(new Items(29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items(30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
         }
+        public List<Enemy> EnemiesLoad()
+        {
+
+        }
         public List<string> InteractionsLoad()
         {
             List<string> list = new List<string>();
