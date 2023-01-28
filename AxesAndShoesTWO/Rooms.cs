@@ -30,8 +30,8 @@ namespace AxesAndShoesTWO
         public string Description;
         public KeysRoom RequiredKey;
         public KeysRoom ReceivedKey;
-        public static List<Enemy> Enemies;
-        public static List<Items> Drops;
+        public List<Enemy> Enemies;
+        public List<Items> Drops;
         public Image Img;
         public Rooms() { }
         public Rooms(int ID, string Name, string Description,KeysRoom RequiredKey, KeysRoom ReceivedKey,  Image Img)
@@ -41,12 +41,13 @@ namespace AxesAndShoesTWO
             this.Description = Description;
             this.RequiredKey = RequiredKey;
             this.ReceivedKey = ReceivedKey;
-            this.Img = Img; 
+            this.Img = Img;
+            
         }
 
         public bool AreThereEnemies()
         {
-            if (this.Enemies.Count == 0)
+            if (Enemies.Count == 0)
             {
                 return false;
             }
@@ -76,8 +77,9 @@ namespace AxesAndShoesTWO
             return true;
         }
         
-        public void CreateDrops(KeysRoom RequiredKey, List<Items> DropTable)
+        public List<Items> CreateDrops(KeysRoom RequiredKey, List<Items> DropTable)
         {
+            List<Items> finalDrops = new List<Items>();
             List<Items> helpList = new List<Items>();
             int amount = rnd.Next(5, 9);
             switch (RequiredKey)
@@ -86,45 +88,46 @@ namespace AxesAndShoesTWO
                     helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Common)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalDrops.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.ElectricityRoom:  //75% Common 25% Uncommon
                     helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Common) || x.Rarity.Equals(Rarity.Uncommon)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalDrops.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.EngineRoom:       //50% Common 50% Uncommon
                     helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Common) || x.Rarity.Equals(Rarity.Uncommon)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalDrops.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.VaultDoor:        //10% Common 50% Uncommon 40% Rare
                     helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Rare) || x.Rarity.Equals(Rarity.Uncommon)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalDrops.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.RogersShrineDoor: //10% Uncommon 60% Rare 30% Legendary
                     helpList = DropTable.Where(x => x.Rarity.Equals(Rarity.Epic) || x.Rarity.Equals(Rarity.Legendary)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Drops.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalDrops.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.BorysHQDoor:      //END. doesn't have to be anything lol
                     break;
             }
-
+            return finalDrops;
         }
-        public void CreateEnemies(KeysRoom RequiredKey, List<Enemy> Enemies)
+        public List<Enemy> CreateEnemies(KeysRoom RequiredKey, List<Enemy> Enemies)
         {
             int amount = rnd.Next(5, 10);
+            List<Enemy> finalEnemies = new List<Enemy>();
             List<Enemy> helpList = new List<Enemy>();
             switch (RequiredKey)
             {
@@ -132,42 +135,42 @@ namespace AxesAndShoesTWO
                     helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Common)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalEnemies.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.ElectricityRoom: //Uncommon
                     helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Uncommon)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalEnemies.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.EngineRoom: //Rare
                     helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Rare)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalEnemies.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.VaultDoor: //Epic
                     helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Epic)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalEnemies.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.RogersShrineDoor: //Legendary
                     helpList = Enemies.Where(x => x.RarityOfEnemy.Equals(Rarity.Legendary)).ToList();
                     for (int i = 0; i < amount; i++)
                     {
-                        this.Enemies.Add(helpList[rnd.Next(0, helpList.Count)]);
+                        finalEnemies.Add(helpList[rnd.Next(0, helpList.Count)]);
                     }
                     break;
                 case KeysRoom.BorysHQDoor: //Final Boss Fight
                     break;
             }
+            return finalEnemies;
         }
-        
 
     }
 }

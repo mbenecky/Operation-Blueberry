@@ -406,18 +406,21 @@ namespace AxesAndShoesTWO
 
         public void SpawnARoom(Rooms GivenRoom)
         {
-            GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
-            GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
-            foreach (Enemy enemy in AllEnemies)
+            GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
+            GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
+            int i = 0;
+            foreach (Enemy enemy in GivenRoom.Enemies)
             {
                 PictureBox pb = new PictureBox();
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.Image = enemy.Img;
+                pb.BackColor = Color.Transparent;
                 pb.Size = enemy.Size;
                 pb.Tag = enemy.Health.ToString();
-                pb.Location = new Point(30, 30);
+                pb.Location = new Point(192*i, 30);
                 pb.Click += new EventHandler(pbClick);
                 CurrentRoom.Controls.Add(pb);
+                i++;
             }
         }
 
