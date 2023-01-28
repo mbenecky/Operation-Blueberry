@@ -8,6 +8,8 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
 namespace AxesAndShoesTWO
 {
     public partial class MainGame : Form
@@ -89,6 +91,7 @@ namespace AxesAndShoesTWO
             AllEnemies= EnemiesLoad();
             AllRooms = RoomsLoad();
 
+            CurrentPlayer.HotBar = (AllItems[1] as Guns);
 
             CurrentRoom.Size = new Size(WidthSet, HeightSet);
             CurrentRoom.Location = new Point(0, 0);
@@ -282,6 +285,34 @@ namespace AxesAndShoesTWO
             loadPanel.Visible = false;
             
         }
+        async Task Reloading()
+        {
+            SoundPlayer Reload = new SoundPlayer(Properties.Resources.reload);
+            Reload.PlaySync();
+            CurrentPlayer.HotBar.isAbleToShoot = false;
+            await Task.Delay(CurrentPlayer.HotBar.WaitTime);
+            CurrentPlayer.HotBar.isAbleToShoot = true;
+            CurrentPlayer.HotBar.CurrentAmountOfRounds = CurrentPlayer.HotBar.NumberOfRounds;
+        }
+        async Task WaitBetweenShots()
+        {
+            SoundPlayer Gunshot = new SoundPlayer(Properties.Resources.gunshot);
+            Gunshot.PlaySync();
+            CurrentPlayer.HotBar.isAbleToShoot = false;
+            await Task.Delay(CurrentPlayer.HotBar.WaitTime / 10);
+            CurrentPlayer.HotBar.isAbleToShoot = true;
+        }
+        async Task Death(object sender)
+        {
+            PictureBox pb = new PictureBox();
+            Location oldLocation = pb.Location;
+            pb = (sender as PictureBox);
+            pb.Size = Properties.Resources.deathImage.Size;
+            pb.Image = Properties.Resources.deathImage;
+            pb.Location = new Point(pb.Width, oldLocation.Height-)
+            await Task.Delay(1000);
+            pb.Dispose();
+        }
         //END OF TASKS
         //START OF METHODS
         public void CreateMessage(string Message)
@@ -366,7 +397,7 @@ namespace AxesAndShoesTWO
             List<Enemy> list = new List<Enemy>();
 
             list.Add(new Enemy(
-                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(192,108),Properties.Resources.enemyTest, 50, Properties.Resources.enemyDeathTest
+                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(WidthSet/4,HeightSet/4),Properties.Resources.enemyTest, 50, Properties.Resources.enemyDeathTest
                 ));
 
             return list;
@@ -406,6 +437,7 @@ namespace AxesAndShoesTWO
 
         public void SpawnARoom(Rooms GivenRoom)
         {
+            Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
             GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
             int i = 0;
@@ -414,10 +446,19 @@ namespace AxesAndShoesTWO
                 PictureBox pb = new PictureBox();
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.Image = enemy.Img;
-                pb.BackColor = Color.Transparent;
+                pb.BackColor = Color.FromArgb(0, Color.Transparent) ;
+                pb.BackgroundImage = null;
+
+
                 pb.Size = enemy.Size;
                 pb.Tag = enemy.Health.ToString();
-                pb.Location = new Point(192*i, 30);
+                if(enemy.Type == Enemy.Types.Ground)
+                {
+                    pb.Location = new Point(rnd.Next(0,WidthSet-enemy.Size.Width), HeightSet - enemy.Size.Height);
+                } else
+                {
+                    pb.Location = new Point(rnd.Next(0, WidthSet - enemy.Size.Width), HeightSet / 8);
+                }
                 pb.Click += new EventHandler(pbClick);
                 CurrentRoom.Controls.Add(pb);
                 i++;
@@ -522,11 +563,27 @@ namespace AxesAndShoesTWO
         }
         private void pbClick(object sender, EventArgs e)
         {
-            MessageBox.Show("it worked");
-            (sender as PictureBox).Tag = Convert.ToInt32((sender as PictureBox).Tag) - 10;
-            if (Convert.ToInt32((sender as PictureBox).Tag) <= 0)
-            {
-                (sender as PictureBox).Dispose();
+            if(CurrentPlayer.HotBar.isAbleToShoot) {
+               
+                (sender as PictureBox).Tag = Convert.ToInt32((sender as PictureBox).Tag) - CurrentPlayer.HotBar.Damage*5;
+                if (Convert.ToInt32((sender as PictureBox).Tag) <= 0)
+                {
+                    try { 
+                    Death(sender);
+                    }
+                    catch(Exception ex)
+                    {
+                        Log("Something went wrong when trying the Death() method, ex code: " + ex.Message);
+                    }
+                }
+                CurrentPlayer.HotBar.CurrentAmountOfRounds--;
+                if (CurrentPlayer.HotBar.CurrentAmountOfRounds == 0)
+                {
+                    Task.Run(() => Reloading());
+                } else
+                {
+                    Task.Run(() => WaitBetweenShots());
+                }
             }
         }
         private void MainGame_Load(object sender, EventArgs e)

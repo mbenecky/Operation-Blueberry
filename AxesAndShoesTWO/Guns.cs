@@ -11,6 +11,7 @@ namespace AxesAndShoesTWO
 
         public int NumberOfRounds;
         public int Damage;
+        public int CurrentAmountOfRounds;
         public int WaitTime; //in milisecodns
         public bool isAbleToShoot;
         public Guns() { }
@@ -25,19 +26,9 @@ namespace AxesAndShoesTWO
             this.Damage = Damage;
             this.WaitTime = WaitTime;
             isAbleToShoot = true;
+            CurrentAmountOfRounds = NumberOfRounds;
         }
-        async Task Reloading()
-        {
-            isAbleToShoot = false;
-            await Task.Delay(WaitTime);
-            isAbleToShoot = true;
-        }
-        async Task WaitBetweenShots()
-        {
-            isAbleToShoot = false;
-            await Task.Delay(WaitTime/10);
-            isAbleToShoot = true;
-        }
+        
         public override string ToString()
         {
             return base.Name;
