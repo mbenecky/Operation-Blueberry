@@ -304,13 +304,15 @@ namespace AxesAndShoesTWO
         }
         async Task Death(object sender)
         {
+
             PictureBox pb = new PictureBox();
-            Location oldLocation = pb.Location;
+         
             pb = (sender as PictureBox);
+            pb.Click -= (pbClick);
             pb.Size = Properties.Resources.deathImage.Size;
             pb.Image = Properties.Resources.deathImage;
-            pb.Location = new Point(pb.Width, oldLocation.Height-)
-            await Task.Delay(1000);
+            pb.Location = new Point(pb.Location.X,pb.Location.Y+pb.Size.Height);
+            await Task.Delay(2000);
             pb.Dispose();
         }
         //END OF TASKS
@@ -397,7 +399,7 @@ namespace AxesAndShoesTWO
             List<Enemy> list = new List<Enemy>();
 
             list.Add(new Enemy(
-                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(WidthSet/4,HeightSet/4),Properties.Resources.enemyTest, 50, Properties.Resources.enemyDeathTest
+                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(WidthSet/4,HeightSet/4),Properties.Resources.enemyTestnew, 50, Properties.Resources.enemyDeathTest
                 ));
 
             return list;
@@ -569,7 +571,7 @@ namespace AxesAndShoesTWO
                 if (Convert.ToInt32((sender as PictureBox).Tag) <= 0)
                 {
                     try { 
-                    Death(sender);
+                     Death(sender);
                     }
                     catch(Exception ex)
                     {
