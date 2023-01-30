@@ -46,7 +46,7 @@ namespace AxesAndShoesTWO
         public static PictureBox lastPb = new PictureBox();
 
         public static Panel CurrentRoom = new Panel();
-
+        public static Rooms CurrentRoomR = new Rooms();
 
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
