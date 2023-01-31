@@ -44,6 +44,8 @@ namespace AxesAndShoesTWO
         public static Panel InventorySpace = new Panel();
         public static Panel StorageSpace = new Panel();
         public static PictureBox lastPb = new PictureBox();
+        public static Panel DropsPanel = new Panel();
+
 
         public static Panel CurrentRoom = new Panel();
         public static Rooms CurrentRoomR = new Rooms();
@@ -185,6 +187,7 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Location = new Point(0, 0);
             InventoryToStorage.BackgroundImage = Properties.Resources.mapBackGround;
 
+
             InventorySpace.Size = new Size(WidthSet / 2, HeightSet);
             InventorySpace.Location = new Point(0, 0);
             InventorySpace.BackColor = Color.Transparent;
@@ -193,8 +196,14 @@ namespace AxesAndShoesTWO
             StorageSpace.Location = new Point(WidthSet / 2, 0);
             StorageSpace.BackColor = Color.Transparent;
 
+            DropsPanel.Size = new Size(WidthSet / 2, HeightSet);
+            DropsPanel.Location = new Point(WidthSet/2, 0);
+            DropsPanel.BackColor = Color.Transparent;
+            DropsPanel.Visible = false;
+
             InventoryToStorage.Controls.Add(InventorySpace);
             InventoryToStorage.Controls.Add(StorageSpace);
+            InventoryToStorage.Controls.Add(DropsPanel);
 
             for(int i = 0; i != 5;i++)
             {
@@ -221,6 +230,7 @@ namespace AxesAndShoesTWO
                     pb.Tag = "0";
                     pb.Click += new EventHandler(inventoryCheck);
                     StorageSpace.Controls.Add(pb);
+                    DropsPanel.Controls.Add(pb);
                 }
             }
             InventoryToStorage.Visible = false;
@@ -314,6 +324,10 @@ namespace AxesAndShoesTWO
             pb.Location = new Point(pb.Location.X,pb.Location.Y+pb.Size.Height);
             await Task.Delay(2000);
             pb.Dispose();
+            if(CurrentRoom.Controls.Count == 0)
+            {
+                ShowDrops(CurrentRoomR);
+            }
         }
         //END OF TASKS
         //START OF METHODS
@@ -436,9 +450,24 @@ namespace AxesAndShoesTWO
             return list;
 
         }
+        public void ShowDrops(Rooms GivenRoom)
+        {
+            CurrentRoom.Visible = false;
+            InventoryToStorage.Visible = true;
+            DropsPanel.Visible = true;
+            StorageSpace.Visible = false;
+            int currentPicBox = 0;
+            foreach (Items it in GivenRoom.Drops)
+            {
+                DropsPanel.Controls[currentPicBox].Tag = it.ID.ToString();
+                (DropsPanel.Controls[currentPicBox] as PictureBox).Image = it.img;
+                currentPicBox++;
+            }
+        }
 
         public void SpawnARoom(Rooms GivenRoom)
         {
+            
             Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
             GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
@@ -465,6 +494,7 @@ namespace AxesAndShoesTWO
                 CurrentRoom.Controls.Add(pb);
                 i++;
             }
+            CurrentRoomR = GivenRoom;
         }
 
         //END OF METHODS
@@ -559,7 +589,9 @@ namespace AxesAndShoesTWO
                 case Keys.Escape: break; //pauses
                 case Keys.M: break; //Opens map
                 case Keys.E: InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
-                case Keys.R: break; //reload
+                case Keys.R: 
+                    Task.Run(() => Reloading());  
+                    break; //reload
                 case Keys.F: statsPanel.Visible = !statsPanel.Visible; break;
             }
         }
@@ -572,6 +604,8 @@ namespace AxesAndShoesTWO
                 {
                     try { 
                      Death(sender);
+                        
+                        
                     }
                     catch(Exception ex)
                     {
@@ -579,10 +613,7 @@ namespace AxesAndShoesTWO
                     }
                 }
                 CurrentPlayer.HotBar.CurrentAmountOfRounds--;
-                if (CurrentPlayer.HotBar.CurrentAmountOfRounds == 0)
-                {
-                    Task.Run(() => Reloading());
-                } else
+                if (CurrentPlayer.HotBar.CurrentAmountOfRounds != 0)
                 {
                     Task.Run(() => WaitBetweenShots());
                 }
