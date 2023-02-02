@@ -49,6 +49,7 @@ namespace AxesAndShoesTWO
 
         public static Panel CurrentRoom = new Panel();
         public static Rooms CurrentRoomR = new Rooms();
+        public static Enemy CurrentEnemy = new Enemy();
 
         public static Label loadLabel = new Label();
         public static Panel loadPanel = new Panel();
@@ -315,18 +316,17 @@ namespace AxesAndShoesTWO
         async Task Death(object sender)
         {
 
-            PictureBox pb = new PictureBox();
-         
-            pb = (sender as PictureBox);
-            pb.Click -= (pbClick);
-            pb.Size = Properties.Resources.deathImage.Size;
-            pb.Image = Properties.Resources.deathImage;
-            pb.Location = new Point(pb.Location.X,pb.Location.Y+pb.Size.Height);
             await Task.Delay(2000);
-            pb.Dispose();
-            if(CurrentRoom.Controls.Count == 0)
+            CurrentRoomR.Enemies.RemoveAt(0);
+            if (CurrentRoomR.Enemies.Count == 0)
             {
                 ShowDrops(CurrentRoomR);
+                ClearRooms();
+            } else
+            {
+                (CurrentRoom.Controls[0] as PictureBox).Image = CurrentRoomR.Enemies[0].Img;
+                (CurrentRoom.Controls[1] as ProgressBar).Maximum = CurrentRoomR.Enemies[0].Health;
+                (CurrentRoom.Controls[1] as ProgressBar).Value = CurrentRoomR.Enemies[0].Health;
             }
         }
         //END OF TASKS
@@ -471,30 +471,37 @@ namespace AxesAndShoesTWO
             Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
             GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
-            int i = 0;
-            foreach (Enemy enemy in GivenRoom.Enemies)
-            {
-                PictureBox pb = new PictureBox();
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                pb.Image = enemy.Img;
-                pb.BackColor = Color.FromArgb(0, Color.Transparent) ;
-                pb.BackgroundImage = null;
+            CurrentEnemy = GivenRoom.Enemies[0];
+
+            PictureBox pb = new PictureBox();
+            pb.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb.Image = CurrentEnemy.Img;
+            pb.BackColor = Color.FromArgb(0, Color.Transparent);
+            pb.BackgroundImage = null;
 
 
-                pb.Size = enemy.Size;
-                pb.Tag = enemy.Health.ToString();
-                if(enemy.Type == Enemy.Types.Ground)
-                {
-                    pb.Location = new Point(rnd.Next(0,WidthSet-enemy.Size.Width), HeightSet - enemy.Size.Height);
-                } else
-                {
-                    pb.Location = new Point(rnd.Next(0, WidthSet - enemy.Size.Width), HeightSet / 8);
-                }
-                pb.Click += new EventHandler(pbClick);
-                CurrentRoom.Controls.Add(pb);
-                i++;
-            }
+            pb.Size = CurrentEnemy.Size;
+            pb.Location = new Point(WidthSet/2-pb.Size.Width/2,HeightSet/8);
+            pb.Tag = CurrentEnemy.Health.ToString();
+            pb.Click += new EventHandler(pbClick);
+
+            ProgressBar progBar = new ProgressBar();
+            progBar.Maximum = CurrentEnemy.Health;
+            progBar.Step = 1;
+            progBar.Value = CurrentEnemy.Health;
+            progBar.Size =      new Size(WidthSet/4,HeightSet/8);
+            progBar.Location =  new Point(WidthSet/2-WidthSet/8, HeightSet-HeightSet/4);
+
+            CurrentRoom.Controls.Add(pb);
+            CurrentRoom.Controls.Add(progBar);
             CurrentRoomR = GivenRoom;
+        }
+
+        public void ClearRooms()
+        {
+            CurrentRoom.Controls.Clear();
+            CurrentRoomR = new Rooms();
+            
         }
 
         //END OF METHODS
@@ -598,19 +605,20 @@ namespace AxesAndShoesTWO
         private void pbClick(object sender, EventArgs e)
         {
             if(CurrentPlayer.HotBar.isAbleToShoot) {
-               
-                (sender as PictureBox).Tag = Convert.ToInt32((sender as PictureBox).Tag) - CurrentPlayer.HotBar.Damage*5;
-                if (Convert.ToInt32((sender as PictureBox).Tag) <= 0)
+                int help = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
+                if (help <= 0)
                 {
                     try { 
-                     Death(sender);
-                        
-                        
+                        Death(sender);
+                        return;
                     }
                     catch(Exception ex)
                     {
                         Log("Something went wrong when trying the Death() method, ex code: " + ex.Message);
                     }
+                } else
+                {
+                    (CurrentRoom.Controls[1] as ProgressBar).Value = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 }
                 CurrentPlayer.HotBar.CurrentAmountOfRounds--;
                 if (CurrentPlayer.HotBar.CurrentAmountOfRounds != 0)
