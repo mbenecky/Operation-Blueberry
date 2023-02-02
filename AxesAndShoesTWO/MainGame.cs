@@ -149,35 +149,40 @@ namespace AxesAndShoesTWO
 
             mainGamePanel.Size = new Size(WidthSet, HeightSet);
 
-            PictureBox logoPicBox = new PictureBox();
-            Button newGameButton = new Button();
-            Button optionsButton = new Button();
-            Button creditsButton = new Button(); //change these asap :)
+            PictureBox newGameButton = new PictureBox();
+            PictureBox quitButton = new PictureBox();//options nehodlam delat nevim co bych tam optionoval a je lepsi kdyz hrac nevi
+            PictureBox creditsButton = new PictureBox(); 
 
-            logoPicBox.Location = new Point(WidthSet / 4, HeightSet / 6);
-            logoPicBox.Size = new Size(WidthSet / 2, HeightSet / 4);
-            logoPicBox.Image = Properties.Resources.OPbLUEBERRYTEMPLOGO2;
-            logoPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            logoPicBox.BackColor = Color.Transparent;
 
+
+                                            //1920/6, 1080/8
             newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
-            newGameButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2);
-            newGameButton.BackgroundImage = Properties.Resources.buttonTemp;
+            newGameButton.Location = new Point(WidthSet - WidthSet/4, HeightSet/2);
+            newGameButton.Image = Properties.Resources.play_button;
+            newGameButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            newGameButton.BackColor = Color.Transparent;
             newGameButton.Click += new EventHandler(newGameButton_Click);
+            newGameButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
 
-            optionsButton.Size = newGameButton.Size;
-            optionsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 + newGameButton.Size.Height + HeightSet / 20);
-            optionsButton.BackgroundImage = Properties.Resources.buttonTemp;
+            quitButton.Size = newGameButton.Size;
+            quitButton.Location = new Point(newGameButton.Location.X-3, newGameButton.Location.Y+HeightSet/6);
+            quitButton.Image = Properties.Resources.quit_button;
+            quitButton.BackColor = Color.Transparent;
+            quitButton.SizeMode =   PictureBoxSizeMode.StretchImage;
+            quitButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
 
             creditsButton.Size = newGameButton.Size;
-            creditsButton.Location = new Point(WidthSet / 2 - newGameButton.Size.Width / 2, HeightSet / 2 + newGameButton.Size.Height + optionsButton.Size.Height + HeightSet / 10);
-            creditsButton.BackgroundImage = Properties.Resources.buttonTemp;
+            creditsButton.Location = new Point(quitButton.Location.X, quitButton.Location.Y+HeightSet/6-5);
+            creditsButton.Image = Properties.Resources.credits_button;
+            creditsButton.BackColor = Color.Transparent;
+            creditsButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            creditsButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
 
-            mainGamePanel.BackColor = Color.FromArgb(64, 64, 64);
 
-            mainGamePanel.Controls.Add(logoPicBox);
+            mainGamePanel.BackgroundImage = Properties.Resources.menu;
+
             mainGamePanel.Controls.Add(newGameButton);
-            mainGamePanel.Controls.Add(optionsButton);
+            mainGamePanel.Controls.Add(quitButton);
             mainGamePanel.Controls.Add(creditsButton);
 
             mapPanel.BackgroundImage = Properties.Resources.mapBackGround;

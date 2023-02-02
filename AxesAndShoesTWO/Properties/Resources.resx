@@ -133,6 +133,12 @@
   <data name="crateTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crateTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="credits_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credits_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="credits_buttonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credits_buttonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="deathImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deathImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,11 +169,26 @@
   <data name="mapBackGround" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapBackGround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="opBlueberryTempLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opBlueberryTempLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OPbLUEBERRYTEMPLOGO2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OPbLUEBERRYTEMPLOGO2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_buttonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_buttonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="quit_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\quit_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="quit_buttonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\quit_buttonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="radiationBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\radiationBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -165,5 +165,26 @@
   <ItemGroup>
     <None Include="Resources\enemyTestnew.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quit_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quit_buttonHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play_buttonHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credits_buttonHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credits_button.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -113,6 +113,26 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap credits_button {
+            get {
+                object obj = ResourceManager.GetObject("credits_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap credits_buttonHover {
+            get {
+                object obj = ResourceManager.GetObject("credits_buttonHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap deathImage {
             get {
                 object obj = ResourceManager.GetObject("deathImage", resourceCulture);
@@ -212,6 +232,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu {
+            get {
+                object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap opBlueberryTempLogo {
             get {
                 object obj = ResourceManager.GetObject("opBlueberryTempLogo", resourceCulture);
@@ -225,6 +255,46 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap OPbLUEBERRYTEMPLOGO2 {
             get {
                 object obj = ResourceManager.GetObject("OPbLUEBERRYTEMPLOGO2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_button {
+            get {
+                object obj = ResourceManager.GetObject("play_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_buttonHover {
+            get {
+                object obj = ResourceManager.GetObject("play_buttonHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap quit_button {
+            get {
+                object obj = ResourceManager.GetObject("quit_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap quit_buttonHover {
+            get {
+                object obj = ResourceManager.GetObject("quit_buttonHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
