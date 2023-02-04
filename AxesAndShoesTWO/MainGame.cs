@@ -161,22 +161,28 @@ namespace AxesAndShoesTWO
             newGameButton.Image = Properties.Resources.play_button;
             newGameButton.SizeMode = PictureBoxSizeMode.StretchImage;
             newGameButton.BackColor = Color.Transparent;
+            newGameButton.Name = "newGameButton";
             newGameButton.Click += new EventHandler(newGameButton_Click);
             newGameButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
+            newGameButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
             quitButton.Size = newGameButton.Size;
             quitButton.Location = new Point(newGameButton.Location.X-3, newGameButton.Location.Y+HeightSet/6);
             quitButton.Image = Properties.Resources.quit_button;
             quitButton.BackColor = Color.Transparent;
+            quitButton.Name = "quitButton";
             quitButton.SizeMode =   PictureBoxSizeMode.StretchImage;
             quitButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
+            quitButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
             creditsButton.Size = newGameButton.Size;
             creditsButton.Location = new Point(quitButton.Location.X, quitButton.Location.Y+HeightSet/6-5);
             creditsButton.Image = Properties.Resources.credits_button;
             creditsButton.BackColor = Color.Transparent;
+            creditsButton.Name = "creditsButton";
             creditsButton.SizeMode = PictureBoxSizeMode.StretchImage;
             creditsButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
+            creditsButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
 
             mainGamePanel.BackgroundImage = Properties.Resources.menu;
@@ -562,6 +568,46 @@ namespace AxesAndShoesTWO
             loadPanel.Visible = true;
             mainGamePanel.Visible = false;
             await loadTimer_Tick();
+        }
+
+        private void globalMouseEnterEvent(object sender, EventArgs e)
+        {
+            string nameOfSender = (sender as PictureBox).Name;
+            switch(nameOfSender)
+            {
+                case "newGameButton":
+                    (sender as PictureBox).Image = Properties.Resources.play_buttonHover;
+                    break;
+                case "creditsButton":
+                    (sender as PictureBox).Image = Properties.Resources.credits_buttonHover;
+                    break;
+                case "quitButton":
+                    (sender as PictureBox).Image= Properties.Resources.quit_buttonHover;
+                    break;
+                default:
+                    Log("globalMouseEnterEvent failed, possibly something to do with name? " + nameOfSender + sender.GetType());
+                    break;
+            }
+
+        }
+        private void globalMouseLeaveEvent(object sender, EventArgs e)
+        {
+            string nameOfSender = (sender as PictureBox).Name;
+            switch (nameOfSender)
+            {
+                case "newGameButton":
+                    (sender as PictureBox).Image = Properties.Resources.play_button;
+                    break;
+                case "creditsButton":
+                    (sender as PictureBox).Image = Properties.Resources.credits_button;
+                    break;
+                case "quitButton":
+                    (sender as PictureBox).Image = Properties.Resources.quit_button;
+                    break;
+                default:
+                    Log("globalMouseLeaveEvent failed, possibly something to do with name? " + nameOfSender + sender.GetType());
+                    break;
+            }
         }
 
         private async void interactButton_Click(object sender, EventArgs e)
