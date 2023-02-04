@@ -218,6 +218,7 @@ namespace AxesAndShoesTWO
             PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 4);
             PlayerClothes.BackColor = Color.Transparent;
             PlayerClothes.Visible = true;
+            PlayerClothes.Name = "PlayerClothes";
 
             InventoryToStorage.Controls.Add(PlayerClothes);
             InventoryToStorage.Controls.Add(InventorySpace);
@@ -246,14 +247,21 @@ namespace AxesAndShoesTWO
                 pb.Location = new Point(0, (HeightSet/10)* i );
                 pb.Tag = "0";
                 pb.Click += new EventHandler(inventoryCheck);
+                pb.Name = "Head";
                 PlayerClothes.Controls.Add(pb);
             }
             //Zmena playerClothes imagů
             (PlayerClothes.Controls[1] as PictureBox).BackgroundImage = Properties.Resources.chestPlace;
+            (PlayerClothes.Controls[1] as PictureBox).Name = "Chest";
+
             (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
+            (PlayerClothes.Controls[2] as PictureBox).Name = "Legs";
+
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
+            (PlayerClothes.Controls[3] as PictureBox).Name = "Feet";
+
             //zmena pl...
-            
+
             for (int i = 0; i != 5; i++)
             {
                 for (int j = 0; j != 5; j++)
@@ -555,7 +563,7 @@ namespace AxesAndShoesTWO
         {
             PictureBox pictureBox =(sender as PictureBox);
             MessageBox.Show(pictureBox.Tag.ToString());
-            if (!isSelected && sender is PictureBox)
+            if (!isSelected)
             {
                 if(pictureBox.Tag.ToString() != "0")
                 {
@@ -579,7 +587,7 @@ namespace AxesAndShoesTWO
                 }
                 if(AllItems[Convert.ToInt32(pictureBox.Tag)-1] is Clothes)
                 {
-                    switch ((AllItems[Convert.ToInt32(pictureBox.Tag)] as Clothes).Place)
+                    switch ((AllItems[Convert.ToInt32(pictureBox.Tag)-1] as Clothes).Place)
                     {
                         case Place.Head:
                             (PlayerClothes.Controls[0] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
@@ -598,7 +606,7 @@ namespace AxesAndShoesTWO
                 }
                 return;
             }
-            if(pictureBox.Tag.ToString() == "0")
+            if(pictureBox.Tag.ToString() == "0" && pictureBox.Parent.Name != "PlayerClothes")
             {
                 pictureBox.Image = lastPb.Image;
                 pictureBox.Tag = lastPb.Tag;
@@ -606,6 +614,63 @@ namespace AxesAndShoesTWO
                 lastPb.Tag = "0";
                 lastPb.Image = null;
             } 
+            else if(pictureBox.Tag.ToString() == "0" && pictureBox.Parent.Name == "PlayerClothes") //Hodne nested ifu, ale tak co uz lol
+            { //Zjisteni jestli uz. klikl na PlayerClothes Panel
+                try {
+                    if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Clothes) //Zjisteni jestli obsah kokotiny je vubec clouts
+                    { //musim zjistit jestli nedava cepici do gati
+                        switch (pictureBox.Name)
+                        {
+                            case "Head":
+                                if ((AllItems[Convert.ToInt32(lastPb.Tag) - 1] as Clothes).Place == Place.Head)
+                                {
+                                    pictureBox.Image = lastPb.Image;
+                                    pictureBox.Tag = lastPb.Tag;
+                                    lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                                    lastPb.Tag = "0";
+                                    lastPb.Image = null;
+                                }
+                                break;
+                            case "Chest":
+                                if ((AllItems[Convert.ToInt32(lastPb.Tag) - 1] as Clothes).Place == Place.Chest)
+                                {
+                                    pictureBox.Image = lastPb.Image;
+                                    pictureBox.Tag = lastPb.Tag;
+                                    lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                                    lastPb.Tag = "0";
+                                    lastPb.Image = null;
+                                }
+                                break;
+                            case "Legs":
+                                if ((AllItems[Convert.ToInt32(lastPb.Tag) - 1] as Clothes).Place == Place.Pants)
+                                {
+                                    pictureBox.Image = lastPb.Image;
+                                    pictureBox.Tag = lastPb.Tag;
+                                    lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                                    lastPb.Tag = "0";
+                                    lastPb.Image = null;
+                                }
+                                break;
+                            case "Feet":
+                                if ((AllItems[Convert.ToInt32(lastPb.Tag) - 1] as Clothes).Place == Place.Boots)
+                                {
+                                    pictureBox.Image = lastPb.Image;
+                                    pictureBox.Tag = lastPb.Tag;
+                                    lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                                    lastPb.Tag = "0";
+                                    lastPb.Image = null;
+                                }
+                                break;
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show((Convert.ToInt32(pictureBox.Tag)).ToString());
+                    MessageBox.Show((Convert.ToInt32(lastPb.Tag)).ToString());
+                }
+            }
             isSelected = false;
             foreach (Control c in InventorySpace.Controls)
             {
