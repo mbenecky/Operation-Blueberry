@@ -45,6 +45,7 @@ namespace AxesAndShoesTWO
         public static Panel StorageSpace = new Panel();
         public static PictureBox lastPb = new PictureBox();
         public static Panel DropsPanel = new Panel();
+        public static Panel PlayerClothes = new Panel();
 
 
         public static Panel CurrentRoom = new Panel();
@@ -213,6 +214,12 @@ namespace AxesAndShoesTWO
             DropsPanel.BackColor = Color.Transparent;
             DropsPanel.Visible = false;
 
+            PlayerClothes.Size = new Size(WidthSet / 20, HeightSet/10*4);
+            PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 10);
+            PlayerClothes.BackColor = Color.Transparent;
+            PlayerClothes.Visible = true;
+
+            InventoryToStorage.Controls.Add(PlayerClothes);
             InventoryToStorage.Controls.Add(InventorySpace);
             InventoryToStorage.Controls.Add(StorageSpace);
             InventoryToStorage.Controls.Add(DropsPanel);
@@ -231,6 +238,22 @@ namespace AxesAndShoesTWO
                }
             }
 
+            for(int i = 0; i!=4;i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.BackgroundImage = Properties.Resources.headPlace;
+                pb.Size = new Size(WidthSet / 20, HeightSet / 10);
+                pb.Location = new Point(0, (HeightSet/10)*i);
+                pb.Tag = "0";
+                pb.Click += new EventHandler(inventoryCheck);
+                PlayerClothes.Controls.Add(pb);
+            }
+            //Zmena playerClothes imagů
+            (PlayerClothes.Controls[1] as PictureBox).Image = Properties.Resources.chestPlace;
+            (PlayerClothes.Controls[2] as PictureBox).Image = Properties.Resources.legsPlace;
+            (PlayerClothes.Controls[3] as PictureBox).Image = Properties.Resources.feetPlace;
+            //zmena pl...
+            
             for (int i = 0; i != 5; i++)
             {
                 for (int j = 0; j != 5; j++)
@@ -328,7 +351,14 @@ namespace AxesAndShoesTWO
         {
 
             await Task.Delay(2000);
-            CurrentRoomR.Enemies.RemoveAt(0);
+            try { 
+                CurrentRoomR.Enemies.RemoveAt(0);
+            } catch(Exception ex)
+            {
+                ShowDrops(CurrentRoomR);
+                ClearRooms();
+                MessageBox.Show(ex.Message);
+            }
             if (CurrentRoomR.Enemies.Count == 0)
             {
                 ShowDrops(CurrentRoomR);
@@ -520,7 +550,7 @@ namespace AxesAndShoesTWO
         private void inventoryCheck(object sender, EventArgs e)
         {
             PictureBox pictureBox =(sender as PictureBox);
-            if (!isSelected)
+            if (!isSelected && sender is PictureBox)
             {
                 if(pictureBox.Tag.ToString() != "0")
                 {
@@ -542,6 +572,7 @@ namespace AxesAndShoesTWO
                         c.BackgroundImage = Properties.Resources.backgroundItemFree;
                     }
                 }
+                
                 return;
             }
             if(pictureBox.Tag.ToString() == "0")
@@ -659,9 +690,9 @@ namespace AxesAndShoesTWO
                 int help = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 if (help <= 0)
                 {
+                    (CurrentRoom.Controls[1] as ProgressBar).Value = 0;
                     try { 
                         Death(sender);
-                        return;
                     }
                     catch(Exception ex)
                     {

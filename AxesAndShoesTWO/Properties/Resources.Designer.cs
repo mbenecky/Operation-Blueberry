@@ -103,6 +103,16 @@ namespace AxesAndShoesTWO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap chestPlace {
+            get {
+                object obj = ResourceManager.GetObject("chestPlace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap crateTest {
             get {
                 object obj = ResourceManager.GetObject("crateTest", resourceCulture);
@@ -171,6 +181,16 @@ namespace AxesAndShoesTWO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap feetPlace {
+            get {
+                object obj = ResourceManager.GetObject("feetPlace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream gunshot {
@@ -185,6 +205,16 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap gunTest {
             get {
                 object obj = ResourceManager.GetObject("gunTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap headPlace {
+            get {
+                object obj = ResourceManager.GetObject("headPlace", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -215,6 +245,16 @@ namespace AxesAndShoesTWO.Properties {
         internal static System.Drawing.Bitmap itemTest {
             get {
                 object obj = ResourceManager.GetObject("itemTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap legsPlace {
+            get {
+                object obj = ResourceManager.GetObject("legsPlace", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -186,5 +186,17 @@
   <ItemGroup>
     <None Include="Resources\credits_button.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\legsPlace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feetPlace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headPlace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chestPlace.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
