@@ -215,7 +215,7 @@ namespace AxesAndShoesTWO
             DropsPanel.Visible = false;
 
             PlayerClothes.Size = new Size(WidthSet / 20, HeightSet/10*4);
-            PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 10);
+            PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 4);
             PlayerClothes.BackColor = Color.Transparent;
             PlayerClothes.Visible = true;
 
@@ -243,15 +243,15 @@ namespace AxesAndShoesTWO
                 PictureBox pb = new PictureBox();
                 pb.BackgroundImage = Properties.Resources.headPlace;
                 pb.Size = new Size(WidthSet / 20, HeightSet / 10);
-                pb.Location = new Point(0, (HeightSet/10)*i);
+                pb.Location = new Point(0, (HeightSet/10)* i );
                 pb.Tag = "0";
                 pb.Click += new EventHandler(inventoryCheck);
                 PlayerClothes.Controls.Add(pb);
             }
             //Zmena playerClothes imagů
-            (PlayerClothes.Controls[1] as PictureBox).Image = Properties.Resources.chestPlace;
-            (PlayerClothes.Controls[2] as PictureBox).Image = Properties.Resources.legsPlace;
-            (PlayerClothes.Controls[3] as PictureBox).Image = Properties.Resources.feetPlace;
+            (PlayerClothes.Controls[1] as PictureBox).BackgroundImage = Properties.Resources.chestPlace;
+            (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
+            (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             //zmena pl...
             
             for (int i = 0; i != 5; i++)
@@ -349,7 +349,7 @@ namespace AxesAndShoesTWO
         }
         async Task Death(object sender)
         {
-
+            (sender as PictureBox).Click -= new EventHandler(pbClick);
             await Task.Delay(2000);
             try { 
                 CurrentRoomR.Enemies.RemoveAt(0);
@@ -368,6 +368,7 @@ namespace AxesAndShoesTWO
                 (CurrentRoom.Controls[0] as PictureBox).Image = CurrentRoomR.Enemies[0].Img;
                 (CurrentRoom.Controls[1] as ProgressBar).Maximum = CurrentRoomR.Enemies[0].Health;
                 (CurrentRoom.Controls[1] as ProgressBar).Value = CurrentRoomR.Enemies[0].Health;
+                (sender as PictureBox).Click += new EventHandler(pbClick);
             }
         }
         //END OF TASKS
@@ -431,8 +432,11 @@ namespace AxesAndShoesTWO
 
             List<Items> list = new List<Items>(); 
             list.Add(new Guns(1, "The Enforcer", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            //ID: 12, Název: "The Hellraiser", Deskripce: "Silný revolver s vysokým poškozením na krátkou vzdálenost", Rarita: Legendary, Velikost zásobníku: 6, Damage: 5
             list.Add(new Guns(2, "The Hellraiser", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
+            list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
+            list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest));
+            list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
+            list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots));
             list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -550,6 +554,7 @@ namespace AxesAndShoesTWO
         private void inventoryCheck(object sender, EventArgs e)
         {
             PictureBox pictureBox =(sender as PictureBox);
+            MessageBox.Show(pictureBox.Tag.ToString());
             if (!isSelected && sender is PictureBox)
             {
                 if(pictureBox.Tag.ToString() != "0")
@@ -572,13 +577,31 @@ namespace AxesAndShoesTWO
                         c.BackgroundImage = Properties.Resources.backgroundItemFree;
                     }
                 }
-                
+                if(AllItems[Convert.ToInt32(pictureBox.Tag)-1] is Clothes)
+                {
+                    switch ((AllItems[Convert.ToInt32(pictureBox.Tag)] as Clothes).Place)
+                    {
+                        case Place.Head:
+                            (PlayerClothes.Controls[0] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
+                            break;
+                        case Place.Chest:
+                            (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
+                            break;
+                        case Place.Pants:
+                            (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
+                            break;
+                        case Place.Boots:
+                            (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
+                            break;
+                    }
+                    
+                }
                 return;
             }
             if(pictureBox.Tag.ToString() == "0")
             {
-                (sender as PictureBox).Image = lastPb.Image;
-                (sender as PictureBox).Tag = lastPb.Tag;
+                pictureBox.Image = lastPb.Image;
+                pictureBox.Tag = lastPb.Tag;
                 lastPb.BackgroundImage = Properties.Resources.backgroundItem;
                 lastPb.Tag = "0";
                 lastPb.Image = null;
@@ -592,7 +615,11 @@ namespace AxesAndShoesTWO
             {
                 c.BackgroundImage = Properties.Resources.backgroundItem;
             }
-            
+            (PlayerClothes.Controls[0] as PictureBox).BackgroundImage = Properties.Resources.headPlace;
+            (PlayerClothes.Controls[1] as PictureBox).BackgroundImage = Properties.Resources.chestPlace;
+            (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
+            (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
+
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
