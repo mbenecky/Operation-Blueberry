@@ -593,7 +593,7 @@ namespace AxesAndShoesTWO
                             (PlayerClothes.Controls[0] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
                             break;
                         case Place.Chest:
-                            (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
+                            (PlayerClothes.Controls[1] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
                             break;
                         case Place.Pants:
                             (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
