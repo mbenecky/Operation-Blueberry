@@ -95,7 +95,6 @@ namespace AxesAndShoesTWO
             AllEnemies= EnemiesLoad();
             AllRooms = RoomsLoad();
 
-            CurrentPlayer.HotBar = (AllItems[1] as Guns);
 
             CurrentRoom.Size = new Size(WidthSet, HeightSet);
             CurrentRoom.Location = new Point(0, 0);
@@ -156,12 +155,14 @@ namespace AxesAndShoesTWO
 
 
 
+            CurrentPlayer.HotBar = (AllItems[6] as Guns);
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
             PHotBar.Size = new Size(WidthSet / 20, HeightSet / 10);
             PHotBar.Location = new Point(WidthSet/2-WidthSet/40, HeightSet-HeightSet/10);
             PHotBar.Click += new EventHandler(inventoryCheck);
-            PHotBar.Tag = "0";
+            PHotBar.Tag = "7";
             PHotBar.Name = "Hotbar";
+            PHotBar.Image = Properties.Resources.gunTest;
                                             //1920/6, 1080/8
             newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
             newGameButton.Location = new Point(WidthSet - WidthSet/4, HeightSet/2);
@@ -446,27 +447,28 @@ namespace AxesAndShoesTWO
         {
 
             List<Items> list = new List<Items>(); 
-            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
+            list.Add(new Guns   (1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
+            list.Add(new Guns   (2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots));
-            list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
-            list.Add(new Items(28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
+            list.Add(new Guns   (7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest,30,1,250));
+            list.Add(new Items  (16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
+            list.Add(new Items  (28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items  (29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items  (30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
         }
         public List<Enemy> EnemiesLoad()
         {
@@ -541,7 +543,7 @@ namespace AxesAndShoesTWO
 
 
             pb.Size = CurrentEnemy.Size;
-            pb.Location = new Point(WidthSet/2-pb.Size.Width/2,HeightSet/8);
+            pb.Location = new Point(WidthSet/2-pb.Size.Width/2,HeightSet/4);
             pb.Tag = CurrentEnemy.Health.ToString();
             pb.Click += new EventHandler(pbClick);
 

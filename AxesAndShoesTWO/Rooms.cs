@@ -126,7 +126,8 @@ namespace AxesAndShoesTWO
         }
         public List<Enemy> CreateEnemies(KeysRoom RequiredKey, List<Enemy> Enemies)
         {
-            int amount = rnd.Next(5, 10);
+            //int amount = rnd.Next(5, 10);
+            int amount = 1;
             List<Enemy> finalEnemies = new List<Enemy>();
             List<Enemy> helpList = new List<Enemy>();
             switch (RequiredKey)
