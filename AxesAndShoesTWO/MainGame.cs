@@ -46,10 +46,10 @@ namespace AxesAndShoesTWO
         public static PictureBox lastPb = new PictureBox();
         public static Panel DropsPanel = new Panel();
         public static Panel PlayerClothes = new Panel();
-
+        public static PictureBox PHotBar = new PictureBox();
 
         public static Panel CurrentRoom = new Panel();
-        public static Rooms CurrentRoomR = new Rooms();
+        public static Rooms CurrentRoomR = new Rooms(); 
         public static Enemy CurrentEnemy = new Enemy();
 
         public static Label loadLabel = new Label();
@@ -152,10 +152,16 @@ namespace AxesAndShoesTWO
 
             PictureBox newGameButton = new PictureBox();
             PictureBox quitButton = new PictureBox();//options nehodlam delat nevim co bych tam optionoval a je lepsi kdyz hrac nevi
-            PictureBox creditsButton = new PictureBox(); 
+            PictureBox creditsButton = new PictureBox();
 
 
 
+            PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
+            PHotBar.Size = new Size(WidthSet / 20, HeightSet / 10);
+            PHotBar.Location = new Point(WidthSet/2-WidthSet/40, HeightSet-HeightSet/10);
+            PHotBar.Click += new EventHandler(inventoryCheck);
+            PHotBar.Tag = "0";
+            PHotBar.Name = "Hotbar";
                                             //1920/6, 1080/8
             newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
             newGameButton.Location = new Point(WidthSet - WidthSet/4, HeightSet/2);
@@ -289,6 +295,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
             this.Controls.Add(statsPanel);
+            this.Controls.Add(PHotBar);
             this.Controls.Add(CurrentRoom);
             this.Controls.Add(InventoryToStorage);
 
@@ -439,8 +446,8 @@ namespace AxesAndShoesTWO
         {
 
             List<Items> list = new List<Items>(); 
-            list.Add(new Guns(1, "The Enforcer", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            list.Add(new Guns(2, "The Hellraiser", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
+            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
+            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
@@ -561,17 +568,16 @@ namespace AxesAndShoesTWO
         //START OF EVENTS
         private void inventoryCheck(object sender, EventArgs e)
         {
-            PictureBox pictureBox =(sender as PictureBox);
-            MessageBox.Show(pictureBox.Tag.ToString());
+            PictureBox pictureBox = (sender as PictureBox);
             if (!isSelected)
             {
-                if(pictureBox.Tag.ToString() != "0")
+                if (pictureBox.Tag.ToString() != "0")
                 {
                     lastPb = pictureBox;
                 }
                 else { return; }
                 isSelected = true;
-                foreach(Control c in InventorySpace.Controls)
+                foreach (Control c in InventorySpace.Controls)
                 {
                     if ((c.Tag).ToString() == "0")
                     {
@@ -585,9 +591,9 @@ namespace AxesAndShoesTWO
                         c.BackgroundImage = Properties.Resources.backgroundItemFree;
                     }
                 }
-                if(AllItems[Convert.ToInt32(pictureBox.Tag)-1] is Clothes)
+                if (AllItems[Convert.ToInt32(pictureBox.Tag) - 1] is Clothes)
                 {
-                    switch ((AllItems[Convert.ToInt32(pictureBox.Tag)-1] as Clothes).Place)
+                    switch ((AllItems[Convert.ToInt32(pictureBox.Tag) - 1] as Clothes).Place)
                     {
                         case Place.Head:
                             (PlayerClothes.Controls[0] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
@@ -602,11 +608,15 @@ namespace AxesAndShoesTWO
                             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.backgroundItemFree;
                             break;
                     }
-                    
+
+                }
+                if (AllItems[Convert.ToInt32(pictureBox.Tag) - 1] is Guns)
+                {
+                    PHotBar.BackgroundImage = Properties.Resources.backgroundItemFree;
                 }
                 return;
             }
-            if(pictureBox.Tag.ToString() == "0" && pictureBox.Parent.Name != "PlayerClothes")
+            if (pictureBox.Tag.ToString() == "0" && ( pictureBox.Parent.Name != "PlayerClothes" || pictureBox.Name != "Hotbar"))
             {
                 pictureBox.Image = lastPb.Image;
                 pictureBox.Tag = lastPb.Tag;
@@ -671,6 +681,18 @@ namespace AxesAndShoesTWO
                     MessageBox.Show((Convert.ToInt32(lastPb.Tag)).ToString());
                 }
             }
+            else if(pictureBox.Tag.ToString() == "0" && pictureBox.Name == "Hotbar")
+            {
+                if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Guns)
+                {
+                    pictureBox.Image = lastPb.Image;
+                    pictureBox.Tag = lastPb.Tag;
+                    lastPb.BackgroundImage = Properties.Resources.backgroundItem;
+                    lastPb.Tag = "0";
+                    lastPb.Image = null;
+                }
+            }
+
             isSelected = false;
             foreach (Control c in InventorySpace.Controls)
             {
@@ -684,7 +706,7 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[1] as PictureBox).BackgroundImage = Properties.Resources.chestPlace;
             (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
-
+            PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
@@ -784,7 +806,7 @@ namespace AxesAndShoesTWO
                 {
                     (CurrentRoom.Controls[1] as ProgressBar).Value = 0;
                     try { 
-                        Death(sender);
+                         Death(sender);
                     }
                     catch(Exception ex)
                     {
