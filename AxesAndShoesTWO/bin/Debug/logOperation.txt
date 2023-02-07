@@ -1,5 +1,1 @@
-07.02.2023 21:01:43: Something was pressed!
-07.02.2023 21:01:57: Something was pressed!
-07.02.2023 21:02:03: Something was pressed!
-07.02.2023 21:02:04: Something was pressed!
-07.02.2023 21:02:05: Something was pressed!
+07.02.2023 21:05:05: Something was pressed!

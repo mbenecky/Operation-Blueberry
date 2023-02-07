@@ -424,6 +424,27 @@ namespace AxesAndShoesTWO
             this.Controls.Add(panelMessage);
             panelMessage.BringToFront();
         }
+        public void SmartTooltip(Items SelectedItem)
+        {
+            Panel ToolTip = new Panel();
+            ToolTip.Location = MousePosition;
+            ToolTip.Size = new Size(WidthSet / 8, HeightSet / 4);
+            ToolTip.BackColor = Color.DarkOliveGreen;
+            Button use = new Button();
+            use.Location = new Point(0, 0);
+            use.Size = new Size(ToolTip.Size.Width, HeightSet / 4);
+            use.Text = "Use";
+            use.BackColor = Color.DarkOliveGreen;
+            use.Click += new EventHandler(useEvent);
+            ToolTip.Controls.Add(use);
+            
+
+            if (SelectedItem is Items)
+            {
+                this.Controls.Add(ToolTip);    
+            }
+
+        }
 
 
         void Log(string message)
@@ -466,6 +487,15 @@ namespace AxesAndShoesTWO
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots));
             list.Add(new Guns   (7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest,30,1,250));
+            list.Add(new Items  (8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(9, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(10, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(11, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(12, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(13, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(14, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(15, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+
             list.Add(new Items  (16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items  (17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items  (18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -584,6 +614,17 @@ namespace AxesAndShoesTWO
 
         //END OF METHODS
         //START OF EVENTS
+        private void useEvent(object sender, EventArgs e)
+        {
+            //do some things
+            (sender as Button).Dispose();
+        }
+        private void MouseClickEvent(object sender, MouseEventArgs e)
+        {
+            //do some things
+            //still not connected :)
+            (sender as PictureBox).Dispose();
+        }
         private void inventoryCheck(object sender, EventArgs e)
         {
             PictureBox pictureBox = (sender as PictureBox);
