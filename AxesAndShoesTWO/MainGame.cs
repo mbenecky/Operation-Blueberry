@@ -47,6 +47,7 @@ namespace AxesAndShoesTWO
         public static Panel DropsPanel = new Panel();
         public static Panel PlayerClothes = new Panel();
         public static PictureBox PHotBar = new PictureBox();
+        public static Label AmmoLabel = new Label();
 
         public static Panel CurrentRoom = new Panel();
         public static Rooms CurrentRoomR = new Rooms(); 
@@ -163,6 +164,12 @@ namespace AxesAndShoesTWO
             PHotBar.Tag = "7";
             PHotBar.Name = "Hotbar";
             PHotBar.Image = Properties.Resources.gunTest;
+            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
+            AmmoLabel.BackColor = Color.White;
+            AmmoLabel.ForeColor = Color.Black;
+            AmmoLabel.Location = new Point(PHotBar.Location.X - WidthSet / 10, PHotBar.Location.Y);
+            
+
                                             //1920/6, 1080/8
             newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
             newGameButton.Location = new Point(WidthSet - WidthSet/4, HeightSet/2);
@@ -297,6 +304,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(mainGamePanel);
             this.Controls.Add(statsPanel);
             this.Controls.Add(PHotBar);
+            this.Controls.Add(AmmoLabel);
             this.Controls.Add(CurrentRoom);
             this.Controls.Add(InventoryToStorage);
 
@@ -344,24 +352,28 @@ namespace AxesAndShoesTWO
             loadLabel.Visible = false;
             await Task.Delay(1);
             loadPanel.Visible = false;
-            
+
         }
+
         async Task Reloading()
         {
             SoundPlayer Reload = new SoundPlayer(Properties.Resources.reload);
-            Reload.PlaySync();
+            Reload.Play();
             CurrentPlayer.HotBar.isAbleToShoot = false;
             await Task.Delay(CurrentPlayer.HotBar.WaitTime);
             CurrentPlayer.HotBar.isAbleToShoot = true;
             CurrentPlayer.HotBar.CurrentAmountOfRounds = CurrentPlayer.HotBar.NumberOfRounds;
+            RefreshLabel();
         }
         async Task WaitBetweenShots()
         {
             SoundPlayer Gunshot = new SoundPlayer(Properties.Resources.gunshot);
-            Gunshot.PlaySync();
+            Gunshot.Play();
             CurrentPlayer.HotBar.isAbleToShoot = false;
             await Task.Delay(CurrentPlayer.HotBar.WaitTime / 10);
             CurrentPlayer.HotBar.isAbleToShoot = true;
+            RefreshLabel();
+
         }
         async Task Death(object sender)
         {
@@ -511,6 +523,10 @@ namespace AxesAndShoesTWO
 
             return list;
 
+        }
+        public void RefreshLabel()
+        {
+            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
         }
         public void ShowDrops(Rooms GivenRoom)
         {
@@ -819,9 +835,13 @@ namespace AxesAndShoesTWO
                     (CurrentRoom.Controls[1] as ProgressBar).Value = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 }
                 CurrentPlayer.HotBar.CurrentAmountOfRounds--;
+                RefreshLabel();
                 if (CurrentPlayer.HotBar.CurrentAmountOfRounds != 0)
                 {
                     Task.Run(() => WaitBetweenShots());
+                } else
+                {
+                    CurrentPlayer.HotBar.isAbleToShoot = false;
                 }
             }
         }
