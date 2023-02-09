@@ -60,12 +60,6 @@ namespace AxesAndShoesTWO
 
 
         public static Panel mapPanel = new Panel();
-        public static PictureBox catacombsPB = new PictureBox();
-        public static PictureBox electricityRoomPB = new PictureBox();
-        public static PictureBox engineRoomPB = new PictureBox();
-        public static PictureBox entrancePB = new PictureBox();
-        public static PictureBox rogersShrinePB = new PictureBox();
-        public static PictureBox boryHQPB = new PictureBox();
 
         public static Panel characterInteractPanel = new Panel();
         public static Label characterInteractLabel = new Label();
@@ -209,11 +203,24 @@ namespace AxesAndShoesTWO
             mapPanel.BackgroundImage = Properties.Resources.mapBackGround;
             mapPanel.Size = new Size(WidthSet, HeightSet);
             mapPanel.Location = new Point(0, 0);
+            mapPanel.Visible = false;
+
+            for(int i =0;i !=6;i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.BackColor = Color.Transparent;
+                pb.Tag = i.ToString();
+                pb.Size = new Size(WidthSet / 8, HeightSet/4);
+                pb.Location = new Point(WidthSet / 8 * i, HeightSet / 4);
+                pb.Image = Properties.Resources.mapButton;
+                pb.Click += new EventHandler(mapButtonClick);
+                mapPanel.Controls.Add(pb);
+            }
 
             InventoryToStorage.Size = new Size(1920, 1080);
             InventoryToStorage.Location = new Point(0, 0);
             InventoryToStorage.BackgroundImage = Properties.Resources.inventoryBI;
-            InventoryToStorage.BackgroundImageLayour = ImageLayout.Stretch;
+            InventoryToStorage.BackgroundImageLayout = ImageLayout.Stretch;
 
 
             InventorySpace.Size = new Size(WidthSet / 2, HeightSet);
@@ -307,6 +314,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
             this.Controls.Add(statsPanel);
+            this.Controls.Add(mapPanel);
             this.Controls.Add(PHotBar);
             this.Controls.Add(AmmoLabel);
             this.Controls.Add(CurrentRoom);
@@ -317,6 +325,7 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
+        
         async Task writeOutLines(string Message)
         {
             if (isWriting) { currentInteraction--; return; }
@@ -324,6 +333,7 @@ namespace AxesAndShoesTWO
             characterInteractLabel.Text = String.Empty;
             for (int i = 0; i != Message.Length; i++)
             {
+                
                 characterInteractLabel.Text += Message[i];
                 await Task.Delay(1);
             }
@@ -661,6 +671,21 @@ namespace AxesAndShoesTWO
                 (sender as Button).Parent.Dispose();
             }
         }
+        private void mapButtonClick(object sender, EventArgs e)
+        {
+            int currentRoomID = Convert.ToInt32((sender as PictureBox).Tag);
+            string currentRoomString = "Clicked on : ";
+            switch(currentRoomID)
+            {
+                case 0: currentRoomString += "catacombs"; break;
+                case 1: currentRoomString += "electricity"; break;
+                case 2: currentRoomString += "engine"; break;
+                case 3: currentRoomString += "vaultdoor"; break;
+                case 4: currentRoomString += "rogersshrine"; break;
+                case 5: currentRoomString += "boryshq"; break;
+            }
+            MessageBox.Show(currentRoomString);
+        }
         private void inventoryCheck(object sender, EventArgs e)
         {
             PictureBox pictureBox = (sender as PictureBox);
@@ -888,8 +913,11 @@ namespace AxesAndShoesTWO
             switch (e.KeyCode)
             {
                 case Keys.Escape: break; //pauses
-                case Keys.M: break; //Opens map
-                case Keys.E: InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
+                case Keys.M:
+                    mapPanel.Visible = !mapPanel.Visible;
+                    break; //Opens map
+                case Keys.E: 
+                    InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
                 case Keys.R:
                     Task.Run(() => Reloading());
                     break; //reload

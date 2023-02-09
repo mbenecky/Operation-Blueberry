@@ -219,5 +219,8 @@
   <ItemGroup>
     <None Include="Resources\inventoryBI.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mapButton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
