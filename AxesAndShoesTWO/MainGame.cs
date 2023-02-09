@@ -50,7 +50,7 @@ namespace AxesAndShoesTWO
         public static Label AmmoLabel = new Label();
 
         public static Panel CurrentRoom = new Panel();
-        public static Rooms CurrentRoomR = new Rooms(); 
+        public static Rooms CurrentRoomR = new Rooms();
         public static Enemy CurrentEnemy = new Enemy();
 
         public static Label loadLabel = new Label();
@@ -93,7 +93,7 @@ namespace AxesAndShoesTWO
             Chars = CharactersLoad();
             CharacterInteractions = InteractionsLoad();
             AllItems = ItemsLoad();
-            AllEnemies= EnemiesLoad();
+            AllEnemies = EnemiesLoad();
             AllRooms = RoomsLoad();
 
 
@@ -142,7 +142,7 @@ namespace AxesAndShoesTWO
             loadLabel.TextAlign = ContentAlignment.MiddleCenter;
             loadPanel.Controls.Add(loadLabel);
 
-            
+
 
             statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4, HeightSet / 2 + HeightSet / 4);
             statsPanel.Visible = false;
@@ -159,7 +159,7 @@ namespace AxesAndShoesTWO
             CurrentPlayer.HotBar = (AllItems[6] as Guns);
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
             PHotBar.Size = new Size(WidthSet / 20, HeightSet / 10);
-            PHotBar.Location = new Point(WidthSet/2-WidthSet/40, HeightSet-HeightSet/10);
+            PHotBar.Location = new Point(WidthSet / 2 - WidthSet / 40, HeightSet - HeightSet / 10);
             PHotBar.Click += new EventHandler(inventoryCheck);
             PHotBar.Tag = "7";
             PHotBar.Name = "Hotbar";
@@ -168,11 +168,11 @@ namespace AxesAndShoesTWO
             AmmoLabel.BackColor = Color.White;
             AmmoLabel.ForeColor = Color.Black;
             AmmoLabel.Location = new Point(PHotBar.Location.X - WidthSet / 10, PHotBar.Location.Y);
-            
 
-                                            //1920/6, 1080/8
+
+            //1920/6, 1080/8
             newGameButton.Size = new Size(WidthSet / 6, HeightSet / 8);
-            newGameButton.Location = new Point(WidthSet - WidthSet/4, HeightSet/2);
+            newGameButton.Location = new Point(WidthSet - WidthSet / 4, HeightSet / 2);
             newGameButton.Image = Properties.Resources.play_button;
             newGameButton.SizeMode = PictureBoxSizeMode.StretchImage;
             newGameButton.BackColor = Color.Transparent;
@@ -182,16 +182,16 @@ namespace AxesAndShoesTWO
             newGameButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
             quitButton.Size = newGameButton.Size;
-            quitButton.Location = new Point(newGameButton.Location.X-3, newGameButton.Location.Y+HeightSet/6);
+            quitButton.Location = new Point(newGameButton.Location.X - 3, newGameButton.Location.Y + HeightSet / 6);
             quitButton.Image = Properties.Resources.quit_button;
             quitButton.BackColor = Color.Transparent;
             quitButton.Name = "quitButton";
-            quitButton.SizeMode =   PictureBoxSizeMode.StretchImage;
+            quitButton.SizeMode = PictureBoxSizeMode.StretchImage;
             quitButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
             quitButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
             creditsButton.Size = newGameButton.Size;
-            creditsButton.Location = new Point(quitButton.Location.X, quitButton.Location.Y+HeightSet/6-5);
+            creditsButton.Location = new Point(quitButton.Location.X, quitButton.Location.Y + HeightSet / 6 - 5);
             creditsButton.Image = Properties.Resources.credits_button;
             creditsButton.BackColor = Color.Transparent;
             creditsButton.Name = "creditsButton";
@@ -212,7 +212,8 @@ namespace AxesAndShoesTWO
 
             InventoryToStorage.Size = new Size(1920, 1080);
             InventoryToStorage.Location = new Point(0, 0);
-            InventoryToStorage.BackgroundImage = Properties.Resources.mapBackGround;
+            InventoryToStorage.BackgroundImage = Properties.Resources.inventoryBI;
+            InventoryToStorage.BackgroundImageLayour = ImageLayout.Stretch;
 
 
             InventorySpace.Size = new Size(WidthSet / 2, HeightSet);
@@ -224,11 +225,11 @@ namespace AxesAndShoesTWO
             StorageSpace.BackColor = Color.Transparent;
 
             DropsPanel.Size = new Size(WidthSet / 2, HeightSet);
-            DropsPanel.Location = new Point(WidthSet/2, 0);
+            DropsPanel.Location = new Point(WidthSet / 2, 0);
             DropsPanel.BackColor = Color.Transparent;
             DropsPanel.Visible = false;
 
-            PlayerClothes.Size = new Size(WidthSet / 20, HeightSet/10*4);
+            PlayerClothes.Size = new Size(WidthSet / 20, HeightSet / 10 * 4);
             PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 4);
             PlayerClothes.BackColor = Color.Transparent;
             PlayerClothes.Visible = true;
@@ -239,9 +240,9 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Controls.Add(StorageSpace);
             InventoryToStorage.Controls.Add(DropsPanel);
 
-            for(int i = 0; i != 5;i++)
+            for (int i = 0; i != 5; i++)
             {
-                for(int j = 0;j!=2;j++)
+                for (int j = 0; j != 2; j++)
                 {
                     PictureBox pb = new PictureBox();
                     pb.BackgroundImage = Properties.Resources.backgroundItem;
@@ -249,18 +250,20 @@ namespace AxesAndShoesTWO
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 4 + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
                     pb.Click += new EventHandler(inventoryCheck);
+                    pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     InventorySpace.Controls.Add(pb);
-               }
+                }
             }
 
-            for(int i = 0; i!=4;i++)
+            for (int i = 0; i != 4; i++)
             {
                 PictureBox pb = new PictureBox();
                 pb.BackgroundImage = Properties.Resources.headPlace;
                 pb.Size = new Size(WidthSet / 20, HeightSet / 10);
-                pb.Location = new Point(0, (HeightSet/10)* i );
+                pb.Location = new Point(0, (HeightSet / 10) * i);
                 pb.Tag = "0";
                 pb.Click += new EventHandler(inventoryCheck);
+                pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                 pb.Name = "Head";
                 PlayerClothes.Controls.Add(pb);
             }
@@ -286,6 +289,7 @@ namespace AxesAndShoesTWO
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
                     pb.Click += new EventHandler(inventoryCheck);
+                    pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     StorageSpace.Controls.Add(pb);
                     DropsPanel.Controls.Add(pb);
                 }
@@ -315,12 +319,12 @@ namespace AxesAndShoesTWO
         //START OF TASKS
         async Task writeOutLines(string Message)
         {
-            if(isWriting) { currentInteraction--; return; }
+            if (isWriting) { currentInteraction--; return; }
             isWriting = true;
             characterInteractLabel.Text = String.Empty;
-            for(int i = 0; i!= Message.Length;i++)
+            for (int i = 0; i != Message.Length; i++)
             {
-                characterInteractLabel.Text+=Message[i];
+                characterInteractLabel.Text += Message[i];
                 await Task.Delay(1);
             }
             isWriting = false;
@@ -379,9 +383,11 @@ namespace AxesAndShoesTWO
         {
             (sender as PictureBox).Click -= new EventHandler(pbClick);
             await Task.Delay(2000);
-            try { 
+            try
+            {
                 CurrentRoomR.Enemies.RemoveAt(0);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ShowDrops(CurrentRoomR);
                 ClearRooms();
@@ -391,7 +397,8 @@ namespace AxesAndShoesTWO
             {
                 ShowDrops(CurrentRoomR);
                 ClearRooms();
-            } else
+            }
+            else
             {
                 (CurrentRoom.Controls[0] as PictureBox).Image = CurrentRoomR.Enemies[0].Img;
                 (CurrentRoom.Controls[1] as ProgressBar).Maximum = CurrentRoomR.Enemies[0].Health;
@@ -406,8 +413,8 @@ namespace AxesAndShoesTWO
             Panel panelMessage = new Panel();
             Button OKButton = new Button();
             Label labelMessage = new Label();
-            panelMessage.Size = new Size(WidthSet/4, HeightSet/4);
-            panelMessage.Location = new Point(WidthSet-WidthSet/2-WidthSet/8, HeightSet-HeightSet/2-HeightSet/8);
+            panelMessage.Size = new Size(WidthSet / 4, HeightSet / 4);
+            panelMessage.Location = new Point(WidthSet - WidthSet / 2 - WidthSet / 8, HeightSet - HeightSet / 2 - HeightSet / 8);
             panelMessage.BackColor = Color.White;
             panelMessage.Visible = true;
 
@@ -417,10 +424,10 @@ namespace AxesAndShoesTWO
             labelMessage.Text = Message;
             labelMessage.Location = new Point(0, 0);
             labelMessage.MaximumSize = new Size(WidthSet / 4, HeightSet / 4);
-            
+
             OKButton.Text = "OK";
             OKButton.Location = new Point(panelMessage.Size.Width - panelMessage.Size.Width / 8, panelMessage.Size.Height - panelMessage.Size.Height / 8);
-            OKButton.Click += new EventHandler(OKButton_Click);            
+            OKButton.Click += new EventHandler(OKButton_Click);
             this.Controls.Add(panelMessage);
             panelMessage.BringToFront();
         }
@@ -430,18 +437,21 @@ namespace AxesAndShoesTWO
             ToolTip.Location = MousePosition;
             ToolTip.Size = new Size(WidthSet / 8, HeightSet / 4);
             ToolTip.BackColor = Color.DarkOliveGreen;
+            ToolTip.MouseLeave += new EventHandler(SmartTTLeave);
             Button use = new Button();
             use.Location = new Point(0, 0);
             use.Size = new Size(ToolTip.Size.Width, HeightSet / 4);
             use.Text = "Use";
             use.BackColor = Color.DarkOliveGreen;
             use.Click += new EventHandler(useEvent);
+            use.MouseLeave += new EventHandler(SmartTTLeave);
             ToolTip.Controls.Add(use);
-            
+
 
             if (SelectedItem is Items)
             {
-                this.Controls.Add(ToolTip);    
+                this.Controls.Add(ToolTip);
+                ToolTip.BringToFront();
             }
 
         }
@@ -457,10 +467,10 @@ namespace AxesAndShoesTWO
         public List<Characters> CharactersLoad()
         {
             List<Characters> list = new List<Characters>();
-            Characters SgtBory = new Characters("Sgt. Blueberry",  Properties.Resources.voiceLineTestBedImage);
-            Characters EndBossBory = new Characters("Blueberry",  Properties.Resources.voiceLineTestBedImage);
-            Characters Korky = new Characters("Mr. Korky",  Properties.Resources.voiceLineTestBedImage);
-            Characters Medved = new Characters("Medved",  Properties.Resources.voiceLineTestBedImage);
+            Characters SgtBory = new Characters("Sgt. Blueberry", Properties.Resources.voiceLineTestBedImage);
+            Characters EndBossBory = new Characters("Blueberry", Properties.Resources.voiceLineTestBedImage);
+            Characters Korky = new Characters("Mr. Korky", Properties.Resources.voiceLineTestBedImage);
+            Characters Medved = new Characters("Medved", Properties.Resources.voiceLineTestBedImage);
             Characters Horkymi = new Characters("Horkymi", Properties.Resources.voiceLineTestBedImage);
             Characters Mako = new Characters("Mako", Properties.Resources.voiceLineTestBedImage);
             Characters ChiefPear = new Characters("Chief Pear", Properties.Resources.voiceLineTestBedImage);
@@ -473,21 +483,21 @@ namespace AxesAndShoesTWO
             list.Add(Horkymi);
             list.Add(Mako);
             list.Add(ChiefPear);
-            
+
             return list;
         }
         public List<Items> ItemsLoad()
         {
 
-            List<Items> list = new List<Items>(); 
-            list.Add(new Guns   (1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            list.Add(new Guns   (2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
+            List<Items> list = new List<Items>();
+            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
+            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots));
-            list.Add(new Guns   (7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest,30,1,250));
-            list.Add(new Items  (8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest, 30, 1, 250));
+            list.Add(new Items(8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(9, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(10, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(11, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -496,28 +506,28 @@ namespace AxesAndShoesTWO
             list.Add(new Items(14, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(15, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
 
-            list.Add(new Items  (16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
-            list.Add(new Items  (28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items  (29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items  (30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
+            list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
+            list.Add(new Items(28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
+            list.Add(new Items(29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
+            list.Add(new Items(30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
         }
         public List<Enemy> EnemiesLoad()
         {
             List<Enemy> list = new List<Enemy>();
 
             list.Add(new Enemy(
-                "Medved", 10, Rarity.Common, Enemy.Types.Ground,new Size(WidthSet/4,HeightSet/4),Properties.Resources.enemyTestnew, 50, Properties.Resources.enemyDeathTest
+                "Medved", 10, Rarity.Common, Enemy.Types.Ground, new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.enemyTestnew, 50, Properties.Resources.enemyDeathTest
                 ));
 
             return list;
@@ -556,7 +566,15 @@ namespace AxesAndShoesTWO
         }
         public void RefreshLabel()
         {
-            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
+            if (CurrentPlayer.HotBar != null)
+            {
+                AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
+            }
+            else
+            {
+                AmmoLabel.Text = "0/0";
+            }
+            AmmoLabel.Refresh();
         }
         public void ShowDrops(Rooms GivenRoom)
         {
@@ -575,7 +593,7 @@ namespace AxesAndShoesTWO
 
         public void SpawnARoom(Rooms GivenRoom)
         {
-            
+
             Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
             GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
@@ -589,7 +607,7 @@ namespace AxesAndShoesTWO
 
 
             pb.Size = CurrentEnemy.Size;
-            pb.Location = new Point(WidthSet/2-pb.Size.Width/2,HeightSet/4);
+            pb.Location = new Point(WidthSet / 2 - pb.Size.Width / 2, HeightSet / 4);
             pb.Tag = CurrentEnemy.Health.ToString();
             pb.Click += new EventHandler(pbClick);
 
@@ -597,8 +615,8 @@ namespace AxesAndShoesTWO
             progBar.Maximum = CurrentEnemy.Health;
             progBar.Step = 1;
             progBar.Value = CurrentEnemy.Health;
-            progBar.Size =      new Size(WidthSet/4,HeightSet/8);
-            progBar.Location =  new Point(WidthSet/2-WidthSet/8, HeightSet-HeightSet/4);
+            progBar.Size = new Size(WidthSet / 4, HeightSet / 8);
+            progBar.Location = new Point(WidthSet / 2 - WidthSet / 8, HeightSet - HeightSet / 4);
 
             CurrentRoom.Controls.Add(pb);
             CurrentRoom.Controls.Add(progBar);
@@ -609,7 +627,7 @@ namespace AxesAndShoesTWO
         {
             CurrentRoom.Controls.Clear();
             CurrentRoomR = new Rooms();
-            
+
         }
 
         //END OF METHODS
@@ -617,13 +635,31 @@ namespace AxesAndShoesTWO
         private void useEvent(object sender, EventArgs e)
         {
             //do some things
-            (sender as Button).Dispose();
+            ((sender as Button).Parent as Panel).Dispose();
         }
         private void MouseClickEvent(object sender, MouseEventArgs e)
         {
             //do some things
-            //still not connected :)
-            (sender as PictureBox).Dispose();
+            if ((sender as PictureBox).Tag.ToString() == "0")
+            {
+                return;
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                SmartTooltip(AllItems[Convert.ToInt32((sender as PictureBox).Tag) - 1]);
+            }
+
+        }
+        private void SmartTTLeave(object sender, EventArgs e)
+        {
+            if (sender is Panel)
+            {
+                (sender as Panel).Dispose();
+            }
+            if (sender is Button)
+            {
+                (sender as Button).Parent.Dispose();
+            }
         }
         private void inventoryCheck(object sender, EventArgs e)
         {
@@ -675,17 +711,18 @@ namespace AxesAndShoesTWO
                 }
                 return;
             }
-            if (pictureBox.Tag.ToString() == "0" && ( pictureBox.Parent.Name != "PlayerClothes" || pictureBox.Name != "Hotbar"))
+            if (pictureBox.Tag.ToString() == "0" && (pictureBox.Parent.Name != "PlayerClothes" || pictureBox.Name != "Hotbar"))
             {
                 pictureBox.Image = lastPb.Image;
                 pictureBox.Tag = lastPb.Tag;
                 lastPb.BackgroundImage = Properties.Resources.backgroundItem;
                 lastPb.Tag = "0";
                 lastPb.Image = null;
-            } 
-            else if(pictureBox.Tag.ToString() == "0" && pictureBox.Parent.Name == "PlayerClothes") //Hodne nested ifu, ale tak co uz lol
+            }
+            else if (pictureBox.Tag.ToString() == "0" && pictureBox.Parent.Name == "PlayerClothes") //Hodne nested ifu, ale tak co uz lol
             { //Zjisteni jestli uz. klikl na PlayerClothes Panel
-                try {
+                try
+                {
                     if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Clothes) //Zjisteni jestli obsah kokotiny je vubec clouts
                     { //musim zjistit jestli nedava cepici do gati
                         switch (pictureBox.Name)
@@ -733,14 +770,14 @@ namespace AxesAndShoesTWO
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                     MessageBox.Show((Convert.ToInt32(pictureBox.Tag)).ToString());
                     MessageBox.Show((Convert.ToInt32(lastPb.Tag)).ToString());
                 }
             }
-            else if(pictureBox.Tag.ToString() == "0" && pictureBox.Name == "Hotbar")
+            else if (pictureBox.Tag.ToString() == "0" && pictureBox.Name == "Hotbar")
             {
                 if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Guns)
                 {
@@ -766,6 +803,7 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
+            RefreshLabel();
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
@@ -777,7 +815,7 @@ namespace AxesAndShoesTWO
         private void globalMouseEnterEvent(object sender, EventArgs e)
         {
             string nameOfSender = (sender as PictureBox).Name;
-            switch(nameOfSender)
+            switch (nameOfSender)
             {
                 case "newGameButton":
                     (sender as PictureBox).Image = Properties.Resources.play_buttonHover;
@@ -786,7 +824,7 @@ namespace AxesAndShoesTWO
                     (sender as PictureBox).Image = Properties.Resources.credits_buttonHover;
                     break;
                 case "quitButton":
-                    (sender as PictureBox).Image= Properties.Resources.quit_buttonHover;
+                    (sender as PictureBox).Image = Properties.Resources.quit_buttonHover;
                     break;
                 default:
                     Log("globalMouseEnterEvent failed, possibly something to do with name? " + nameOfSender + sender.GetType());
@@ -816,7 +854,7 @@ namespace AxesAndShoesTWO
 
         private async void interactButton_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 if (!CharacterInteractions[currentInteraction].Contains("NEXT") && !CharacterInteractions[currentInteraction].Contains("END"))
@@ -830,14 +868,15 @@ namespace AxesAndShoesTWO
                     characterInteractLabel.Text = String.Empty;
                     characterInteractLabelName.Text = Chars[Convert.ToInt32(args[1])].Name;
                     characterInteractPanel.BackgroundImage = Chars[Convert.ToInt32(args[1])].img;
-                } else
+                }
+                else
                 {
                     characterInteractPanel.Visible = false;
                     SpawnARoom(AllRooms[0]);
                 }
                 currentInteraction++;
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log("Wrong characterInteraction, Maybe currentInteraction value is wrong?" + ex.Message);
             }
@@ -846,32 +885,35 @@ namespace AxesAndShoesTWO
         private void MainGame_KeyDown(object sender, KeyEventArgs e)
         {
             Log("Something was pressed!");
-            switch(e.KeyCode)
+            switch (e.KeyCode)
             {
                 case Keys.Escape: break; //pauses
                 case Keys.M: break; //Opens map
                 case Keys.E: InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
-                case Keys.R: 
-                    Task.Run(() => Reloading());  
+                case Keys.R:
+                    Task.Run(() => Reloading());
                     break; //reload
                 case Keys.F: statsPanel.Visible = !statsPanel.Visible; break;
             }
         }
         private void pbClick(object sender, EventArgs e)
         {
-            if(CurrentPlayer.HotBar.isAbleToShoot) {
+            if (CurrentPlayer.HotBar.isAbleToShoot)
+            {
                 int help = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 if (help <= 0)
                 {
                     (CurrentRoom.Controls[1] as ProgressBar).Value = 0;
-                    try { 
-                         Death(sender);
+                    try
+                    {
+                        Death(sender);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Log("Something went wrong when trying the Death() method, ex code: " + ex.Message);
                     }
-                } else
+                }
+                else
                 {
                     (CurrentRoom.Controls[1] as ProgressBar).Value = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 }
@@ -880,7 +922,8 @@ namespace AxesAndShoesTWO
                 if (CurrentPlayer.HotBar.CurrentAmountOfRounds != 0)
                 {
                     Task.Run(() => WaitBetweenShots());
-                } else
+                }
+                else
                 {
                     CurrentPlayer.HotBar.isAbleToShoot = false;
                 }
@@ -916,7 +959,7 @@ namespace AxesAndShoesTWO
     };
 
     public enum KeysRoom
-    {   
+    {
         Catacombs = 1,          //base mistnost na nauceni controls
         ElectricityRoom = 2,    //second level mistnost s mensima enemies
         EngineRoom = 3,         //third level mistnost s vetsima enemies a lepsimy dropy
