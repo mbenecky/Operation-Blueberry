@@ -27,7 +27,7 @@ namespace AxesAndShoesTWO
 
         StatsPanel statsPanel = new StatsPanel(1920, 1080);
 
-        public static List<Clothes> Clothes = new List<Clothes>();
+        public static Clothes[] Clothes = new Clothes[4];
         public static List<Items> pItems = new List<Items>();
         public static Guns pGuns = new Guns();
         public static List<KeysRoom> pKeys = new List<KeysRoom>();
@@ -328,12 +328,12 @@ namespace AxesAndShoesTWO
         
         async Task writeOutLines(string Message)
         {
+            //neprepise se kdyz posle dalsi writeOutLines, seru na uzivatele
             if (isWriting) { currentInteraction--; return; }
             isWriting = true;
             characterInteractLabel.Text = String.Empty;
             for (int i = 0; i != Message.Length; i++)
             {
-                
                 characterInteractLabel.Text += Message[i];
                 await Task.Delay(1);
             }
@@ -500,6 +500,7 @@ namespace AxesAndShoesTWO
         {
 
             List<Items> list = new List<Items>();
+            
             list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
             list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
@@ -515,7 +516,6 @@ namespace AxesAndShoesTWO
             list.Add(new Items(13, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(14, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(15, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-
             list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
             list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -736,7 +736,7 @@ namespace AxesAndShoesTWO
                 }
                 return;
             }
-            if (pictureBox.Tag.ToString() == "0" && (pictureBox.Parent.Name != "PlayerClothes" || pictureBox.Name != "Hotbar"))
+            if (pictureBox.Tag.ToString() == "0" && (pictureBox.Parent.Name != "PlayerClothes" && pictureBox.Name != "Hotbar"))
             {
                 pictureBox.Image = lastPb.Image;
                 pictureBox.Tag = lastPb.Tag;
@@ -806,6 +806,7 @@ namespace AxesAndShoesTWO
             {
                 if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Guns)
                 {
+                    
                     pictureBox.Image = lastPb.Image;
                     pictureBox.Tag = lastPb.Tag;
                     lastPb.BackgroundImage = Properties.Resources.backgroundItem;
@@ -829,6 +830,7 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
             RefreshLabel();
+            
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {

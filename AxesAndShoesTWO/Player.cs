@@ -12,13 +12,13 @@ namespace AxesAndShoesTWO
         public int Thirst;
         public int Hunger;
         public int Radiation;
-        public List<Clothes> PlayerClothes;
+        public Clothes[] PlayerClothes;
         public List<Items> PlayerInventory;
         public Guns HotBar;
         public List<KeysRoom> CurrentKeys;
         public Player()
         { }
-        public Player(int Health, int Thirst, int Hunger, int Radiation, List<Clothes> PlayerClothes, List<Items> PlayerInventory, Guns HotBar, List<KeysRoom> CurrentKeys)
+        public Player(int Health, int Thirst, int Hunger, int Radiation, Clothes[] PlayerClothes, List<Items> PlayerInventory, Guns HotBar, List<KeysRoom> CurrentKeys)
         {
             this.Health = Health;
             this.Thirst = Thirst;
