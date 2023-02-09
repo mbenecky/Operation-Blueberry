@@ -12,20 +12,20 @@ namespace AxesAndShoesTWO
         public int Thirst;
         public int Hunger;
         public int Radiation;
-        public Clothes[] PlayerClothes;
-        public List<Items> PlayerInventory;
+        public double HealthP = 1;
+        public double ThirstP = 1;
+        public double HungerP = 1;
+        public double RadiationP = 1;
         public Guns HotBar;
         public List<KeysRoom> CurrentKeys;
         public Player()
         { }
-        public Player(int Health, int Thirst, int Hunger, int Radiation, Clothes[] PlayerClothes, List<Items> PlayerInventory, Guns HotBar, List<KeysRoom> CurrentKeys)
+        public Player(int Health, int Thirst, int Hunger, int Radiation, Guns HotBar, List<KeysRoom> CurrentKeys)
         {
             this.Health = Health;
             this.Thirst = Thirst;
             this.Hunger = Hunger;
             this.Radiation = Radiation;
-            this.PlayerClothes = PlayerClothes;
-            this.PlayerInventory = PlayerInventory;
             this.HotBar = HotBar;
             this.CurrentKeys= CurrentKeys;
         }
@@ -58,10 +58,7 @@ namespace AxesAndShoesTWO
         
         private void ChangeStats(StatsPanel sp)
         {
-            sp.healthBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Health)), sp.healthBar.Height);
-            sp.hungerBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Hunger)), sp.hungerBar.Height);
-            sp.thirstBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Thirst)), sp.thirstBar.Height);
-            sp.radiationBar.Size = new Size(Convert.ToInt32(sp.MaxWidth - ((double)sp.MaxWidth / 100 * Radiation)), sp.radiationBar.Height);
+            sp.healthBar = new Size(sp.healthBar.Width*HealthP, sp.healthBar.Height);
         }
 
         public override string ToString()

@@ -65,10 +65,10 @@ namespace AxesAndShoesTWO
                     if (player.CurrentKeys.Contains(KeysRoom.EngineRoom)) return true;
                     else return false;
                 case KeysRoom.VaultDoor:
-                    if (player.CurrentKeys.Contains(KeysRoom.VaultDoor) && player.PlayerInventory.Contains(new Items())) return true;
+                    if (player.CurrentKeys.Contains(KeysRoom.VaultDoor)) return true;
                     else return false;
                 case KeysRoom.RogersShrineDoor:
-                    if (player.CurrentKeys.Contains(KeysRoom.RogersShrineDoor) && player.PlayerInventory.Contains(new Items())) return true;
+                    if (player.CurrentKeys.Contains(KeysRoom.RogersShrineDoor)) return true;
                     else return false;
                 case KeysRoom.BorysHQDoor:
                     if (player.CurrentKeys.Contains(KeysRoom.BorysHQDoor)) return true;

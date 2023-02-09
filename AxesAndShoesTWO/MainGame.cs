@@ -32,7 +32,7 @@ namespace AxesAndShoesTWO
         public static Guns pGuns = new Guns();
         public static List<KeysRoom> pKeys = new List<KeysRoom>();
 
-        public Player CurrentPlayer = new Player(85, 30, 30, 0, Clothes, pItems, pGuns, pKeys);
+        public Player CurrentPlayer = new Player(85, 30, 30, 0, pGuns, pKeys);
 
         public static List<Characters> Chars = new List<Characters>();
         public static List<string> CharacterInteractions = new List<string>();
@@ -325,7 +325,13 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
-        
+        async Task logicalInventory()
+        {
+            foreach(PictureBox pb in PlayerClothes.Controls)
+            {
+
+            }
+        }
         async Task writeOutLines(string Message)
         {
             //neprepise se kdyz posle dalsi writeOutLines, seru na uzivatele
