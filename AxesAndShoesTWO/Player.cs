@@ -60,11 +60,11 @@ namespace AxesAndShoesTWO
 
 
         public void ChangeStats(StatsPanel sp)
-        {
-            sp.healthBar.Size = new Size(Convert.ToInt32(this.Health * 2.4), sp.healthBar.Height);
-            sp.thirstBar.Size = new Size(Convert.ToInt32(this.Thirst * 2.4), sp.healthBar.Height);
-            sp.hungerBar.Size = new Size(Convert.ToInt32(this.Hunger * 2.4), sp.healthBar.Height);
-            sp.radiationBar.Size = new Size(Convert.ToInt32(this.Radiation * 2.4), sp.healthBar.Height);
+        { 
+            sp.healthBar.Size = new Size(Convert.ToInt32(this.Health * 1.2), sp.healthBar.Height);
+            sp.thirstBar.Size = new Size(Convert.ToInt32(this.Thirst * 1.2), sp.healthBar.Height);
+            sp.hungerBar.Size = new Size(Convert.ToInt32(this.Hunger * 1.2), sp.healthBar.Height);
+            sp.radiationBar.Size = new Size(Convert.ToInt32(this.Radiation * 1.2), sp.healthBar.Height);
         }
 
         public override string ToString()

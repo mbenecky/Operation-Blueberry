@@ -21,19 +21,21 @@ namespace AxesAndShoesTWO
             InitializeComponent();
 
             healthBar.Location = new Point(0, 0);
-            thirstBar.Location = new Point(0,  Height / 16);
-            hungerBar.Location = new Point(0, (Height / 16) * 2);
-            radiationBar.Location = new Point(0, (Height / 16) * 3);
+            thirstBar.Location = new Point(0,  Height / 32);
+            hungerBar.Location = new Point(0, (Height / 32) * 2);
+            radiationBar.Location = new Point(0, (Height / 32) * 3);
 
-            healthBar.Size = new Size(Width/4, Height / 16);
-            thirstBar.Size = new Size(Width/4, Height / 16);
-            hungerBar.Size = new Size(Width/4, Height / 16);
-            radiationBar.Size = new Size(Width / 4, Height / 16);
+            healthBar.Size = new Size(Width/16, Height / 32);
+            thirstBar.Size = new Size(Width / 16, Height / 32);
+            hungerBar.Size = new Size(Width / 16, Height / 32);
+            radiationBar.Size = new Size(Width / 16, Height / 32);
 
             healthBar.Image = Properties.Resources.healthBar;
             thirstBar.Image = Properties.Resources.thirstBar;
             hungerBar.Image = Properties.Resources.hungerBar;
             radiationBar.Image = Properties.Resources.radiationBar;
+
+            this.BackColor = Color.Black;
 
             healthBar.SizeMode = PictureBoxSizeMode.StretchImage;
             thirstBar.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -45,7 +47,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(hungerBar);
             this.Controls.Add(radiationBar);
 
-            this.Size = new Size(480,270);
+            this.Size = new Size(Width/8,Height/8);
         }
 
         protected override void OnPaint(PaintEventArgs pe)

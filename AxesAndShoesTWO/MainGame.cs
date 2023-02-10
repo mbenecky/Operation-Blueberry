@@ -138,8 +138,7 @@ namespace AxesAndShoesTWO
 
 
 
-            statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4, HeightSet / 2 + HeightSet / 4);
-            statsPanel.Visible = false;
+            statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4+WidthSet/8, HeightSet / 2 + HeightSet / 4+HeightSet/8);
             loadPanel.Visible = false;
 
             mainGamePanel.Size = new Size(WidthSet, HeightSet);
@@ -308,14 +307,22 @@ namespace AxesAndShoesTWO
             (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.gunTest;
             InventorySpace.Controls[1].Tag = "16";
             (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest;
+            InventorySpace.Controls[2].Tag = "3";
+            (InventorySpace.Controls[2] as PictureBox).Image = Properties.Resources.bonnieHat;
+            InventorySpace.Controls[3].Tag = "4";
+            (InventorySpace.Controls[3] as PictureBox).Image = Properties.Resources.tshirt;
+            InventorySpace.Controls[4].Tag = "5";
+            (InventorySpace.Controls[4] as PictureBox).Image = Properties.Resources.sweatPants;
+            InventorySpace.Controls[5].Tag = "6";
+            (InventorySpace.Controls[5] as PictureBox).Image = Properties.Resources.socks;
             //Test Batch
-
+            CurrentPlayer.ChangeStats(statsPanel);
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
-            this.Controls.Add(statsPanel);
             this.Controls.Add(mapPanel);
             this.Controls.Add(PHotBar);
+            this.Controls.Add(statsPanel);
             this.Controls.Add(AmmoLabel);
             this.Controls.Add(CurrentRoom);
             this.Controls.Add(InventoryToStorage);
@@ -328,13 +335,21 @@ namespace AxesAndShoesTWO
         async Task logicalInventory()
         {
             int CurrentHealth = CurrentPlayer.HealthWA;
-            CurrentPlayer.Health = CurrentHealth;
-            foreach(PictureBox pb in PlayerClothes.Controls)
+            MessageBox.Show(CurrentPlayer.Health.ToString());
+            foreach (PictureBox pb in PlayerClothes.Controls)
             {
-                Clothes CurrentClothing = AllItems[Convert.ToInt32((pb.Tag))] as Clothes;
-                CurrentHealth += CurrentClothing.HealthBoost;
-                CurrentPlayer.Health = CurrentHealth;
+                
+                if(pb.Tag.ToString() != "0")
+                {
+                    Clothes CurrentClothing = AllItems[Convert.ToInt32(pb.Tag) - 1] as Clothes;
+                    CurrentHealth += CurrentClothing.HealthBoost;
+                }
             }
+            CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag)-1] as Guns;
+            CurrentPlayer.Health = CurrentHealth;
+            MessageBox.Show(CurrentPlayer.Health.ToString());
+            CurrentPlayer.ChangeStats(statsPanel);
+            RefreshLabel();
         }
         async Task writeOutLines(string Message)
         {
@@ -455,12 +470,12 @@ namespace AxesAndShoesTWO
         {
             Panel ToolTip = new Panel();
             ToolTip.Location = MousePosition;
-            ToolTip.Size = new Size(WidthSet / 8, HeightSet / 4);
+            ToolTip.Size = new Size(WidthSet / 8, HeightSet / 10);
             ToolTip.BackColor = Color.DarkOliveGreen;
             ToolTip.MouseLeave += new EventHandler(SmartTTLeave);
             Button use = new Button();
             use.Location = new Point(0, 0);
-            use.Size = new Size(ToolTip.Size.Width, HeightSet / 4);
+            use.Size = new Size(ToolTip.Size.Width, HeightSet / 10);
             use.Text = "Use";
             use.BackColor = Color.DarkOliveGreen;
             use.Click += new EventHandler(useEvent);
@@ -586,7 +601,7 @@ namespace AxesAndShoesTWO
         }
         public void RefreshLabel()
         {
-            if (CurrentPlayer.HotBar != null)
+            if (PHotBar.Tag.ToString() != "0")
             {
                 AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
             }
@@ -839,7 +854,7 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[2] as PictureBox).BackgroundImage = Properties.Resources.legsPlace;
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
-            RefreshLabel();
+            logicalInventory();
             
         }
         private async void newGameButton_Click(object sender, EventArgs e)
