@@ -16,11 +16,9 @@ namespace AxesAndShoesTWO
         public  PictureBox thirstBar = new PictureBox();
         public  PictureBox hungerBar = new PictureBox();
         public  PictureBox radiationBar = new PictureBox();
-        public  int MaxWidth;
         public StatsPanel(int Width, int Height)
         {
             InitializeComponent();
-            MaxWidth = Width / 4;
 
             healthBar.Location = new Point(0, 0);
             thirstBar.Location = new Point(0,  Height / 16);

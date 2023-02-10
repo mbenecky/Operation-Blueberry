@@ -9,7 +9,8 @@ namespace AxesAndShoesTWO
     public class Clothes : Items
     {
         public Place Place;
-        public Clothes(int ID, string Name, string Description, Rarity Rarity, Image img, Place Place) : base(-1, "NULL", "NULL", Rarity.Common, Properties.Resources.whitePanel)
+        public int HealthBoost;
+        public Clothes(int ID, string Name, string Description, Rarity Rarity, Image img, Place Place, int HealthBoost) : base(-1, "NULL", "NULL", Rarity.Common, Properties.Resources.whitePanel)
         {
             base.ID = ID;
             base.Name = Name;
@@ -19,7 +20,7 @@ namespace AxesAndShoesTWO
             base.Rarity = Rarity;
             base.img = img;
             this.Place = Place;
-             
+             this.HealthBoost= HealthBoost;
         }
     }
     public enum Place

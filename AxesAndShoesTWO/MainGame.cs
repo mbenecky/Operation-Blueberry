@@ -327,9 +327,13 @@ namespace AxesAndShoesTWO
         //START OF TASKS
         async Task logicalInventory()
         {
+            int CurrentHealth = CurrentPlayer.HealthWA;
+            CurrentPlayer.Health = CurrentHealth;
             foreach(PictureBox pb in PlayerClothes.Controls)
             {
-
+                Clothes CurrentClothing = AllItems[Convert.ToInt32((pb.Tag))] as Clothes;
+                CurrentHealth += CurrentClothing.HealthBoost;
+                CurrentPlayer.Health = CurrentHealth;
             }
         }
         async Task writeOutLines(string Message)
@@ -509,10 +513,10 @@ namespace AxesAndShoesTWO
             
             list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
             list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
-            list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head));
-            list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest));
-            list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants));
-            list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots));
+            list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head, 10));
+            list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest, 10));
+            list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants, 10));
+            list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots, 10));
             list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest, 30, 1, 250));
             list.Add(new Items(8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(9, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -1002,5 +1006,11 @@ namespace AxesAndShoesTWO
         VaultDoor = 4,          //fourth a vetsi level mistnost s moznym vstupem jen s gasmaskou
         RogersShrineDoor = 5,   //fifth level mistnost kde najdes jak korky zemre :(
         BorysHQDoor = 6         //last boss kde budes muset porazit sgt. boryho a end :)
+    };
+
+    public enum Quests
+    {
+        RunCatacombs,
+        //to be done
     };
 }

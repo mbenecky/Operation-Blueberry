@@ -9,13 +9,10 @@ namespace AxesAndShoesTWO
     public class Player
     {
         public int Health;
+        public int HealthWA;
         public int Thirst;
         public int Hunger;
         public int Radiation;
-        public double HealthP = 1;
-        public double ThirstP = 1;
-        public double HungerP = 1;
-        public double RadiationP = 1;
         public Guns HotBar;
         public List<KeysRoom> CurrentKeys;
         public Player()
@@ -23,6 +20,7 @@ namespace AxesAndShoesTWO
         public Player(int Health, int Thirst, int Hunger, int Radiation, Guns HotBar, List<KeysRoom> CurrentKeys)
         {
             this.Health = Health;
+            this.HealthWA = Health;
             this.Thirst = Thirst;
             this.Hunger = Hunger;
             this.Radiation = Radiation;
@@ -56,9 +54,17 @@ namespace AxesAndShoesTWO
             }
         }
         
-        private void ChangeStats(StatsPanel sp)
+        //200 - 480px
+        //100 - 240px
+        //1 - 4,8px
+
+
+        public void ChangeStats(StatsPanel sp)
         {
-            sp.healthBar = new Size(sp.healthBar.Width*HealthP, sp.healthBar.Height);
+            sp.healthBar.Size = new Size(Convert.ToInt32(this.Health * 2.4), sp.healthBar.Height);
+            sp.thirstBar.Size = new Size(Convert.ToInt32(this.Thirst * 2.4), sp.healthBar.Height);
+            sp.hungerBar.Size = new Size(Convert.ToInt32(this.Hunger * 2.4), sp.healthBar.Height);
+            sp.radiationBar.Size = new Size(Convert.ToInt32(this.Radiation * 2.4), sp.healthBar.Height);
         }
 
         public override string ToString()
