@@ -538,7 +538,7 @@ namespace AxesAndShoesTWO
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest, 10));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants, 10));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots, 10));
-            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest, 30, 1, 250));
+            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest, 30, 1, 100));
             list.Add(new Items(8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(9, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
             list.Add(new Items(10, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
@@ -959,8 +959,10 @@ namespace AxesAndShoesTWO
         }
         private void pbClick(object sender, EventArgs e)
         {
+            Random rnd = new Random();
             if (CurrentPlayer.HotBar.isAbleToShoot)
             {
+                Cursor.Position = new Point(Cursor.Position.X - rnd.Next(-50, 50), Cursor.Position.Y - rnd.Next(30, 100));
                 int help = Convert.ToInt32((CurrentRoom.Controls[1] as ProgressBar).Value) - CurrentPlayer.HotBar.Damage * 5;
                 if (help <= 0)
                 {
