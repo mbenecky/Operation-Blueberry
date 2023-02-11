@@ -335,7 +335,6 @@ namespace AxesAndShoesTWO
         async Task logicalInventory()
         {
             int CurrentHealth = CurrentPlayer.HealthWA;
-            MessageBox.Show(CurrentPlayer.Health.ToString());
             foreach (PictureBox pb in PlayerClothes.Controls)
             {
                 
@@ -345,9 +344,16 @@ namespace AxesAndShoesTWO
                     CurrentHealth += CurrentClothing.HealthBoost;
                 }
             }
-            CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag)-1] as Guns;
+            if(PHotBar.Tag.ToString() == "0" || PHotBar.Image == null)
+            {
+                PHotBar.Tag = "0";
+                PHotBar.Image = null;
+                CurrentPlayer.HotBar = null;
+            }else
+            {
+                CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag) - 1] as Guns;
+            }
             CurrentPlayer.Health = CurrentHealth;
-            MessageBox.Show(CurrentPlayer.Health.ToString());
             CurrentPlayer.ChangeStats(statsPanel);
             RefreshLabel();
         }
@@ -402,7 +408,7 @@ namespace AxesAndShoesTWO
             await Task.Delay(CurrentPlayer.HotBar.WaitTime);
             CurrentPlayer.HotBar.isAbleToShoot = true;
             CurrentPlayer.HotBar.CurrentAmountOfRounds = CurrentPlayer.HotBar.NumberOfRounds;
-            RefreshLabel();
+            await logicalInventory();
         }
         async Task WaitBetweenShots()
         {
