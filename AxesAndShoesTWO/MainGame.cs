@@ -320,11 +320,12 @@ namespace AxesAndShoesTWO
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
-            this.Controls.Add(mapPanel);
+            
             this.Controls.Add(PHotBar);
             this.Controls.Add(statsPanel);
             this.Controls.Add(AmmoLabel);
             this.Controls.Add(CurrentRoom);
+            this.Controls.Add(mapPanel);
             this.Controls.Add(InventoryToStorage);
 
             Task.Run(() => mainGameTimer_Tick());
@@ -408,7 +409,9 @@ namespace AxesAndShoesTWO
             await Task.Delay(CurrentPlayer.HotBar.WaitTime);
             CurrentPlayer.HotBar.isAbleToShoot = true;
             CurrentPlayer.HotBar.CurrentAmountOfRounds = CurrentPlayer.HotBar.NumberOfRounds;
-            await logicalInventory();
+            
+            RefreshLabel();
+
         }
         async Task WaitBetweenShots()
         {
@@ -568,9 +571,20 @@ namespace AxesAndShoesTWO
             List<Enemy> list = new List<Enemy>();
 
             list.Add(new Enemy(
-                "Medved", 10, Rarity.Common, Enemy.Types.Ground, new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.enemyTestnew, 50, Properties.Resources.enemyDeathTest
+                "Bear", 10, Rarity.Common,  new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.enemyTestnew, 50
                 ));
-
+            list.Add(new Enemy(
+                "Mouse", 10, Rarity.Uncommon, new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.mouse, 30
+                ));
+            list.Add(new Enemy(
+                "Houmles", 20, Rarity.Rare, new Size(WidthSet / 4, HeightSet / 2), Properties.Resources.houmles, 55
+                ));
+            list.Add(new Enemy(
+                "Crip", 20, Rarity.Epic, new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.crip, 55
+                ));
+            list.Add(new Enemy(
+                "Gunman", 20, Rarity.Legendary, new Size(WidthSet / 4, HeightSet / 4), Properties.Resources.gunman, 100
+                ));
             return list;
         }
         public List<string> InteractionsLoad()
@@ -596,11 +610,11 @@ namespace AxesAndShoesTWO
             List<Rooms> list = new List<Rooms>();
 
             list.Add(new Rooms(1, "Catacombs", "NULL", KeysRoom.Catacombs, KeysRoom.ElectricityRoom, Properties.Resources.roomTest));
-            list.Add(new Rooms(2, "Electricity Room", "NULL", KeysRoom.ElectricityRoom, KeysRoom.EngineRoom, Properties.Resources.roomTest));
-            list.Add(new Rooms(3, "Engine Room", "NULL", KeysRoom.EngineRoom, KeysRoom.VaultDoor, Properties.Resources.roomTest));
-            list.Add(new Rooms(4, "Vault Air-Lock", "NULL", KeysRoom.VaultDoor, KeysRoom.RogersShrineDoor, Properties.Resources.roomTest));
-            list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.roomTest));
-            list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.roomTest));
+            list.Add(new Rooms(2, "Electricity Room", "NULL", KeysRoom.ElectricityRoom, KeysRoom.EngineRoom, Properties.Resources.electricityRoom));
+            list.Add(new Rooms(3, "Engine Room", "NULL", KeysRoom.EngineRoom, KeysRoom.VaultDoor, Properties.Resources.engineRoom));
+            list.Add(new Rooms(4, "Vault Air-Lock", "NULL", KeysRoom.VaultDoor, KeysRoom.RogersShrineDoor, Properties.Resources.vaultDoor));
+            list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.rogersShrine));
+            list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.borysHQ));
 
             return list;
 
@@ -634,6 +648,11 @@ namespace AxesAndShoesTWO
 
         public void SpawnARoom(Rooms GivenRoom)
         {
+            PHotBar.Visible = true;
+            AmmoLabel.Visible = true;
+            statsPanel.Visible = true;
+            InventoryToStorage.Visible = false;
+
 
             Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
@@ -668,7 +687,6 @@ namespace AxesAndShoesTWO
         {
             CurrentRoom.Controls.Clear();
             CurrentRoomR = new Rooms();
-
         }
 
         //END OF METHODS
@@ -705,17 +723,9 @@ namespace AxesAndShoesTWO
         private void mapButtonClick(object sender, EventArgs e)
         {
             int currentRoomID = Convert.ToInt32((sender as PictureBox).Tag);
-            string currentRoomString = "Clicked on : ";
-            switch(currentRoomID)
-            {
-                case 0: currentRoomString += "catacombs"; break;
-                case 1: currentRoomString += "electricity"; break;
-                case 2: currentRoomString += "engine"; break;
-                case 3: currentRoomString += "vaultdoor"; break;
-                case 4: currentRoomString += "rogersshrine"; break;
-                case 5: currentRoomString += "boryshq"; break;
-            }
-            MessageBox.Show(currentRoomString);
+            SpawnARoom(AllRooms[currentRoomID]);
+            CurrentRoom.Visible = true;
+            MessageBox.Show("Spawning a room...");
         }
         private void inventoryCheck(object sender, EventArgs e)
         {
@@ -861,7 +871,6 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
             logicalInventory();
-            
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
@@ -948,9 +957,35 @@ namespace AxesAndShoesTWO
                 case Keys.Escape: break; //pauses
                 case Keys.M:
                     mapPanel.Visible = !mapPanel.Visible;
+                    if(mapPanel.Visible)
+                    {
+                        PHotBar.Visible = false;
+                        statsPanel.Visible = false;
+                        AmmoLabel.Visible = false;
+                    } else
+                    {
+                        PHotBar.Visible = true;
+                        statsPanel.Visible = true;
+                        AmmoLabel.Visible = true;
+                    }
                     break; //Opens map
-                case Keys.E: 
-                    InventoryToStorage.Visible = !InventoryToStorage.Visible; break; //opens inventory
+                case Keys.E:
+                    InventoryToStorage.Visible = !InventoryToStorage.Visible;  //opens inventory
+                    if (!InventoryToStorage.Visible)
+                    {
+                        PHotBar.Visible = false;
+                        statsPanel.Visible = false;
+                        AmmoLabel.Visible = false;
+                    }
+                    else
+                    {
+                        mapPanel.Visible = false;
+                        DropsPanel.Visible = false;
+                        PHotBar.Visible = true;
+                        statsPanel.Visible = true;
+                        AmmoLabel.Visible = true;
+                    }
+                    break;
                 case Keys.R:
                     Task.Run(() => Reloading());
                     break; //reload
@@ -1034,6 +1069,14 @@ namespace AxesAndShoesTWO
     public enum Quests
     {
         RunCatacombs,
+        InspectStorage,
+        RunElectriity,
+        ThreathenHorkymi,
+        BringBackARareItem,
+        RunEngine,
+        MurderKorky,
+        ObtainAGasMask,
+        RunVault
         //to be done
     };
 }

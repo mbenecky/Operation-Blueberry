@@ -222,5 +222,32 @@
   <ItemGroup>
     <None Include="Resources\mapButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rogersShrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vaultDoor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borysHQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\electricityRoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\engineRoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\houmles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gunman.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

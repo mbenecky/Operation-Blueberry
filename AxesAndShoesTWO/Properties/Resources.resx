@@ -130,6 +130,9 @@
   <data name="bonnieHat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bonnieHat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="borysHQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\borysHQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="buttonTemp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buttonTemp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,8 +148,14 @@
   <data name="credits_buttonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\credits_buttonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="crip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\crip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="deathImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deathImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="electricityRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\electricityRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="enemyDeathTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemyDeathTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,8 +166,14 @@
   <data name="enemyTestnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemyTestnew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="engineRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\engineRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="feetPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\feetPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gunman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gunman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gunshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gunshot.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -171,6 +186,9 @@
   </data>
   <data name="healthBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\healthBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="houmles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\houmles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hungerBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hungerBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -192,6 +210,9 @@
   </data>
   <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mouse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opBlueberryTempLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opBlueberryTempLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,6 +238,9 @@
   <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reload.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="rogersShrine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rogersShrine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="roomTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\roomTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -231,6 +255,9 @@
   </data>
   <data name="tshirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tshirt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vaultDoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vaultDoor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="voiceLineTestBedImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\voiceLineTestBedImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

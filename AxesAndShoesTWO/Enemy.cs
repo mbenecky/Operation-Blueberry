@@ -15,41 +15,26 @@ namespace AxesAndShoesTWO
         public int Health;
         public static int WaitTime;
         public Rarity RarityOfEnemy;
-        public Types Type;
         public Size Size;
         public Image Img;
-        public Image DeathImage;
         public Enemy()
         {
 
         }
-        public Enemy(string Name, int Damage, Rarity RarityOfEnemy, Types Type, Size Size, Image Img, int Health, Image deathImage)
+        public Enemy(string Name, int Damage, Rarity RarityOfEnemy, Size Size, Image Img, int Health)
         {
             WaitTime = rnd.Next(0, 5);
             this.Name = Name;
             this.Damage = Damage;
             this.RarityOfEnemy = RarityOfEnemy;
-            this.Type = Type;
             this.Size = Size;
             this.Img = Img;
             this.Health = Health;
-            DeathImage = deathImage;
         }
         async Task Attack()
         {
             await Task.Delay(WaitTime * 1000);
 
         }
-        async Task Death()
-        {
-            Img = DeathImage;
-            await Task.Delay(2000);
-        }
-       
-        public enum Types
-        {
-            Flying,
-            Ground
-        };
     }
 }
