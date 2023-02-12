@@ -249,5 +249,14 @@
   <ItemGroup>
     <None Include="Resources\gunman.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medicslab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\armory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainRoom.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

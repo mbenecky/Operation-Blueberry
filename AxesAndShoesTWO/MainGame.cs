@@ -57,6 +57,9 @@ namespace AxesAndShoesTWO
         public static Panel loadPanel = new Panel();
         public static Panel mainGamePanel = new Panel();
 
+        public static Panel MainRoom = new Panel();
+        //dodelat pictureboxy jako NPCs
+
 
 
         public static Panel mapPanel = new Panel();
@@ -93,8 +96,11 @@ namespace AxesAndShoesTWO
 
             CurrentRoom.Size = new Size(WidthSet, HeightSet);
             CurrentRoom.Location = new Point(0, 0);
-            CurrentRoom.BackgroundImage = Properties.Resources.roomTest;
+            CurrentRoom.Visible = false;
 
+            MainRoom.Size = new Size(WidthSet, HeightSet);
+            MainRoom.Location = new Point(0, 0);
+            MainRoom.Visible = false;
 
             characterInteractButton.Text = "Next";
             characterInteractButton.Location = new Point(WidthSet - WidthSet / 10, HeightSet - HeightSet / 10);
@@ -204,7 +210,7 @@ namespace AxesAndShoesTWO
             mapPanel.Location = new Point(0, 0);
             mapPanel.Visible = false;
 
-            for(int i =0;i !=6;i++)
+            for(int i =0;i !=11;i++)
             {
                 PictureBox pb = new PictureBox();
                 pb.BackColor = Color.Transparent;
@@ -616,6 +622,11 @@ namespace AxesAndShoesTWO
             list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.rogersShrine));
             list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.borysHQ));
 
+            list.Add(new Rooms(7, "Storage room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.blackPanel));
+            list.Add(new Rooms(8, "Medic's lab", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.medicslab));
+            list.Add(new Rooms(9, "Armory", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.armory));
+            list.Add(new Rooms(10, "Main room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.mainRoom));
+
             return list;
 
         }
@@ -645,7 +656,40 @@ namespace AxesAndShoesTWO
                 currentPicBox++;
             }
         }
+        public void GoTo(Rooms GivenRoom)
+        {
+            if(GivenRoom.ID < 7)
+            {
+                Log("Wrong method used, please use SpawnARoom for rooms with enemies :)");
+                return;
+            }
+            switch(GivenRoom.ID)
+            {
+                case 7:
+                    CurrentRoomR = AllRooms[6];
 
+                    InventoryToStorage.Visible = true;
+                    PHotBar.Visible = true;
+                    AmmoLabel.Visible = true;
+                    statsPanel.Visible = true;
+                    StorageSpace.Visible = true;
+
+
+                    mapPanel.Visible = false;
+                    DropsPanel.Visible = false;
+                
+                    break;
+
+                case 8:
+                    CurrentRoom.BackgroundImage = AllRooms[7].Img;
+                    CurrentRoom.Visible = true;
+                    
+
+
+                    break;
+            }
+            
+        }
         public void SpawnARoom(Rooms GivenRoom)
         {
             PHotBar.Visible = true;
@@ -939,7 +983,6 @@ namespace AxesAndShoesTWO
                 else
                 {
                     characterInteractPanel.Visible = false;
-                    SpawnARoom(AllRooms[0]);
                 }
                 currentInteraction++;
             }
