@@ -50,7 +50,7 @@ namespace AxesAndShoesTWO
         public static Label AmmoLabel = new Label();
 
         public static Panel CurrentRoom = new Panel();
-        public static Rooms CurrentRoomR = new Rooms();
+        public static Rooms CurrentRoomR = null;
         public static Enemy CurrentEnemy = new Enemy();
 
         public static Label loadLabel = new Label();
@@ -644,6 +644,8 @@ namespace AxesAndShoesTWO
         }
         public void ShowDrops(Rooms GivenRoom)
         {
+            CloseMap();
+            OpenInventory();
             CurrentRoom.Visible = false;
             InventoryToStorage.Visible = true;
             DropsPanel.Visible = true;
@@ -696,7 +698,7 @@ namespace AxesAndShoesTWO
             AmmoLabel.Visible = true;
             statsPanel.Visible = true;
             InventoryToStorage.Visible = false;
-
+            CurrentRoom.BackgroundImage =GivenRoom.Img;
 
             Random rnd = new Random();
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
@@ -726,11 +728,37 @@ namespace AxesAndShoesTWO
             CurrentRoom.Controls.Add(progBar);
             CurrentRoomR = GivenRoom;
         }
+        public void OpenMap()
+        {
+            mapPanel.Visible = true;
+            CloseInventory();
+            
+        }
+        public void CloseMap()
+        {
+            mapPanel.Visible = false;
+        }
+        public void OpenInventory()
+        {
+            InventoryToStorage.Visible =true;  //opens inventory
+            CloseMap();
 
+                DropsPanel.Visible = false;
+                PHotBar.Visible = true;
+                statsPanel.Visible = true;
+                AmmoLabel.Visible = true;
+        }
+        public void CloseInventory()
+        {
+            InventoryToStorage.Visible = false;
+                AmmoLabel.Visible = false;
+                statsPanel.Visible = false;
+            PHotBar.Visible = false;
+        }
         public void ClearRooms()
         {
             CurrentRoom.Controls.Clear();
-            CurrentRoomR = new Rooms();
+            CurrentRoomR = null;
         }
 
         //END OF METHODS
@@ -999,34 +1027,14 @@ namespace AxesAndShoesTWO
             {
                 case Keys.Escape: break; //pauses
                 case Keys.M:
-                    mapPanel.Visible = !mapPanel.Visible;
-                    if(mapPanel.Visible)
-                    {
-                        PHotBar.Visible = false;
-                        statsPanel.Visible = false;
-                        AmmoLabel.Visible = false;
-                    } else
-                    {
-                        PHotBar.Visible = true;
-                        statsPanel.Visible = true;
-                        AmmoLabel.Visible = true;
+                    if(CurrentRoomR == null) { 
+                    OpenMap();
                     }
                     break; //Opens map
                 case Keys.E:
-                    InventoryToStorage.Visible = !InventoryToStorage.Visible;  //opens inventory
-                    if (!InventoryToStorage.Visible)
+                    if (CurrentRoomR == null)
                     {
-                        PHotBar.Visible = false;
-                        statsPanel.Visible = false;
-                        AmmoLabel.Visible = false;
-                    }
-                    else
-                    {
-                        mapPanel.Visible = false;
-                        DropsPanel.Visible = false;
-                        PHotBar.Visible = true;
-                        statsPanel.Visible = true;
-                        AmmoLabel.Visible = true;
+                        OpenInventory();
                     }
                     break;
                 case Keys.R:
