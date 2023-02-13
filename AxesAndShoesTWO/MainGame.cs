@@ -34,40 +34,40 @@ namespace AxesAndShoesTWO
 
         public Player CurrentPlayer = new Player(85, 30, 30, 0, pGuns, pKeys);
 
-        public static List<Characters> Chars = new List<Characters>();
-        public static List<string> CharacterInteractions = new List<string>();
-        public static List<Items> AllItems = new List<Items>();
-        public static List<Enemy> AllEnemies = new List<Enemy>();
-        public static List<Rooms> AllRooms = new List<Rooms>();
+        public  List<Characters> Chars = new List<Characters>();
+        public  List<string> CharacterInteractions = new List<string>();
+        public  List<Items> AllItems = new List<Items>();
+        public  List<Enemy> AllEnemies = new List<Enemy>();
+        public  List<Rooms> AllRooms = new List<Rooms>();
 
-        public static Panel InventoryToStorage = new Panel();
-        public static Panel InventorySpace = new Panel();
-        public static Panel StorageSpace = new Panel();
-        public static PictureBox lastPb = new PictureBox();
-        public static Panel DropsPanel = new Panel();
-        public static Panel PlayerClothes = new Panel();
-        public static PictureBox PHotBar = new PictureBox();
-        public static Label AmmoLabel = new Label();
+        public  Panel InventoryToStorage = new Panel();
+        public  Panel InventorySpace = new Panel();
+        public  Panel StorageSpace = new Panel();
+        public  PictureBox lastPb = new PictureBox();
+        public  Panel DropsPanel = new Panel();
+        public  Panel PlayerClothes = new Panel();
+        public  PictureBox PHotBar = new PictureBox();
+        public  Label AmmoLabel = new Label();
 
-        public static Panel CurrentRoom = new Panel();
-        public static Rooms CurrentRoomR = null;
-        public static Enemy CurrentEnemy = new Enemy();
+        public  Panel CurrentRoom = new Panel();
+        public  Rooms CurrentRoomR = null;
+        public  Enemy CurrentEnemy = new Enemy();
 
-        public static Label loadLabel = new Label();
-        public static Panel loadPanel = new Panel();
-        public static Panel mainGamePanel = new Panel();
+        public  Label loadLabel = new Label();
+        public  Panel loadPanel = new Panel();
+        public  Panel mainGamePanel = new Panel();
 
-        public static Panel MainRoom = new Panel();
+        public  Panel MainRoom = new Panel();
         //dodelat pictureboxy jako NPCs
 
 
 
-        public static Panel mapPanel = new Panel();
+        public  Panel mapPanel = new Panel();
 
-        public static Panel characterInteractPanel = new Panel();
-        public static Label characterInteractLabel = new Label();
-        public static Label characterInteractLabelName = new Label();
-        public static Button characterInteractButton = new Button();
+        public  Panel characterInteractPanel = new Panel();
+        public  Label characterInteractLabel = new Label();
+        public  Label characterInteractLabelName = new Label();
+        public  Button characterInteractButton = new Button();
 
         public int loadColor = 0;
         public int loadOpacity = 255;
@@ -334,7 +334,6 @@ namespace AxesAndShoesTWO
             this.Controls.Add(mapPanel);
             this.Controls.Add(InventoryToStorage);
 
-            Task.Run(() => mainGameTimer_Tick());
         }
 
 
@@ -377,13 +376,7 @@ namespace AxesAndShoesTWO
             }
             isWriting = false;
         }
-        async Task mainGameTimer_Tick()
-        {
-            while (!isPaused)
-            {
-                await Task.Delay(16); //Main game is set to ~60 fps
-            }
-        }
+       
         async Task loadTimer_Tick()
         {
             while (loadColor < 255)
