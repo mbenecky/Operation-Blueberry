@@ -32,7 +32,7 @@ namespace AxesAndShoesTWO
         public static Guns pGuns = new Guns();
         public static List<KeysRoom> pKeys = new List<KeysRoom>();
 
-        public Player CurrentPlayer = new Player(85, 30, 30, 0, pGuns, pKeys);
+        public Player CurrentPlayer = new Player(85, 30, 30, 20, pGuns, pKeys);
 
         public  List<Characters> Chars = new List<Characters>();
         public  List<string> CharacterInteractions = new List<string>();
@@ -78,7 +78,7 @@ namespace AxesAndShoesTWO
         public bool isSelected = false;
         public bool isWriting = false;
         public bool isPaused = false;
-
+        public bool enemyIsDead = false;
         public MainGame()
         {
             InitializeComponent();
@@ -247,6 +247,8 @@ namespace AxesAndShoesTWO
             PlayerClothes.Visible = true;
             PlayerClothes.Name = "PlayerClothes";
 
+            CurrentEnemy = null;
+
             InventoryToStorage.Controls.Add(PlayerClothes);
             InventoryToStorage.Controls.Add(InventorySpace);
             InventoryToStorage.Controls.Add(StorageSpace);
@@ -338,6 +340,21 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
+        async Task Attack()
+        {
+            MessageBox.Show("I am going to start attacking!");
+            MessageBox.Show(CurrentEnemy.ToString());
+        MessageBox.Show(enemyIsDead.ToString());
+            while(!enemyIsDead && CurrentEnemy != null)
+            {
+                CurrentPlayer.Health -= CurrentEnemy.Damage;
+                CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
+                CurrentPlayer.ChangeStats(statsPanel);
+
+                MessageBox.Show("Just attacked you!");
+                await Task.Delay(3000);
+            }
+        }
         async Task logicalInventory()
         {
             int CurrentHealth = CurrentPlayer.HealthWA;
@@ -363,7 +380,7 @@ namespace AxesAndShoesTWO
             CurrentPlayer.ChangeStats(statsPanel);
             RefreshLabel();
         }
-        async Task writeOutLines(string Message)
+        async Task writeOutLines(string Message)                        
         {
             //neprepise se kdyz posle dalsi writeOutLines, seru na uzivatele
             if (isWriting) { currentInteraction--; return; }
@@ -424,16 +441,19 @@ namespace AxesAndShoesTWO
         }
         async Task Death(object sender)
         {
+            enemyIsDead = true;
             (sender as PictureBox).Click -= new EventHandler(pbClick);
             await Task.Delay(2000);
             try
             {
+
                 CurrentRoomR.Enemies.RemoveAt(0);
             }
             catch (Exception ex)
             {
                 ShowDrops(CurrentRoomR);
                 ClearRooms();
+                MessageBox.Show("Please contact beneckym.05@spst.eu with this ex Message:");
                 MessageBox.Show(ex.Message);
             }
             if (CurrentRoomR.Enemies.Count == 0)
@@ -443,10 +463,14 @@ namespace AxesAndShoesTWO
             }
             else
             {
+                CurrentEnemy = CurrentRoomR.Enemies[0];
                 (CurrentRoom.Controls[0] as PictureBox).Image = CurrentRoomR.Enemies[0].Img;
                 (CurrentRoom.Controls[1] as ProgressBar).Maximum = CurrentRoomR.Enemies[0].Health;
                 (CurrentRoom.Controls[1] as ProgressBar).Value = CurrentRoomR.Enemies[0].Health;
                 (sender as PictureBox).Click += new EventHandler(pbClick);
+
+                enemyIsDead = false;
+                Task.Run(() =>Attack());
             }
         }
         //END OF TASKS
@@ -697,6 +721,7 @@ namespace AxesAndShoesTWO
             GivenRoom.Drops = GivenRoom.CreateDrops(GivenRoom.RequiredKey, AllItems);
             GivenRoom.Enemies = GivenRoom.CreateEnemies(GivenRoom.RequiredKey, AllEnemies);
             CurrentEnemy = GivenRoom.Enemies[0];
+            enemyIsDead = false;
 
             PictureBox pb = new PictureBox();
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -719,6 +744,7 @@ namespace AxesAndShoesTWO
 
             CurrentRoom.Controls.Add(pb);
             CurrentRoom.Controls.Add(progBar);
+            Task.Run(() => Attack());
             CurrentRoomR = GivenRoom;
         }
         public void OpenMap()
@@ -1049,6 +1075,7 @@ namespace AxesAndShoesTWO
                     try
                     {
                         Death(sender);
+                        
                     }
                     catch (Exception ex)
                     {

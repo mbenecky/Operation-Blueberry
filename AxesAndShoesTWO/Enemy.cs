@@ -31,10 +31,9 @@ namespace AxesAndShoesTWO
             this.Img = Img;
             this.Health = Health;
         }
-        async Task Attack()
+        public override string ToString()
         {
-            await Task.Delay(WaitTime * 1000);
-
+            return this.Name;
         }
     }
 }
