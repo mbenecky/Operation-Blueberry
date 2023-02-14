@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
 using System;
-
 namespace AxesAndShoesTWO
 {
     public class Player
@@ -59,13 +57,7 @@ namespace AxesAndShoesTWO
         //1 - 4,8px
 
 
-        public void ChangeStats(StatsPanel sp)
-        { 
-            sp.healthBar.Size = new Size(Convert.ToInt32(this.Health * 1.2), sp.healthBar.Height);
-            sp.thirstBar.Size = new Size(Convert.ToInt32(this.Thirst * 1.2), sp.healthBar.Height);
-            sp.hungerBar.Size = new Size(Convert.ToInt32(this.Hunger * 1.2), sp.healthBar.Height);
-            sp.radiationBar.Size = new Size(Convert.ToInt32(this.Radiation * 1.2), sp.healthBar.Height);
-        }
+        
 
         public override string ToString()
         {

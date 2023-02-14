@@ -25,7 +25,7 @@ namespace AxesAndShoesTWO
         }
         public int WidthSet = Screen.PrimaryScreen.Bounds.Width, HeightSet = Screen.PrimaryScreen.Bounds.Height;
 
-        StatsPanel statsPanel = new StatsPanel(1920, 1080);
+        public static StatsPanel statsPanel = new StatsPanel(1920, 1080);
 
         public static Clothes[] Clothes = new Clothes[4];
         public static List<Items> pItems = new List<Items>();
@@ -163,10 +163,12 @@ namespace AxesAndShoesTWO
             PHotBar.Tag = "7";
             PHotBar.Name = "Hotbar";
             PHotBar.Image = Properties.Resources.gunTest;
-            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
-            AmmoLabel.BackColor = Color.White;
-            AmmoLabel.ForeColor = Color.Black;
-            AmmoLabel.Location = new Point(PHotBar.Location.X - WidthSet / 10, PHotBar.Location.Y);
+            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds.ToString();
+            AmmoLabel.ForeColor = Color.White;
+            AmmoLabel.BackColor = Color.Black;
+            AmmoLabel.Font = new Font(AmmoLabel.Font.FontFamily, HeightSet/30,FontStyle.Bold);
+            AmmoLabel.Size = new Size(WidthSet/20, HeightSet/16);
+            AmmoLabel.Location = new Point(PHotBar.Location.X - WidthSet / 20, PHotBar.Location.Y);
 
 
             //1920/6, 1080/8
@@ -324,7 +326,7 @@ namespace AxesAndShoesTWO
             InventorySpace.Controls[5].Tag = "6";
             (InventorySpace.Controls[5] as PictureBox).Image = Properties.Resources.socks;
             //Test Batch
-            CurrentPlayer.ChangeStats(statsPanel);
+            ChangeStats(CurrentPlayer);
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
@@ -342,16 +344,14 @@ namespace AxesAndShoesTWO
         //START OF TASKS
         async Task Attack()
         {
-            MessageBox.Show("I am going to start attacking!");
-            MessageBox.Show(CurrentEnemy.ToString());
-        MessageBox.Show(enemyIsDead.ToString());
             while(!enemyIsDead && CurrentEnemy != null)
             {
+                Log("Start");
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
-                CurrentPlayer.ChangeStats(statsPanel);
-
-                MessageBox.Show("Just attacked you!");
+                Log("Changestats starts");
+                ChangeStats(CurrentPlayer);
+                Log("Changestats end");
                 await Task.Delay(3000);
             }
         }
@@ -377,7 +377,7 @@ namespace AxesAndShoesTWO
                 CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag) - 1] as Guns;
             }
             CurrentPlayer.Health = CurrentHealth;
-            CurrentPlayer.ChangeStats(statsPanel);
+            ChangeStats(CurrentPlayer);
             RefreshLabel();
         }
         async Task writeOutLines(string Message)                        
@@ -425,7 +425,7 @@ namespace AxesAndShoesTWO
             await Task.Delay(CurrentPlayer.HotBar.WaitTime);
             CurrentPlayer.HotBar.isAbleToShoot = true;
             CurrentPlayer.HotBar.CurrentAmountOfRounds = CurrentPlayer.HotBar.NumberOfRounds;
-            
+
             RefreshLabel();
 
         }
@@ -470,7 +470,7 @@ namespace AxesAndShoesTWO
                 (sender as PictureBox).Click += new EventHandler(pbClick);
 
                 enemyIsDead = false;
-                Task.Run(() =>Attack());
+                await Task.Run(() =>Attack());
             }
         }
         //END OF TASKS
@@ -524,7 +524,7 @@ namespace AxesAndShoesTWO
         }
 
 
-        void Log(string message)
+        public static void Log(string message)
         {
             using (StreamWriter sw = new StreamWriter("logOperation.txt", true))
             {
@@ -651,13 +651,12 @@ namespace AxesAndShoesTWO
         {
             if (PHotBar.Tag.ToString() != "0")
             {
-                AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds + "/" + CurrentPlayer.HotBar.NumberOfRounds;
+                AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds.ToString();
             }
             else
             {
-                AmmoLabel.Text = "0/0";
+                AmmoLabel.Text = "0";
             }
-            AmmoLabel.Refresh();
         }
         public void ShowDrops(Rooms GivenRoom)
         {
@@ -747,6 +746,13 @@ namespace AxesAndShoesTWO
             Task.Run(() => Attack());
             CurrentRoomR = GivenRoom;
         }
+        public void ChangeStats(Player CurrentPl)
+        {
+            statsPanel.healthBar.Size = new Size(Convert.ToInt32(CurrentPl.Health * 1.2), statsPanel.healthBar.Height);
+            statsPanel.thirstBar.Size = new Size(Convert.ToInt32(CurrentPl.Thirst *1.2), statsPanel.thirstBar.Height);
+            statsPanel.hungerBar.Size = new Size(Convert.ToInt32(CurrentPl.Hunger *1.2), statsPanel.hungerBar.Height);
+            statsPanel.radiationBar.Size = new Size(Convert.ToInt32(CurrentPl.Radiation* 1.2), statsPanel.radiationBar.Height);
+        }
         public void OpenMap()
         {
             mapPanel.Visible = true;
@@ -816,7 +822,6 @@ namespace AxesAndShoesTWO
             int currentRoomID = Convert.ToInt32((sender as PictureBox).Tag);
             SpawnARoom(AllRooms[currentRoomID]);
             CurrentRoom.Visible = true;
-            MessageBox.Show("Spawning a room...");
         }
         private void inventoryCheck(object sender, EventArgs e)
         {

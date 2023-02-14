@@ -258,5 +258,17 @@
   <ItemGroup>
     <None Include="Resources\mainRoom.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hungerbar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\radiatonbar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thirstbar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\healthbar.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

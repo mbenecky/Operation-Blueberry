@@ -30,10 +30,10 @@ namespace AxesAndShoesTWO
             hungerBar.Size = new Size(Width / 16, Height / 32);
             radiationBar.Size = new Size(Width / 16, Height / 32);
 
-            healthBar.Image = Properties.Resources.healthBar;
-            thirstBar.Image = Properties.Resources.thirstBar;
-            hungerBar.Image = Properties.Resources.hungerBar;
-            radiationBar.Image = Properties.Resources.radiationBar;
+            healthBar.Image = Properties.Resources.healthbar;
+            thirstBar.Image = Properties.Resources.thirstbar;
+            hungerBar.Image = Properties.Resources.hungerbar;
+            radiationBar.Image = Properties.Resources.radiatonbar;
 
             this.BackColor = Color.Black;
 
