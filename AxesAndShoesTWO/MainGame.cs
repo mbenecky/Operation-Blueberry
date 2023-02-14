@@ -25,7 +25,11 @@ namespace AxesAndShoesTWO
         }
         public int WidthSet = Screen.PrimaryScreen.Bounds.Width, HeightSet = Screen.PrimaryScreen.Bounds.Height;
 
-        public static StatsPanel statsPanel = new StatsPanel(1920, 1080);
+        public Panel statsPanel = new Panel();
+        public PictureBox healthBar = new PictureBox();
+        public PictureBox thirstBar = new PictureBox();
+        public PictureBox hungerBar = new PictureBox();
+        public PictureBox radiationBar = new PictureBox();
 
         public static Clothes[] Clothes = new Clothes[4];
         public static List<Items> pItems = new List<Items>();
@@ -114,7 +118,7 @@ namespace AxesAndShoesTWO
             characterInteractButton.BackgroundImageLayout = ImageLayout.Stretch;
             characterInteractButton.Click += new EventHandler(interactButton_Click);
 
-            characterInteractLabel.Location = new Point(0, HeightSet / 2);
+            characterInteractLabel.Location = new Point(0, HeightSet / 2+HeightSet/8);
             characterInteractLabel.BackColor = Color.Transparent;
             characterInteractLabel.Font = new Font(characterInteractLabel.Font.FontFamily, 36);
             characterInteractLabel.Size = new Size(WidthSet - WidthSet / 10, HeightSet);
@@ -224,6 +228,36 @@ namespace AxesAndShoesTWO
                 mapPanel.Controls.Add(pb);
             }
 
+            healthBar.Location = new Point(0, 0);
+            thirstBar.Location = new Point(0, HeightSet / 32);
+            hungerBar.Location = new Point(0, (HeightSet / 32) * 2);
+            radiationBar.Location = new Point(0, (HeightSet / 32) * 3);
+
+            healthBar.Size = new Size(WidthSet / 16, HeightSet / 32);
+            thirstBar.Size = new Size(WidthSet / 16, HeightSet / 32);
+            hungerBar.Size = new Size(WidthSet / 16, HeightSet / 32);
+            radiationBar.Size = new Size(WidthSet / 16, HeightSet/ 32);
+
+            healthBar.Image = Properties.Resources.healthbar;
+            thirstBar.Image = Properties.Resources.thirstbar;
+            hungerBar.Image = Properties.Resources.hungerbar;
+            radiationBar.Image = Properties.Resources.radiatonbar;
+
+            statsPanel.BackColor = Color.Black;
+
+            healthBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            thirstBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            hungerBar.SizeMode = PictureBoxSizeMode.StretchImage;
+            radiationBar.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            statsPanel.Controls.Add(healthBar);
+            statsPanel.Controls.Add(thirstBar);
+            statsPanel.Controls.Add(hungerBar);
+            statsPanel.Controls.Add(radiationBar);
+
+            statsPanel.Size = new Size(WidthSet / 8, HeightSet / 8);
+
+
             InventoryToStorage.Size = new Size(1920, 1080);
             InventoryToStorage.Location = new Point(0, 0);
             InventoryToStorage.BackgroundImage = Properties.Resources.inventoryBI;
@@ -326,7 +360,7 @@ namespace AxesAndShoesTWO
             InventorySpace.Controls[5].Tag = "6";
             (InventorySpace.Controls[5] as PictureBox).Image = Properties.Resources.socks;
             //Test Batch
-            ChangeStats(CurrentPlayer);
+            ChangeStats();
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
@@ -346,12 +380,9 @@ namespace AxesAndShoesTWO
         {
             while(!enemyIsDead && CurrentEnemy != null)
             {
-                Log("Start");
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
-                Log("Changestats starts");
-                ChangeStats(CurrentPlayer);
-                Log("Changestats end");
+                ChangeStats();
                 await Task.Delay(3000);
             }
         }
@@ -377,7 +408,7 @@ namespace AxesAndShoesTWO
                 CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag) - 1] as Guns;
             }
             CurrentPlayer.Health = CurrentHealth;
-            ChangeStats(CurrentPlayer);
+            ChangeStats();
             RefreshLabel();
         }
         async Task writeOutLines(string Message)                        
@@ -389,7 +420,7 @@ namespace AxesAndShoesTWO
             for (int i = 0; i != Message.Length; i++)
             {
                 characterInteractLabel.Text += Message[i];
-                await Task.Delay(1);
+                await Task.Delay(40);
             }
             isWriting = false;
         }
@@ -400,19 +431,19 @@ namespace AxesAndShoesTWO
             {
                 loadLabel.ForeColor = Color.FromArgb(loadColor, loadColor, loadColor);
                 loadColor += 10;
-                await Task.Delay(1);
+                await Task.Delay(100);
 
             }
-            await Task.Delay(1);
+            await Task.Delay(2000);
             characterInteractPanel.Visible = true;
             while (loadOpacity > 0)
             {
                 loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
                 loadOpacity -= 5;
-                await Task.Delay(1);
+                await Task.Delay(100);
             }
             loadLabel.Visible = false;
-            await Task.Delay(1);
+            await Task.Delay(3000);
             loadPanel.Visible = false;
 
         }
@@ -482,14 +513,17 @@ namespace AxesAndShoesTWO
             Label labelMessage = new Label();
             panelMessage.Size = new Size(WidthSet / 4, HeightSet / 4);
             panelMessage.Location = new Point(WidthSet - WidthSet / 2 - WidthSet / 8, HeightSet - HeightSet / 2 - HeightSet / 8);
-            panelMessage.BackColor = Color.White;
+            panelMessage.BackColor = Color.DarkGray;
             panelMessage.Visible = true;
 
-            panelMessage.Controls.Add(labelMessage);
             panelMessage.Controls.Add(OKButton);
+            panelMessage.Controls.Add(labelMessage);
+            
 
             labelMessage.Text = Message;
             labelMessage.Location = new Point(0, 0);
+            labelMessage.Size = new Size(WidthSet / 4, HeightSet / 4);
+
             labelMessage.MaximumSize = new Size(WidthSet / 4, HeightSet / 4);
 
             OKButton.Text = "OK";
@@ -746,12 +780,13 @@ namespace AxesAndShoesTWO
             Task.Run(() => Attack());
             CurrentRoomR = GivenRoom;
         }
-        public void ChangeStats(Player CurrentPl)
+        public void ChangeStats()
         {
-            statsPanel.healthBar.Size = new Size(Convert.ToInt32(CurrentPl.Health * 1.2), statsPanel.healthBar.Height);
-            statsPanel.thirstBar.Size = new Size(Convert.ToInt32(CurrentPl.Thirst *1.2), statsPanel.thirstBar.Height);
-            statsPanel.hungerBar.Size = new Size(Convert.ToInt32(CurrentPl.Hunger *1.2), statsPanel.hungerBar.Height);
-            statsPanel.radiationBar.Size = new Size(Convert.ToInt32(CurrentPl.Radiation* 1.2), statsPanel.radiationBar.Height);
+            healthBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Health * 1.2), healthBar.Height);
+            thirstBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Thirst *1.2),thirstBar.Height);
+            hungerBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Hunger *1.2), hungerBar.Height);
+            radiationBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Radiation* 1.2), radiationBar.Height);
+
         }
         public void OpenMap()
         {
@@ -820,7 +855,12 @@ namespace AxesAndShoesTWO
         private void mapButtonClick(object sender, EventArgs e)
         {
             int currentRoomID = Convert.ToInt32((sender as PictureBox).Tag);
+            try { 
             SpawnARoom(AllRooms[currentRoomID]);
+            } catch
+            {
+                MessageBox.Show("mistnost jeste neni dodelana..");
+            }
             CurrentRoom.Visible = true;
         }
         private void inventoryCheck(object sender, EventArgs e)
@@ -934,6 +974,7 @@ namespace AxesAndShoesTWO
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("An error has occured, please contact beneckym.05@spst.eu with your error, error code: ");
                     MessageBox.Show(ex.Message);
                     MessageBox.Show((Convert.ToInt32(pictureBox.Tag)).ToString());
                     MessageBox.Show((Convert.ToInt32(lastPb.Tag)).ToString());
@@ -1035,6 +1076,7 @@ namespace AxesAndShoesTWO
                 else
                 {
                     characterInteractPanel.Visible = false;
+                    CreateMessage("Tohle je jen Beta verze!!!!\nPro otevreni mapy - M\nPro otevreni inventare - E\nStrileni - LMB\n Reload - R\n jo a mensi oznameni, hra je nehorazne hlasita protoze neexistuje nic jako volumecontrol na soundplayeru, takze doporocuji ztisit!!!!");
                 }
                 currentInteraction++;
             }

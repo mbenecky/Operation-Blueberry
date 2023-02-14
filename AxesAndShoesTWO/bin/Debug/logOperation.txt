@@ -1,11 +1,1 @@
-14.02.2023 18:56:32: Something was pressed!
-14.02.2023 18:56:36: Something was pressed!
-14.02.2023 18:56:40: Something was pressed!
-14.02.2023 18:56:43: Something was pressed!
-14.02.2023 18:56:48: Something was pressed!
-14.02.2023 18:56:55: Something was pressed!
-14.02.2023 18:56:56: Start
-14.02.2023 18:56:56: Changestats starts
-14.02.2023 18:56:59: Something was pressed!
-14.02.2023 18:57:11: Something was pressed!
-14.02.2023 18:57:13: Something was pressed!
+14.02.2023 20:46:12: Something was pressed!
