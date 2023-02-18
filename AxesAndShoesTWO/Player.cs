@@ -13,6 +13,7 @@ namespace AxesAndShoesTWO
         public int Radiation;
         public Guns HotBar;
         public List<KeysRoom> CurrentKeys;
+        public Quests CurrentQuest;
         public Player()
         { }
         public Player(int Health, int Thirst, int Hunger, int Radiation, Guns HotBar, List<KeysRoom> CurrentKeys)
@@ -24,6 +25,7 @@ namespace AxesAndShoesTWO
             this.Radiation = Radiation;
             this.HotBar = HotBar;
             this.CurrentKeys= CurrentKeys;
+            this.CurrentQuest = Quests.RunCatacombs;
         }
         public bool IsAlive()
         {

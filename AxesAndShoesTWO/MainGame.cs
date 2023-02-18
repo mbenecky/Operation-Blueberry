@@ -73,6 +73,8 @@ namespace AxesAndShoesTWO
         public  Label characterInteractLabelName = new Label();
         public  Button characterInteractButton = new Button();
 
+        public string DeathMessage = "You have died from ";
+        
         public int loadColor = 0;
         public int loadOpacity = 255;
         public int currentInteraction = 0;
@@ -376,6 +378,32 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
+        async Task DeathScreen()
+        {
+            Panel dsPanel = new Panel();
+            dsPanel.Size = new Size(WidthSet,HeightSet);
+            dsPanel.Location = new Point(0, 0);
+            dsPanel.BackColor = Color.Black;
+            
+            this.Controls.Add(dsPanel);
+            dsPanel.BringToFront();
+            int dsLoad = 0;
+            while(dsLoad < 255)
+            {
+                dsPanel.BackColor = Color.FromArgb(dsLoad, Color.Black);
+                dsLoad += 5;
+                await Task.Delay(1);
+            }
+            Label dsMessage = new Label();
+            dsMessage.ForeColor = Color.White;
+            dsMessage.BackColor = Color.Black;
+            dsMessage.Text = DeathMessage;
+            
+            dsMessage.AutoSize = true;
+            dsMessage.Location = new Point(WidthSet / 2 - dsMessage.Size.Width/2, HeightSet / 2);
+            dsPanel.Controls.Add(dsMessage);
+            await Task.Delay(5000);
+        }
         async Task Attack()
         {
             while(!enemyIsDead && CurrentEnemy != null)
@@ -383,6 +411,11 @@ namespace AxesAndShoesTWO
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
                 ChangeStats();
+                if(!CurrentPlayer.IsAlive())
+                {
+                    DeathMessage += "a " + CurrentEnemy.Name + " attack.";
+                    await DeathScreen();
+                }
                 await Task.Delay(3000);
             }
         }
@@ -409,6 +442,11 @@ namespace AxesAndShoesTWO
             }
             CurrentPlayer.Health = CurrentHealth;
             ChangeStats();
+            if(!CurrentPlayer.IsAlive())
+            {
+                DeathMessage += " taking off your clothes, which were holding you together.";
+                await DeathScreen();
+            }
             RefreshLabel();
         }
         async Task writeOutLines(string Message)                        
@@ -420,7 +458,7 @@ namespace AxesAndShoesTWO
             for (int i = 0; i != Message.Length; i++)
             {
                 characterInteractLabel.Text += Message[i];
-                await Task.Delay(40);
+                await Task.Delay(1);
             }
             isWriting = false;
         }
@@ -431,19 +469,19 @@ namespace AxesAndShoesTWO
             {
                 loadLabel.ForeColor = Color.FromArgb(loadColor, loadColor, loadColor);
                 loadColor += 10;
-                await Task.Delay(100);
+                await Task.Delay(1);
 
             }
-            await Task.Delay(2000);
+            await Task.Delay(1);
             characterInteractPanel.Visible = true;
             while (loadOpacity > 0)
             {
                 loadPanel.BackColor = Color.FromArgb(loadOpacity, Color.Black);
                 loadOpacity -= 5;
-                await Task.Delay(100);
+                await Task.Delay(1);
             }
             loadLabel.Visible = false;
-            await Task.Delay(3000);
+            await Task.Delay(1);
             loadPanel.Visible = false;
 
         }
@@ -477,7 +515,6 @@ namespace AxesAndShoesTWO
             await Task.Delay(2000);
             try
             {
-
                 CurrentRoomR.Enemies.RemoveAt(0);
             }
             catch (Exception ex)
@@ -725,18 +762,12 @@ namespace AxesAndShoesTWO
                     AmmoLabel.Visible = true;
                     statsPanel.Visible = true;
                     StorageSpace.Visible = true;
-
-
                     mapPanel.Visible = false;
                     DropsPanel.Visible = false;
-                
                     break;
-
                 case 8:
                     CurrentRoom.BackgroundImage = AllRooms[7].Img;
                     CurrentRoom.Visible = true;
-                    
-
 
                     break;
             }
@@ -802,7 +833,6 @@ namespace AxesAndShoesTWO
         {
             InventoryToStorage.Visible =true;  //opens inventory
             CloseMap();
-
                 DropsPanel.Visible = false;
                 PHotBar.Visible = true;
                 statsPanel.Visible = true;
