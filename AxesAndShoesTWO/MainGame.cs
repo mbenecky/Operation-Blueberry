@@ -68,7 +68,12 @@ namespace AxesAndShoesTWO
 
         public  Panel mapPanel = new Panel();
 
-        public  Panel characterInteractPanel = new Panel();
+        public Panel dsPanel = new Panel();
+        public Label dsMessage = new Label();
+
+
+
+        public Panel characterInteractPanel = new Panel();
         public  Label characterInteractLabel = new Label();
         public  Label characterInteractLabelName = new Label();
         public  Button characterInteractButton = new Button();
@@ -362,7 +367,22 @@ namespace AxesAndShoesTWO
             InventorySpace.Controls[5].Tag = "6";
             (InventorySpace.Controls[5] as PictureBox).Image = Properties.Resources.socks;
             //Test Batch
+
+            dsPanel.Size = new Size(WidthSet, HeightSet);
+            dsPanel.Location = new Point(0, 0);
+            dsPanel.BackColor = Color.Black;
+            dsPanel.Visible = false;
+
+
+            dsMessage.ForeColor = Color.White;
+            dsMessage.BackColor = Color.Black;
+            dsMessage.AutoSize = true;
+            dsMessage.Location = new Point(WidthSet / 2 - dsMessage.Size.Width / 2, HeightSet / 2);
+            dsPanel.Controls.Add(dsMessage);
+
+
             ChangeStats();
+            this.Controls.Add(dsPanel);
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
@@ -380,13 +400,8 @@ namespace AxesAndShoesTWO
         //START OF TASKS
         async Task DeathScreen()
         {
-            Panel dsPanel = new Panel();
-            dsPanel.Size = new Size(WidthSet,HeightSet);
-            dsPanel.Location = new Point(0, 0);
-            dsPanel.BackColor = Color.Black;
-            
-            this.Controls.Add(dsPanel);
-            dsPanel.BringToFront();
+            dsMessage.Text = DeathMessage;
+            dsPanel.Visible = true;
             int dsLoad = 0;
             while(dsLoad < 255)
             {
@@ -394,14 +409,6 @@ namespace AxesAndShoesTWO
                 dsLoad += 5;
                 await Task.Delay(1);
             }
-            Label dsMessage = new Label();
-            dsMessage.ForeColor = Color.White;
-            dsMessage.BackColor = Color.Black;
-            dsMessage.Text = DeathMessage;
-            
-            dsMessage.AutoSize = true;
-            dsMessage.Location = new Point(WidthSet / 2 - dsMessage.Size.Width/2, HeightSet / 2);
-            dsPanel.Controls.Add(dsMessage);
             await Task.Delay(5000);
         }
         async Task Attack()
@@ -410,11 +417,15 @@ namespace AxesAndShoesTWO
             {
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
+                    MessageBox.Show("Player got hit lol");
                 ChangeStats();
-                if(!CurrentPlayer.IsAlive())
+
+                if (!CurrentPlayer.IsAlive())
                 {
+                    MessageBox.Show("Player died lol");
                     DeathMessage += "a " + CurrentEnemy.Name + " attack.";
                     await DeathScreen();
+                    return;
                 }
                 await Task.Delay(3000);
             }
@@ -446,6 +457,7 @@ namespace AxesAndShoesTWO
             {
                 DeathMessage += " taking off your clothes, which were holding you together.";
                 await DeathScreen();
+                return;
             }
             RefreshLabel();
         }
@@ -752,18 +764,15 @@ namespace AxesAndShoesTWO
                 Log("Wrong method used, please use SpawnARoom for rooms with enemies :)");
                 return;
             }
-            switch(GivenRoom.ID)
+            CurrentRoomR = GivenRoom;
+            switch (GivenRoom.ID)
             {
                 case 7:
-                    CurrentRoomR = AllRooms[6];
 
-                    InventoryToStorage.Visible = true;
-                    PHotBar.Visible = true;
-                    AmmoLabel.Visible = true;
-                    statsPanel.Visible = true;
+                    CloseInventory();
+                    CloseMap();
+                    OpenInventory();
                     StorageSpace.Visible = true;
-                    mapPanel.Visible = false;
-                    DropsPanel.Visible = false;
                     break;
                 case 8:
                     CurrentRoom.BackgroundImage = AllRooms[7].Img;
@@ -775,6 +784,11 @@ namespace AxesAndShoesTWO
         }
         public void SpawnARoom(Rooms GivenRoom)
         {
+            if(GivenRoom.ID >= 7)
+            {
+                GoTo(GivenRoom); //timhle jen serazuju spawning a goto room, jsou to dve jine funkce logicky lmfao :)
+                return;
+            }
             PHotBar.Visible = true;
             AmmoLabel.Visible = true;
             statsPanel.Visible = true;
@@ -834,6 +848,7 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Visible =true;  //opens inventory
             CloseMap();
                 DropsPanel.Visible = false;
+            StorageSpace.Visible = false;
                 PHotBar.Visible = true;
                 statsPanel.Visible = true;
                 AmmoLabel.Visible = true;
@@ -841,6 +856,8 @@ namespace AxesAndShoesTWO
         public void CloseInventory()
         {
             InventoryToStorage.Visible = false;
+            StorageSpace.Visible = false;
+            DropsPanel.Visible = false;
                 AmmoLabel.Visible = false;
                 statsPanel.Visible = false;
             PHotBar.Visible = false;

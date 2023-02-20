@@ -31,9 +31,9 @@ namespace AxesAndShoesTWO
         {
             if (this.Health <= 0)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
         public bool IsTorH()
         {
