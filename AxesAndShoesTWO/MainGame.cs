@@ -402,12 +402,13 @@ namespace AxesAndShoesTWO
         {
             dsMessage.Text = DeathMessage;
             dsPanel.Visible = true;
+            dsPanel.BringToFront();
             int dsLoad = 0;
             while(dsLoad < 255)
             {
                 dsPanel.BackColor = Color.FromArgb(dsLoad, Color.Black);
                 dsLoad += 5;
-                await Task.Delay(1);
+                await Task.Delay(100);
             }
             await Task.Delay(5000);
         }
@@ -417,7 +418,6 @@ namespace AxesAndShoesTWO
             {
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
-                    MessageBox.Show("Player got hit lol");
                 ChangeStats();
 
                 if (!CurrentPlayer.IsAlive())
@@ -459,7 +459,6 @@ namespace AxesAndShoesTWO
                 await DeathScreen();
                 return;
             }
-            RefreshLabel();
         }
         async Task writeOutLines(string Message)                        
         {
@@ -556,7 +555,8 @@ namespace AxesAndShoesTWO
         //END OF TASKS
         //START OF METHODS
         public void CreateMessage(string Message)
-        {
+        { 
+        
             Panel panelMessage = new Panel();
             Button OKButton = new Button();
             Label labelMessage = new Label();
@@ -1055,6 +1055,8 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             PHotBar.BackgroundImage = Properties.Resources.backgroundItem;
             logicalInventory();
+            RefreshLabel();
+
         }
         private async void newGameButton_Click(object sender, EventArgs e)
         {
