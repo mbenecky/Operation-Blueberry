@@ -400,17 +400,22 @@ namespace AxesAndShoesTWO
         //START OF TASKS
         async Task DeathScreen()
         {
+            CurrentRoom.Visible = false;
+            InventoryToStorage.Visible = false;
+            mapPanel.Visible = false;
             dsMessage.Text = DeathMessage;
             dsPanel.Visible = true;
             dsPanel.BringToFront();
-            int dsLoad = 0;
-            while(dsLoad < 255)
+
+            for (int i = 0; i <= 270; i += 5)
             {
-                dsPanel.BackColor = Color.FromArgb(dsLoad, Color.Black);
-                dsLoad += 5;
+                dsPanel.BackColor = Color.FromArgb(i, Color.Black);
+                Log(i.ToString());
+                dsPanel.Refresh();
                 await Task.Delay(100);
             }
             await Task.Delay(5000);
+            Application.Exit();
         }
         async Task Attack()
         {
@@ -422,9 +427,8 @@ namespace AxesAndShoesTWO
 
                 if (!CurrentPlayer.IsAlive())
                 {
-                    MessageBox.Show("Player died lol");
                     DeathMessage += "a " + CurrentEnemy.Name + " attack.";
-                    await DeathScreen();
+                    await Task.Run(() => DeathScreen());
                     return;
                 }
                 await Task.Delay(3000);
@@ -456,7 +460,7 @@ namespace AxesAndShoesTWO
             if(!CurrentPlayer.IsAlive())
             {
                 DeathMessage += " taking off your clothes, which were holding you together.";
-                await DeathScreen();
+                await Task.Run(() => DeathScreen());
                 return;
             }
         }
