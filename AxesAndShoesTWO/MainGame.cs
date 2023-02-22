@@ -78,6 +78,8 @@ namespace AxesAndShoesTWO
         public  Label characterInteractLabelName = new Label();
         public  Button characterInteractButton = new Button();
 
+        public Items CurrentItem; //will cause bugs I can guarantee it 
+
         public string DeathMessage = "You have died from ";
         
         public int loadColor = 0;
@@ -250,7 +252,9 @@ namespace AxesAndShoesTWO
             hungerBar.Image = Properties.Resources.hungerbar;
             radiationBar.Image = Properties.Resources.radiatonbar;
 
-            statsPanel.BackColor = Color.Black;
+            statsPanel.BackgroundImage = Properties.Resources.barstats;
+            statsPanel.BackgroundImageLayout = ImageLayout.Stretch;
+            statsPanel.BackColor = Color.Transparent;
 
             healthBar.SizeMode = PictureBoxSizeMode.StretchImage;
             thirstBar.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -601,13 +605,10 @@ namespace AxesAndShoesTWO
             use.MouseLeave += new EventHandler(SmartTTLeave);
             ToolTip.Controls.Add(use);
 
+            this.Controls.Add(ToolTip);
+            ToolTip.BringToFront();
 
-            if (SelectedItem is Items)
-            {
-                this.Controls.Add(ToolTip);
-                ToolTip.BringToFront();
-            }
-
+            CurrentItem = SelectedItem;
         }
 
 
@@ -763,11 +764,6 @@ namespace AxesAndShoesTWO
         }
         public void GoTo(Rooms GivenRoom)
         {
-            if(GivenRoom.ID < 7)
-            {
-                Log("Wrong method used, please use SpawnARoom for rooms with enemies :)");
-                return;
-            }
             CurrentRoomR = GivenRoom;
             switch (GivenRoom.ID)
             {
@@ -835,7 +831,6 @@ namespace AxesAndShoesTWO
             thirstBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Thirst *1.2),thirstBar.Height);
             hungerBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Hunger *1.2), hungerBar.Height);
             radiationBar.Size = new Size(Convert.ToInt32(CurrentPlayer.Radiation* 1.2), radiationBar.Height);
-
         }
         public void OpenMap()
         {
@@ -876,7 +871,30 @@ namespace AxesAndShoesTWO
         //START OF EVENTS
         private void useEvent(object sender, EventArgs e)
         {
-            //do some things
+            if (CurrentItem is Consumables)
+            {
+                switch ((CurrentItem as Consumables).TypeOf)
+                {
+                    case TypeOfCons.Health:
+                        (sender as Button).Text = "Use";
+                        break;
+                    case TypeOfCons.Drink:
+                        (sender as Button).Text = "Drink";
+                        break;
+                    case TypeOfCons.Food:
+                        (sender as Button).Text = "Eat";
+                        break;
+                    case TypeOfCons.Rad:
+                        (sender as Button).Text = "Take";
+                        break;
+                }
+                CurrentPlayer.Health += (CurrentItem as Consumables).HealthAdd;
+                CurrentPlayer.HealthWA += (CurrentItem as Consumables).HealthAdd;
+                CurrentPlayer.Thirst += (CurrentItem as Consumables).DrinkAdd;
+                CurrentPlayer.Hunger += (CurrentItem as Consumables).FoodAdd;
+                CurrentPlayer.Radiation += (CurrentItem as Consumables).RadAdd;
+            }
+            
             ((sender as Button).Parent as Panel).Dispose();
         }
         private void MouseClickEvent(object sender, MouseEventArgs e)
