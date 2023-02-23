@@ -589,7 +589,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(panelMessage);
             panelMessage.BringToFront();
         }
-        public void SmartTooltip(Items SelectedItem)
+        public void SmartTooltip(Items SelectedItem, string PosOfPic)
         {
             Panel ToolTip = new Panel();
             ToolTip.Location = MousePosition;
@@ -603,8 +603,26 @@ namespace AxesAndShoesTWO
             use.BackColor = Color.DarkOliveGreen;
             use.Click += new EventHandler(useEvent);
             use.MouseLeave += new EventHandler(SmartTTLeave);
+            use.Tag = SelectedItem.ID.ToString();
             ToolTip.Controls.Add(use);
-
+            if ((SelectedItem is Consumables))
+            {
+                switch ((SelectedItem as Consumables).TypeOf)
+                {
+                    case TypeOfCons.Health:
+                        use.Text = "Use";
+                        break;
+                    case TypeOfCons.Drink:
+                        use.Text = "Drink";
+                        break;
+                    case TypeOfCons.Food:
+                        use.Text = "Eat";
+                        break;
+                    case TypeOfCons.Rad:
+                        use.Text = "Take";
+                        break;
+                }
+            }
             this.Controls.Add(ToolTip);
             ToolTip.BringToFront();
 
@@ -644,38 +662,60 @@ namespace AxesAndShoesTWO
         public List<Items> ItemsLoad()
         {
 
-            List<Items> list = new List<Items>();
+
+        // 
+        //
+        //                              Common, //prodej za 3
+        //                              Uncommon, //prodej za 6
+        //                              Rare, //prodej za 15
+        //                              Epic, //prodej za 40
+        //                               Legendary //prodej za 125
+        //
+        List<Items> list = new List<Items>();
             
-            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Common, Properties.Resources.gunTest, 12, 2, 3000));
-            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.gunTest, 6, 5, 3000));
+            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Uncommon, Properties.Resources._1911, 12, 2, 4000));
+            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.Judge, 6, 5, 5600));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head, 10));
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest, 10));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants, 10));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots, 10));
-            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Uncommon, Properties.Resources.gunTest, 30, 1, 100));
-            list.Add(new Items(8, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(9, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(10, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(11, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(12, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(13, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(14, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(15, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(16, "Can of Beans", "Standard source of protein for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(18, "Water Bottle", "Standard source of drinking water for combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(19, "Energy Bar", "Quick source of energy for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(20, "Flashlight", "Tool for lighting in dark areas", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(21, "Tent", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(22, "Sleeping Bag", "Sleeping space for combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(23, "Matches", "Tool for lighting fire", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(24, "Cooking Pot", "Tool for cooking food in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(25, "Rope", "Tool for climbing and pulling things", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(26, "Multi-Tool", "Tool for various purposes in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(27, "Portable Generator", "Tool for generating electric energy in combat situations", Rarity.Rare, Properties.Resources.itemTest));
-            list.Add(new Items(28, "Duct Tape", "Tool for repairing things in combat situations", Rarity.Common, Properties.Resources.itemTest));
-            list.Add(new Items(29, "Portable Water Filter", "Tool for filtering water in combat situations", Rarity.Uncommon, Properties.Resources.itemTest));
-            list.Add(new Items(30, "Firestarter", "Tool for easy lighting of fire in combat situations", Rarity.Common, Properties.Resources.itemTest)); return list;
+            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Rare, Properties.Resources.gunTest, 30, 1, 6500));
+            list.Add(new Items(8, "Hunting Knife", "Made for a true killer!", Rarity.Epic, Properties.Resources.HuntingKnife));
+            list.Add(new Clothes(9, "Knitted hat", "Canadian Classic!", Rarity.Uncommon, Properties.Resources.KnittedHat, Place.Head, 13));
+            list.Add(new Items(10, "Flint and Steel", "Great for creating a housefire!", Rarity.Common, Properties.Resources.FlintAndSteel));
+            list.Add(new Clothes(11, "Army Issued backpack", "A lot of space for items, sadly there's a hole...", Rarity.Rare, Properties.Resources.BigBackpack, Place.Chest, 20));
+            list.Add(new Clothes(12, "Medium-sized backpack", "Kevlar fitted backpack, could stop a bullet.", Rarity.Rare, Properties.Resources.MediumSizedBackpack, Place.Chest, 25));
+            list.Add(new Clothes(13, "Small backpack", "Kindergartener's favourite.", Rarity.Uncommon, Properties.Resources.SmallBackpack, Place.Chest, 10));
+            list.Add(new Clothes(14, "Gloves", "Best way of hiding fingerprints.", Rarity.Common, Properties.Resources.Gloves, Place.Chest, 5));
+            list.Add(new Items(15, "Axe", "Great way to chop down a tree.", Rarity.Uncommon, Properties.Resources.Axe));
+            list.Add(new Items(16, "Compass", "For some reason always points to the north...", Rarity.Epic, Properties.Resources.Compass));
+            list.Add(new Consumables(17, "First Aid Kit", "Tool for immediate assistance in injuries", Rarity.Rare, Properties.Resources.FirstAidKit, TypeOfCons.Health, 50, 0, 0, 10));
+            list.Add(new Consumables(18, "Water Bottle", "Best thing to mix with alcohol!", Rarity.Common, Properties.Resources.WaterBottle, TypeOfCons.Drink, 0, 55, 1,5));
+            list.Add(new Consumables(19, "Energy Bar", "Great way to collapse from caffeine induced heart attack!", Rarity.Uncommon, Properties.Resources.EnergyBar, TypeOfCons.Food, 5, 0, 30, 0));
+            list.Add(new Items(20, "Flashlight", "Best way to blind yourself permanently.", Rarity.Epic, Properties.Resources.Flashlight));
+            list.Add(new Items(21, "Tent", "Still better than the schools's dormatory!", Rarity.Legendary, Properties.Resources.Tent));
+            list.Add(new Items(22, "Sleeping Bag", "Better than the school's dormatory!", Rarity.Epic, Properties.Resources.SleepingBag));
+            list.Add(new Items(23, "Matches", "Second best thing at starting a housefire!", Rarity.Uncommon, Properties.Resources.Matches));
+            list.Add(new Items(24, "Cooking Pot", "Made of asbestos.", Rarity.Uncommon, Properties.Resources.CookingPot));
+            list.Add(new Items(25, "Rope", "Tool for climbing, pulling things or...", Rarity.Common, Properties.Resources.Rope));
+            list.Add(new Items(26, "Multi-Tool", "It literally does everything...", Rarity.Uncommon, Properties.Resources.MultiTool));
+            list.Add(new Items(27, "Portable Generator", "Industrial grade generator.", Rarity.Legendary, Properties.Resources.PortableGenerator));
+            list.Add(new Items(28, "Duct Tape", "You could probably repair a car with this!", Rarity.Common, Properties.Resources.DuctTape));
+            list.Add(new Consumables(29, "Portable Water Filter", "You probably shouldn't eat these...", Rarity.Uncommon, Properties.Resources.PortableWaterFilter, TypeOfCons.Rad, -5, 0, 0, 10));
+            list.Add(new Items(30, "Firestarter", "Classic PEPO set.", Rarity.Rare, Properties.Resources.FireStarter));
+            list.Add(new Clothes(31, "Headlamp", "Can't see?", Rarity.Epic, Properties.Resources.Headlamp, Place.Head, 10));
+            list.Add(new Clothes(32, "Military Boots", "Skinhead's favourite.", Rarity.Epic, Properties.Resources.MilitaryBoots, Place.Boots, 20));
+            list.Add(new Clothes(33, "Briefs", "There seems to be some kind of stain...", Rarity.Uncommon, Properties.Resources.Briefs, Place.Pants, 5));
+            list.Add(new Guns(34, "M4A1", "US issued fully automatic rifle.", Rarity.Epic, Properties.Resources.M4, 25, 1, 5000));
+            list.Add(new Consumables(35, "Chocolate Bar", "Diabetic's least favourite.", Rarity.Common, Properties.Resources.ChocolateBar, TypeOfCons.Food, 1, 0, 30, 0));
+            list.Add(new Clothes(36, "Watches", "Sadly the battery ran out, so you still can't tell time...", Rarity.Rare, Properties.Resources.Watches, Place.Chest, 0));
+            list.Add(new Items(37, "Steel Mug", "I guess you could bash someone with this...", Rarity.Common, Properties.Resources.SteelMug));
+            list.Add(new Clothes(38, "Leather Jacket", "Skinhead's second favourite!", Rarity.Rare, Properties.Resources.LeatherJacket, Place.Chest, 30));
+            list.Add(new Items(39, "Baseball Bat", "Perfect for baseball!", Rarity.Rare, Properties.Resources.BaseballBat));
+            list.Add(new Clothes(40, "Gas Mask", "Mmpmhmpphmmm!", Rarity.Rare, Properties.Resources.GasMask, Place.Head, 5));
+
+            return list;
+
         }
         public List<Enemy> EnemiesLoad()
         {
@@ -871,28 +911,15 @@ namespace AxesAndShoesTWO
         //START OF EVENTS
         private void useEvent(object sender, EventArgs e)
         {
-            if (CurrentItem is Consumables)
+            if (AllItems[Convert.ToInt32((sender as Button).Tag)-1] is Consumables)
             {
-                switch ((CurrentItem as Consumables).TypeOf)
-                {
-                    case TypeOfCons.Health:
-                        (sender as Button).Text = "Use";
-                        break;
-                    case TypeOfCons.Drink:
-                        (sender as Button).Text = "Drink";
-                        break;
-                    case TypeOfCons.Food:
-                        (sender as Button).Text = "Eat";
-                        break;
-                    case TypeOfCons.Rad:
-                        (sender as Button).Text = "Take";
-                        break;
-                }
-                CurrentPlayer.Health += (CurrentItem as Consumables).HealthAdd;
-                CurrentPlayer.HealthWA += (CurrentItem as Consumables).HealthAdd;
-                CurrentPlayer.Thirst += (CurrentItem as Consumables).DrinkAdd;
-                CurrentPlayer.Hunger += (CurrentItem as Consumables).FoodAdd;
-                CurrentPlayer.Radiation += (CurrentItem as Consumables).RadAdd;
+                
+                CurrentPlayer.Health += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).HealthAdd;
+                CurrentPlayer.HealthWA += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).HealthAdd;
+                CurrentPlayer.Thirst += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).DrinkAdd;
+                CurrentPlayer.Hunger += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).FoodAdd;
+                CurrentPlayer.Radiation += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).RadAdd;
+
             }
             
             ((sender as Button).Parent as Panel).Dispose();
@@ -1267,5 +1294,12 @@ namespace AxesAndShoesTWO
         ObtainAGasMask,
         RunVault
         //to be done
+    };
+    public enum TypeOfCons
+    {
+        Health,
+        Drink,
+        Food,
+        Rad
     };
 }

@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters.cs" />
+    <Compile Include="Consumables.cs" />
     <Compile Include="Rooms.cs" />
     <Compile Include="Clothes.cs" />
     <Compile Include="Player.cs" />
@@ -214,16 +215,7 @@
     <None Include="Resources\chestPlace.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bonnieHat.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\socks.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\sweatPants.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tshirt.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\backgroundItem.jpg" />
@@ -302,6 +294,126 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\barstats.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WaterBottle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Watches.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1911.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Axe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BaseballBat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BigBackpack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BonnieHat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Briefs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CanOfBeans.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Compass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CookingPot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DuctTape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EnergyBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FilterPills.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FireStarter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FirstAidKit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flashlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlintAndSteel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GasMask.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gloves.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Headlamp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HuntingKnife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChocolateBar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Judge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KnittedHat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeatherJacket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\M4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Matches.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MediumSizedBackpack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MilitaryBoots.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MultiTool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PortableGenerator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PortableWaterFilter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SleepingBag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SmallBackpack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SteelMug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sweatpants.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tshirt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

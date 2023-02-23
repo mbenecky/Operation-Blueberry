@@ -121,6 +121,9 @@
   <data name="armory" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\armory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Axe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="backgroundItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\backgroundItem.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,6 +132,12 @@
   </data>
   <data name="barstats" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\barstats.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BaseballBat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BaseballBat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BigBackpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BigBackpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="blackPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blackPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,11 +148,26 @@
   <data name="borysHQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\borysHQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Briefs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Briefs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="buttonTemp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buttonTemp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CanOfBeans" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CanOfBeans.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="chestPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chestPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChocolateBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChocolateBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Compass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Compass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CookingPot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CookingPot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="crateTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crateTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,6 +184,9 @@
   <data name="deathImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deathImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DuctTape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DuctTape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="electricityRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\electricityRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,11 +199,35 @@
   <data name="enemyTestnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemyTestnew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EnergyBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EnergyBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="engineRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\engineRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="feetPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\feetPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FilterPills" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FilterPills.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FireStarter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FireStarter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FirstAidKit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FirstAidKit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Flashlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Flashlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FlintAndSteel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FlintAndSteel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GasMask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GasMask.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Gloves" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gloves.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gunman" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gunman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -186,6 +237,9 @@
   </data>
   <data name="gunTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gunTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Headlamp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Headlamp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="headPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\headPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,14 +256,29 @@
   <data name="hungerbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hungerbar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HuntingKnife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HuntingKnife.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="inventoryBI" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inventoryBI.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="itemTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\itemTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Judge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Judge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KnittedHat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KnittedHat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeatherJacket" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LeatherJacket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="legsPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\legsPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="M4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\M4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mainRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mainRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,14 +289,26 @@
   <data name="mapButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Matches" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Matches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="medicslab" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\medicslab.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MediumSizedBackpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MediumSizedBackpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MilitaryBoots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MilitaryBoots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mouse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MultiTool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MultiTool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opBlueberryTempLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\opBlueberryTempLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -240,6 +321,12 @@
   </data>
   <data name="play_buttonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play_buttonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PortableGenerator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PortableGenerator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PortableWaterFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PortableWaterFilter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quit_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quit_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,11 +346,26 @@
   <data name="roomTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\roomTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Rope" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SleepingBag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SleepingBag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SmallBackpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SmallBackpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="socks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\socks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SteelMug" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SteelMug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sweatPants" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sweatPants.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="thirstbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\thirstbar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,7 +379,16 @@
   <data name="voiceLineTestBedImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\voiceLineTestBedImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Watches" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Watches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WaterBottle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WaterBottle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="whitePanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\whitePanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1911" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1911.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
