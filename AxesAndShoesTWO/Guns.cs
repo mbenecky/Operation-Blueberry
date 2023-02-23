@@ -13,9 +13,10 @@ namespace AxesAndShoesTWO
         public int Damage;
         public int CurrentAmountOfRounds;
         public int WaitTime; //in milisecodns
+        public int WBSTime;
         public bool isAbleToShoot;
         public Guns() { }
-        public Guns(int ID, string Name, string Description, Rarity Rarity, Image img, int NumberOfRounds, int Damage, int WaitTime) : base(0, "NULL", "NULL", Rarity.Common, Properties.Resources.whitePanel)
+        public Guns(int ID, string Name, string Description, Rarity Rarity, Image img, int NumberOfRounds, int Damage, int WaitTime, int WBSTime) : base(0, "NULL", "NULL", Rarity.Common, Properties.Resources.whitePanel)
         {
             base.ID = ID;
             base.Name = Name;
@@ -25,6 +26,7 @@ namespace AxesAndShoesTWO
             this.NumberOfRounds = NumberOfRounds;
             this.Damage = Damage;
             this.WaitTime = WaitTime;
+            this.WBSTime = WBSTime;
             isAbleToShoot = true;
             CurrentAmountOfRounds = NumberOfRounds;
         }

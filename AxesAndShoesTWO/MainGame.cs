@@ -78,7 +78,6 @@ namespace AxesAndShoesTWO
         public  Label characterInteractLabelName = new Label();
         public  Button characterInteractButton = new Button();
 
-        public Items CurrentItem; //will cause bugs I can guarantee it 
 
         public string DeathMessage = "You have died from ";
         
@@ -301,6 +300,7 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Controls.Add(StorageSpace);
             InventoryToStorage.Controls.Add(DropsPanel);
 
+            int helpInt = 0;
             for (int i = 0; i != 5; i++)
             {
                 for (int j = 0; j != 2; j++)
@@ -310,9 +310,10 @@ namespace AxesAndShoesTWO
                     pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 4 + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
-                    pb.Click += new EventHandler(inventoryCheck);
+                    pb.Name = helpInt.ToString();
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     InventorySpace.Controls.Add(pb);
+                    helpInt++;
                 }
             }
 
@@ -323,7 +324,6 @@ namespace AxesAndShoesTWO
                 pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                 pb.Location = new Point(0, (HeightSet / 10) * i);
                 pb.Tag = "0";
-                pb.Click += new EventHandler(inventoryCheck);
                 pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                 pb.Name = "Head";
                 PlayerClothes.Controls.Add(pb);
@@ -349,7 +349,6 @@ namespace AxesAndShoesTWO
                     pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
-                    pb.Click += new EventHandler(inventoryCheck);
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     StorageSpace.Controls.Add(pb);
                     DropsPanel.Controls.Add(pb);
@@ -507,6 +506,10 @@ namespace AxesAndShoesTWO
 
         async Task Reloading()
         {
+            if(!CurrentPlayer.HotBar.isAbleToShoot)
+            {
+                return;
+            }
             SoundPlayer Reload = new SoundPlayer(Properties.Resources.reload);
             Reload.Play();
             CurrentPlayer.HotBar.isAbleToShoot = false;
@@ -519,10 +522,14 @@ namespace AxesAndShoesTWO
         }
         async Task WaitBetweenShots()
         {
+            if (!CurrentPlayer.HotBar.isAbleToShoot)
+            {
+                return;
+            }
             SoundPlayer Gunshot = new SoundPlayer(Properties.Resources.gunshot);
             Gunshot.Play();
             CurrentPlayer.HotBar.isAbleToShoot = false;
-            await Task.Delay(CurrentPlayer.HotBar.WaitTime / 10);
+            await Task.Delay(CurrentPlayer.HotBar.WBSTime);
             CurrentPlayer.HotBar.isAbleToShoot = true;
             RefreshLabel();
 
@@ -603,7 +610,7 @@ namespace AxesAndShoesTWO
             use.BackColor = Color.DarkOliveGreen;
             use.Click += new EventHandler(useEvent);
             use.MouseLeave += new EventHandler(SmartTTLeave);
-            use.Tag = SelectedItem.ID.ToString();
+            use.Tag = SelectedItem.ID.ToString() + " " + PosOfPic;
             ToolTip.Controls.Add(use);
             if ((SelectedItem is Consumables))
             {
@@ -626,7 +633,6 @@ namespace AxesAndShoesTWO
             this.Controls.Add(ToolTip);
             ToolTip.BringToFront();
 
-            CurrentItem = SelectedItem;
         }
 
 
@@ -673,13 +679,13 @@ namespace AxesAndShoesTWO
         //
         List<Items> list = new List<Items>();
             
-            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Uncommon, Properties.Resources._1911, 12, 2, 4000));
-            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.Judge, 6, 5, 5600));
+            list.Add(new Guns(1, "1911", "Standard handgun for all situations", Rarity.Uncommon, Properties.Resources._1911, 12, 2, 4000, 700));
+            list.Add(new Guns(2, "Judge", "Strong revolver with high damage and blowback", Rarity.Legendary, Properties.Resources.Judge, 6, 5, 5600, 1000));
             list.Add(new Clothes(3, "Bonnie hat", "Perfect headwarmer", Rarity.Common, Properties.Resources.bonnieHat, Place.Head, 10));
             list.Add(new Clothes(4, "T-Shirt", "Good old classic shirt", Rarity.Common, Properties.Resources.tshirt, Place.Chest, 10));
             list.Add(new Clothes(5, "Sweatpants", "Great at looking average", Rarity.Common, Properties.Resources.sweatPants, Place.Pants, 10));
             list.Add(new Clothes(6, "Socks", "Great for everyone!", Rarity.Common, Properties.Resources.socks, Place.Boots, 10));
-            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Rare, Properties.Resources.gunTest, 30, 1, 6500));
+            list.Add(new Guns(7, "AK-47", "Fast firing Soviet-made assault rifle", Rarity.Rare, Properties.Resources.gunTest, 30, 1, 6500, 100));
             list.Add(new Items(8, "Hunting Knife", "Made for a true killer!", Rarity.Epic, Properties.Resources.HuntingKnife));
             list.Add(new Clothes(9, "Knitted hat", "Canadian Classic!", Rarity.Uncommon, Properties.Resources.KnittedHat, Place.Head, 13));
             list.Add(new Items(10, "Flint and Steel", "Great for creating a housefire!", Rarity.Common, Properties.Resources.FlintAndSteel));
@@ -706,7 +712,7 @@ namespace AxesAndShoesTWO
             list.Add(new Clothes(31, "Headlamp", "Can't see?", Rarity.Epic, Properties.Resources.Headlamp, Place.Head, 10));
             list.Add(new Clothes(32, "Military Boots", "Skinhead's favourite.", Rarity.Epic, Properties.Resources.MilitaryBoots, Place.Boots, 20));
             list.Add(new Clothes(33, "Briefs", "There seems to be some kind of stain...", Rarity.Uncommon, Properties.Resources.Briefs, Place.Pants, 5));
-            list.Add(new Guns(34, "M4A1", "US issued fully automatic rifle.", Rarity.Epic, Properties.Resources.M4, 25, 1, 5000));
+            list.Add(new Guns(34, "M4A1", "US issued fully automatic rifle.", Rarity.Epic, Properties.Resources.M4, 25, 1, 5000, 100));
             list.Add(new Consumables(35, "Chocolate Bar", "Diabetic's least favourite.", Rarity.Common, Properties.Resources.ChocolateBar, TypeOfCons.Food, 1, 0, 30, 0));
             list.Add(new Clothes(36, "Watches", "Sadly the battery ran out, so you still can't tell time...", Rarity.Rare, Properties.Resources.Watches, Place.Chest, 0));
             list.Add(new Items(37, "Steel Mug", "I guess you could bash someone with this...", Rarity.Common, Properties.Resources.SteelMug));
@@ -911,29 +917,51 @@ namespace AxesAndShoesTWO
         //START OF EVENTS
         private void useEvent(object sender, EventArgs e)
         {
-            if (AllItems[Convert.ToInt32((sender as Button).Tag)-1] is Consumables)
+            try
             {
-                
-                CurrentPlayer.Health += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).HealthAdd;
-                CurrentPlayer.HealthWA += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).HealthAdd;
-                CurrentPlayer.Thirst += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).DrinkAdd;
-                CurrentPlayer.Hunger += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).FoodAdd;
-                CurrentPlayer.Radiation += (AllItems[Convert.ToInt32((sender as Button).Tag) - 1] as Consumables).RadAdd;
+                string[] args = (sender as Button).Tag.ToString().Split(' ');
+                if (AllItems[Convert.ToInt32(args[0]) - 1] is Consumables)
+                {
 
+                    CurrentPlayer.Health += (AllItems[Convert.ToInt32(args[0]) - 1] as Consumables).HealthAdd;
+                    CurrentPlayer.HealthWA += (AllItems[Convert.ToInt32(args[0]) - 1] as Consumables).HealthAdd;
+                    CurrentPlayer.Thirst += (AllItems[Convert.ToInt32(args[0]) - 1] as Consumables).DrinkAdd;
+                    CurrentPlayer.Hunger += (AllItems[Convert.ToInt32(args[0]) - 1] as Consumables).FoodAdd;
+                    CurrentPlayer.Radiation += (AllItems[Convert.ToInt32(args[0]) - 1] as Consumables).RadAdd;
+
+                    (InventorySpace.Controls[Convert.ToInt32(args[1])] as PictureBox).Tag = "0";
+                    (InventorySpace.Controls[Convert.ToInt32(args[1])] as PictureBox).Image = null;
+                }
             }
-            
+            catch (Exception ex)
+            {
+                Log("useEvent error, error code: " + ex.Message);
+            }
+            ChangeStats();
             ((sender as Button).Parent as Panel).Dispose();
         }
         private void MouseClickEvent(object sender, MouseEventArgs e)
         {
-            //do some things
-            if ((sender as PictureBox).Tag.ToString() == "0")
+            if (e.Button == MouseButtons.Left)
             {
-                return;
-            }
+                inventoryCheck(sender, e);
+            } else
             if (e.Button == MouseButtons.Right)
             {
-                SmartTooltip(AllItems[Convert.ToInt32((sender as PictureBox).Tag) - 1]);
+                if ((sender as PictureBox).Tag.ToString() == "0")
+                {
+                    return;
+                }
+                try
+                {
+                    if (((sender as PictureBox).Parent as Panel) == InventorySpace)
+                    {
+                        SmartTooltip(AllItems[Convert.ToInt32((sender as PictureBox).Tag) - 1], (sender as PictureBox).Name);
+                    }
+                } catch
+                {
+                    Log("User right clicked on something else...");
+                }
             }
 
         }
