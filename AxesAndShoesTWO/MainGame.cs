@@ -312,6 +312,7 @@ namespace AxesAndShoesTWO
                     pb.Tag = "0";
                     pb.Name = helpInt.ToString();
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
                     InventorySpace.Controls.Add(pb);
                     helpInt++;
                 }
@@ -324,6 +325,7 @@ namespace AxesAndShoesTWO
                 pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                 pb.Location = new Point(0, (HeightSet / 10) * i);
                 pb.Tag = "0";
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                 pb.Name = "Head";
                 PlayerClothes.Controls.Add(pb);
@@ -349,6 +351,7 @@ namespace AxesAndShoesTWO
                     pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     StorageSpace.Controls.Add(pb);
                     DropsPanel.Controls.Add(pb);
@@ -397,11 +400,35 @@ namespace AxesAndShoesTWO
             this.Controls.Add(mapPanel);
             this.Controls.Add(InventoryToStorage);
 
+            Task.Run(() => mainTimer());
+
         }
 
 
         //START OF TASKS
         
+        async Task mainTimer()
+        {
+            while(true)
+            {
+                if(CurrentPlayer.IsTorH())
+                {
+                    CurrentPlayer.HealthWA -= 1;
+                    CurrentPlayer.Health -= 1;
+                } else
+                {
+                    CurrentPlayer.Hunger -= 1;
+                    CurrentPlayer.Thirst -= 1;
+                }
+                if(CurrentPlayer.Radiation <= 0)
+                {
+                    CurrentPlayer.HealthWA -= 2;
+                    CurrentPlayer.Health -= 2;
+                }
+                ChangeStats();
+                Task.Delay(10000);
+            }
+        }
         async Task Attack()
         {
             while(!enemyIsDead && CurrentEnemy != null)
@@ -571,13 +598,21 @@ namespace AxesAndShoesTWO
                 {
                     (c as Label).Visible = false;
                     Log("found label!");
-
+                } else
+                {
+                    Log("found something else...");
+                    Log(c.GetType().ToString());
                 }
             }
-            dsPanel.Visible = true;
-            dsPanel.BackColor = Color.Black;
-            dsMessage.Text = DeathMessage;
-            MessageBox.Show("Death");
+
+            this.Hide();
+            MessageBox.Show(DeathMessage + "\nThanks for playing!");
+
+            Log("Messagebox called!");
+            Log("Death CLEARLY doesnt work, way too deep in it to make it work, if some smart soul could help me out abit I'd appreciate tremendously!");
+            Log("beneckym.05@spst.eu - developer");
+            Application.Exit();
+
         }
         public void CreateMessage(string Message)
         { 
@@ -613,17 +648,18 @@ namespace AxesAndShoesTWO
             ToolTip.Size = new Size(WidthSet / 8, HeightSet / 10);
             ToolTip.BackColor = Color.DarkOliveGreen;
             ToolTip.MouseLeave += new EventHandler(SmartTTLeave);
-            Button use = new Button();
-            use.Location = new Point(0, 0);
-            use.Size = new Size(ToolTip.Size.Width, HeightSet / 10);
-            use.Text = "Use";
-            use.BackColor = Color.DarkOliveGreen;
-            use.Click += new EventHandler(useEvent);
-            use.MouseLeave += new EventHandler(SmartTTLeave);
-            use.Tag = SelectedItem.ID.ToString() + " " + PosOfPic;
-            ToolTip.Controls.Add(use);
             if ((SelectedItem is Consumables))
             {
+                Button use = new Button();
+                use.Location = new Point(0, 0);
+                use.Size = new Size(ToolTip.Size.Width, HeightSet / 10);
+                use.Text = "Use";
+                use.BackColor = Color.DarkOliveGreen;
+                use.Click += new EventHandler(useEvent);
+                use.MouseLeave += new EventHandler(SmartTTLeave);
+                use.Tag = SelectedItem.ID.ToString() + " " + PosOfPic;
+                ToolTip.Controls.Add(use);
+
                 switch ((SelectedItem as Consumables).TypeOf)
                 {
                     case TypeOfCons.Health:
@@ -639,6 +675,12 @@ namespace AxesAndShoesTWO
                         use.Text = "Take";
                         break;
                 }
+            } else
+            {
+                Label smartLabel = new Label();
+                smartLabel.Text = SelectedItem.Name + "\n" + SelectedItem.Description;
+                smartLabel.AutoSize = true;
+                ToolTip.Controls.Add(smartLabel);
             }
             this.Controls.Add(ToolTip);
             ToolTip.BringToFront();
@@ -729,7 +771,7 @@ namespace AxesAndShoesTWO
             list.Add(new Clothes(38, "Leather Jacket", "Skinhead's second favourite!", Rarity.Rare, Properties.Resources.LeatherJacket, Place.Chest, 30));
             list.Add(new Items(39, "Baseball Bat", "Perfect for baseball!", Rarity.Rare, Properties.Resources.BaseballBat));
             list.Add(new Clothes(40, "Gas Mask", "Mmpmhmpphmmm!", Rarity.Rare, Properties.Resources.GasMask, Place.Head, 5));
-
+            list.Add(new Consumables(41, "Can of Beans", "Tasty!", Rarity.Common, Properties.Resources.CanOfBeans, TypeOfCons.Food, 10, 10, 40, 0));
             return list;
 
         }
