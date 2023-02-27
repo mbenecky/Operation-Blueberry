@@ -362,7 +362,7 @@ namespace AxesAndShoesTWO
             //Test Batch
             InventorySpace.Controls[0].Tag = "1";
             (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.gunTest;
-            InventorySpace.Controls[1].Tag = "16";
+            InventorySpace.Controls[1].Tag = "41";
             (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest;
             InventorySpace.Controls[2].Tag = "3";
             (InventorySpace.Controls[2] as PictureBox).Image = Properties.Resources.bonnieHat;
