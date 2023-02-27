@@ -401,25 +401,7 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
-        async Task DeathScreen()
-        {
-            CurrentRoom.Visible = false;
-            InventoryToStorage.Visible = false;
-            mapPanel.Visible = false;
-            dsMessage.Text = DeathMessage;
-            dsPanel.Visible = true;
-            dsPanel.BringToFront();
-
-            for (int i = 0; i <= 270; i += 5)
-            {
-                dsPanel.BackColor = Color.FromArgb(i, Color.Black);
-                Log(i.ToString());
-                dsPanel.Refresh();
-                await Task.Delay(100);
-            }
-            await Task.Delay(5000);
-            Application.Exit();
-        }
+        
         async Task Attack()
         {
             while(!enemyIsDead && CurrentEnemy != null)
@@ -431,8 +413,8 @@ namespace AxesAndShoesTWO
                 if (!CurrentPlayer.IsAlive())
                 {
                     DeathMessage += "a " + CurrentEnemy.Name + " attack.";
-                    await Task.Run(() => DeathScreen());
-                    return;
+                    DeathScreen();
+                    enemyIsDead = true;
                 }
                 await Task.Delay(3000);
             }
@@ -463,8 +445,8 @@ namespace AxesAndShoesTWO
             if(!CurrentPlayer.IsAlive())
             {
                 DeathMessage += " taking off your clothes, which were holding you together.";
-                await Task.Run(() => DeathScreen());
-                return;
+                DeathScreen();
+ 
             }
         }
         async Task writeOutLines(string Message)                        
@@ -569,6 +551,34 @@ namespace AxesAndShoesTWO
         }
         //END OF TASKS
         //START OF METHODS
+        public void DeathScreen()
+        {
+            Log("At the start of  foreach");
+            foreach (Control c in this.Controls)
+            {
+                if(c is Panel)
+                {
+                    (c as Panel).Visible = false;
+                    Log("found panel!");
+                }else
+                if (c is PictureBox)
+                {
+                    (c as PictureBox).Visible = false;
+                    Log("found picBox!");
+
+                }else
+                if (c is Label)
+                {
+                    (c as Label).Visible = false;
+                    Log("found label!");
+
+                }
+            }
+            dsPanel.Visible = true;
+            dsPanel.BackColor = Color.Black;
+            dsMessage.Text = DeathMessage;
+            MessageBox.Show("Death");
+        }
         public void CreateMessage(string Message)
         { 
         
