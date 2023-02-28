@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="armory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\armory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArmoryRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArmoryRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="armoryroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\armoryroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="armoryroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\armoryroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Axe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,8 +151,14 @@
   <data name="bonnieHat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bonnieHat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="borysHQ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\borysHQ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BorysHQDoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BorysHQDoor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boryshqroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boryshqroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boryshqroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boryshqroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Briefs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Briefs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,8 +169,17 @@
   <data name="CanOfBeans" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CanOfBeans.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Catacombs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Catacombs.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="catacombsicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\catacombsicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="catacombsicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\catacombsicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="chestPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chestPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\chestPlace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ChocolateBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChocolateBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -168,9 +189,6 @@
   </data>
   <data name="CookingPot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CookingPot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="crateTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\crateTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="credits_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\credits_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,17 +202,38 @@
   <data name="deathImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deathImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dialog_bear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_bear.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_bory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_bory.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_bossbory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_bossbory.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_chiefpear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_chiefpear.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_horkymi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_horkymi.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_korky" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_korky.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dialog_mako" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_mako.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DuctTape" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DuctTape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="electricityRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\electricityRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ElectricityRoom1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ElectricityRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemyDeathTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enemyDeathTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="electricityroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\electricityroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemyTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enemyTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="electricityroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\electricityroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="enemyTestnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemyTestnew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,11 +241,17 @@
   <data name="EnergyBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EnergyBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="engineRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\engineRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EngineRoom1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EngineRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="engineroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\engineroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="engineroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\engineroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="feetPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\feetPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\feetPlace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FilterPills" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FilterPills.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -242,7 +287,7 @@
     <value>..\Resources\Headlamp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="headPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\headPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\headPlace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="healthbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\healthbar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -275,13 +320,19 @@
     <value>..\Resources\LeatherJacket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="legsPlace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\legsPlace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\legsPlace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="M4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\M4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mainRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mainRoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MainRoom1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mainroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mainroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mainroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mainroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mapBackGround" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapBackGround.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,11 +340,20 @@
   <data name="mapButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="map_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Matches" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Matches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="medicslab" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\medicslab.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MedicsLab1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MedicsLab.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="medicslabicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\medicslabicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="medicslabicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\medicslabicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MediumSizedBackpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MediumSizedBackpack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -340,11 +400,14 @@
   <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reload.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rogersShrine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rogersShrine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="rogershrinedooricon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rogershrinedooricon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="roomTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\roomTest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="rogershrinedooricon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rogershrinedooricon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RogersShrineDoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RogersShrineDoor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Rope" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -361,6 +424,15 @@
   <data name="SteelMug" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SteelMug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="StorageRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StorageRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="storageroomicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\storageroomicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="storageroomicon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\storageroomicon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sweatPants" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sweatPants.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -376,8 +448,14 @@
   <data name="vaultDoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vaultDoor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="voiceLineTestBedImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\voiceLineTestBedImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="VaultDoor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VaultDoor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vaultdooricon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vaultdooricon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vaultdooricon_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vaultdooricon_hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Watches" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Watches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

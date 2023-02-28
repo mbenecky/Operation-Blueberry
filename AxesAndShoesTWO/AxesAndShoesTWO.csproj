@@ -182,9 +182,6 @@
     <None Include="Resources\enemyTestnew.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\menu.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\quit_button.png" />
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chestPlace.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\backgroundItem.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\backgroundItemFree.jpg" />
@@ -414,6 +408,138 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Socks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArmoryRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BorysHQDoor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Catacombs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ElectricityRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EngineRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MedicsLab.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RogersShrineDoor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StorageRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VaultDoor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_bear.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_bory.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_bossbory.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_horkymi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_chiefpear.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_korky.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_mako.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backgroundItem.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\legsPlace.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feetPlace.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headPlace.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chestPlace.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\armoryroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\armoryroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boryshqroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boryshqroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\catacombsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\catacombsicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\electricityroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\electricityroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\engineroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\engineroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medicslabicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medicslabicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rogershrinedooricon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rogershrinedooricon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\storageroomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\storageroomicon_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vaultdooricon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vaultdooricon_hover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,42 +31,46 @@ namespace AxesAndShoesTWO
         public PictureBox hungerBar = new PictureBox();
         public PictureBox radiationBar = new PictureBox();
 
-        public static Clothes[] Clothes = new Clothes[4];
-        public static List<Items> pItems = new List<Items>();
-        public static Guns pGuns = new Guns();
-        public static List<KeysRoom> pKeys = new List<KeysRoom>();
+
+        public static Guns pGuns;
+        public static List<KeysRoom> pKeys;
+
 
         public Player CurrentPlayer = new Player(85, 30, 30, 20, pGuns, pKeys);
 
-        public  List<Characters> Chars = new List<Characters>();
-        public  List<string> CharacterInteractions = new List<string>();
-        public  List<Items> AllItems = new List<Items>();
-        public  List<Enemy> AllEnemies = new List<Enemy>();
-        public  List<Rooms> AllRooms = new List<Rooms>();
+        public List<Characters> Chars = new List<Characters>();
+        public List<string> CharacterInteractions = new List<string>();
+        public List<Items> AllItems = new List<Items>();
+        public List<Enemy> AllEnemies = new List<Enemy>();
+        public List<Rooms> AllRooms = new List<Rooms>();
+        public List<Quests> AllQuests = new List<Quests>();
+        public List<KeysRoom> AllKeys = new List<KeysRoom>();
+        public List<Image> mapImages = new List<Image>();
 
-        public  Panel InventoryToStorage = new Panel();
-        public  Panel InventorySpace = new Panel();
-        public  Panel StorageSpace = new Panel();
-        public  PictureBox lastPb = new PictureBox();
-        public  Panel DropsPanel = new Panel();
-        public  Panel PlayerClothes = new Panel();
-        public  PictureBox PHotBar = new PictureBox();
-        public  Label AmmoLabel = new Label();
 
-        public  Panel CurrentRoom = new Panel();
-        public  Rooms CurrentRoomR = null;
-        public  Enemy CurrentEnemy = new Enemy();
+        public Panel InventoryToStorage = new Panel();
+        public Panel InventorySpace = new Panel();
+        public Panel StorageSpace = new Panel();
+        public PictureBox lastPb = new PictureBox();
+        public Panel DropsPanel = new Panel();
+        public Panel PlayerClothes = new Panel();
+        public PictureBox PHotBar = new PictureBox();
+        public Label AmmoLabel = new Label();
 
-        public  Label loadLabel = new Label();
-        public  Panel loadPanel = new Panel();
-        public  Panel mainGamePanel = new Panel();
+        public Panel CurrentRoom = new Panel();
+        public Rooms CurrentRoomR = null;
+        public Enemy CurrentEnemy = new Enemy();
 
-        public  Panel MainRoom = new Panel();
+        public Label loadLabel = new Label();
+        public Panel loadPanel = new Panel();
+        public Panel mainGamePanel = new Panel();
+
+        public Panel MainRoom = new Panel();
         //dodelat pictureboxy jako NPCs
 
 
 
-        public  Panel mapPanel = new Panel();
+        public Panel mapPanel = new Panel();
 
         public Panel dsPanel = new Panel();
         public Label dsMessage = new Label();
@@ -74,23 +78,25 @@ namespace AxesAndShoesTWO
 
 
         public Panel characterInteractPanel = new Panel();
-        public  Label characterInteractLabel = new Label();
-        public  Label characterInteractLabelName = new Label();
-        public  Button characterInteractButton = new Button();
+        public Label characterInteractLabel = new Label();
+        public Button characterInteractButton = new Button();
 
 
         public string DeathMessage = "You have died from ";
-        
+
         public int loadColor = 0;
         public int loadOpacity = 255;
         public int currentInteraction = 0;
 
-        public int currentMoney = 10;
+        public int CurrentQuest = 0;
+
+        public int CurrentMoney = 10;
 
         public bool isSelected = false;
         public bool isWriting = false;
         public bool isPaused = false;
         public bool enemyIsDead = false;
+        public bool hasCheckedStorage = false;
         public MainGame()
         {
             InitializeComponent();
@@ -104,8 +110,17 @@ namespace AxesAndShoesTWO
             AllItems = ItemsLoad();
             AllEnemies = EnemiesLoad();
             AllRooms = RoomsLoad();
+            AllQuests = QuestsLoad();
+            AllKeys = KeysLoad();
+            mapImages = MapLoad();
 
 
+
+            pGuns = new Guns();
+            pKeys = new List<KeysRoom>();
+            pKeys.Add(AllKeys[0]);
+            CurrentPlayer.CurrentKeys = pKeys;
+            CurrentPlayer.HotBar = pGuns;
             CurrentRoom.Size = new Size(WidthSet, HeightSet);
             CurrentRoom.Location = new Point(0, 0);
             CurrentRoom.Visible = false;
@@ -126,24 +141,17 @@ namespace AxesAndShoesTWO
             characterInteractButton.BackgroundImageLayout = ImageLayout.Stretch;
             characterInteractButton.Click += new EventHandler(interactButton_Click);
 
-            characterInteractLabel.Location = new Point(0, HeightSet / 2+HeightSet/8);
+            characterInteractLabel.Location = new Point(0, HeightSet / 2 + HeightSet / 8);
             characterInteractLabel.BackColor = Color.Transparent;
             characterInteractLabel.Font = new Font(characterInteractLabel.Font.FontFamily, 36);
             characterInteractLabel.Size = new Size(WidthSet - WidthSet / 10, HeightSet);
             characterInteractLabel.MaximumSize = new Size(WidthSet - WidthSet / 10, HeightSet);
             characterInteractLabel.BackColor = Color.Transparent;
 
-            characterInteractLabelName.Text = Chars[0].Name;
-            characterInteractLabelName.AutoSize = true;
-            characterInteractLabelName.Location = new Point(0, 0);
-            characterInteractLabelName.BackColor = Color.Transparent;
-            characterInteractLabelName.Font = new Font(characterInteractLabelName.Font.FontFamily, 50);
-
             characterInteractPanel.Visible = false;
 
             characterInteractPanel.Controls.Add(characterInteractButton);
             characterInteractPanel.Controls.Add(characterInteractLabel);
-            characterInteractPanel.Controls.Add(characterInteractLabelName);
 
             loadPanel.Location = new Point(0, 0);
             loadPanel.Size = new Size(WidthSet, HeightSet);
@@ -156,7 +164,7 @@ namespace AxesAndShoesTWO
 
 
 
-            statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4+WidthSet/8, HeightSet / 2 + HeightSet / 4+HeightSet/8);
+            statsPanel.Location = new Point(WidthSet / 2 + WidthSet / 4 + WidthSet / 8, HeightSet / 2 + HeightSet / 4 + HeightSet / 8);
             loadPanel.Visible = false;
 
             mainGamePanel.Size = new Size(WidthSet, HeightSet);
@@ -178,8 +186,8 @@ namespace AxesAndShoesTWO
             AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds.ToString();
             AmmoLabel.ForeColor = Color.White;
             AmmoLabel.BackColor = Color.Black;
-            AmmoLabel.Font = new Font(AmmoLabel.Font.FontFamily, HeightSet/30,FontStyle.Bold);
-            AmmoLabel.Size = new Size(WidthSet/20, HeightSet/16);
+            AmmoLabel.Font = new Font(AmmoLabel.Font.FontFamily, HeightSet / 30, FontStyle.Bold);
+            AmmoLabel.Size = new Size(WidthSet / 20, HeightSet / 16);
             AmmoLabel.Location = new Point(PHotBar.Location.X - WidthSet / 20, PHotBar.Location.Y);
 
 
@@ -224,12 +232,12 @@ namespace AxesAndShoesTWO
             mapPanel.Location = new Point(0, 0);
             mapPanel.Visible = false;
 
-            for(int i =0;i !=11;i++)
+            for (int i = 0; i != 11; i++)
             {
                 PictureBox pb = new PictureBox();
                 pb.BackColor = Color.Transparent;
                 pb.Tag = i.ToString();
-                pb.Size = new Size(WidthSet / 8, HeightSet/4);
+                pb.Size = new Size(WidthSet / 8, HeightSet / 4);
                 pb.Location = new Point(WidthSet / 8 * i, HeightSet / 4);
                 pb.Image = Properties.Resources.mapButton;
                 pb.Click += new EventHandler(mapButtonClick);
@@ -244,7 +252,7 @@ namespace AxesAndShoesTWO
             healthBar.Size = new Size(WidthSet / 16, HeightSet / 32);
             thirstBar.Size = new Size(WidthSet / 16, HeightSet / 32);
             hungerBar.Size = new Size(WidthSet / 16, HeightSet / 32);
-            radiationBar.Size = new Size(WidthSet / 16, HeightSet/ 32);
+            radiationBar.Size = new Size(WidthSet / 16, HeightSet / 32);
 
             healthBar.Image = Properties.Resources.healthbar;
             thirstBar.Image = Properties.Resources.thirstbar;
@@ -312,6 +320,7 @@ namespace AxesAndShoesTWO
                     pb.Tag = "0";
                     pb.Name = helpInt.ToString();
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
+                    pb.BackgroundImageLayout = ImageLayout.Stretch;
                     pb.SizeMode = PictureBoxSizeMode.StretchImage;
                     InventorySpace.Controls.Add(pb);
                     helpInt++;
@@ -325,7 +334,8 @@ namespace AxesAndShoesTWO
                 pb.Size = new Size(WidthSet / 20, HeightSet / 10);
                 pb.Location = new Point(0, (HeightSet / 10) * i);
                 pb.Tag = "0";
-                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.BackgroundImageLayout = ImageLayout.Stretch;
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                 pb.Name = "Head";
                 PlayerClothes.Controls.Add(pb);
@@ -352,6 +362,7 @@ namespace AxesAndShoesTWO
                     pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
                     pb.Tag = "0";
                     pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pb.BackgroundImageLayout = ImageLayout.Stretch;
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     StorageSpace.Controls.Add(pb);
                     DropsPanel.Controls.Add(pb);
@@ -392,7 +403,7 @@ namespace AxesAndShoesTWO
             this.Controls.Add(loadPanel);
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
-            
+
             this.Controls.Add(PHotBar);
             this.Controls.Add(statsPanel);
             this.Controls.Add(AmmoLabel);
@@ -406,12 +417,12 @@ namespace AxesAndShoesTWO
 
 
         //START OF TASKS
-        
+
         async Task mainTimer()
         {
-            while(true)
+            while (true)
             {
-                if(CurrentPlayer.IsTorH())
+                if (CurrentPlayer.IsTorH())
                 {
                     CurrentPlayer.HealthWA -= 1;
                     CurrentPlayer.Health -= 1;
@@ -420,18 +431,18 @@ namespace AxesAndShoesTWO
                     CurrentPlayer.Hunger -= 1;
                     CurrentPlayer.Thirst -= 1;
                 }
-                if(CurrentPlayer.Radiation <= 0)
+                if (CurrentPlayer.Radiation <= 0)
                 {
                     CurrentPlayer.HealthWA -= 2;
                     CurrentPlayer.Health -= 2;
                 }
                 ChangeStats();
-                Task.Delay(10000);
+                await Task.Delay(15000);
             }
         }
         async Task Attack()
         {
-            while(!enemyIsDead && CurrentEnemy != null)
+            while (!enemyIsDead && CurrentEnemy != null)
             {
                 CurrentPlayer.Health -= CurrentEnemy.Damage;
                 CurrentPlayer.HealthWA -= CurrentEnemy.Damage;
@@ -451,32 +462,32 @@ namespace AxesAndShoesTWO
             int CurrentHealth = CurrentPlayer.HealthWA;
             foreach (PictureBox pb in PlayerClothes.Controls)
             {
-                
-                if(pb.Tag.ToString() != "0")
+
+                if (pb.Tag.ToString() != "0")
                 {
                     Clothes CurrentClothing = AllItems[Convert.ToInt32(pb.Tag) - 1] as Clothes;
                     CurrentHealth += CurrentClothing.HealthBoost;
                 }
             }
-            if(PHotBar.Tag.ToString() == "0" || PHotBar.Image == null)
+            if (PHotBar.Tag.ToString() == "0" || PHotBar.Image == null)
             {
                 PHotBar.Tag = "0";
                 PHotBar.Image = null;
                 CurrentPlayer.HotBar = null;
-            }else
+            } else
             {
                 CurrentPlayer.HotBar = AllItems[Convert.ToInt32(PHotBar.Tag) - 1] as Guns;
             }
             CurrentPlayer.Health = CurrentHealth;
             ChangeStats();
-            if(!CurrentPlayer.IsAlive())
+            if (!CurrentPlayer.IsAlive())
             {
                 DeathMessage += " taking off your clothes, which were holding you together.";
                 DeathScreen();
- 
+
             }
         }
-        async Task writeOutLines(string Message)                        
+        async Task writeOutLines(string Message)
         {
             //neprepise se kdyz posle dalsi writeOutLines, seru na uzivatele
             if (isWriting) { currentInteraction--; return; }
@@ -489,7 +500,7 @@ namespace AxesAndShoesTWO
             }
             isWriting = false;
         }
-       
+
         async Task loadTimer_Tick()
         {
             while (loadColor < 255)
@@ -515,7 +526,7 @@ namespace AxesAndShoesTWO
 
         async Task Reloading()
         {
-            if(!CurrentPlayer.HotBar.isAbleToShoot)
+            if (!CurrentPlayer.HotBar.isAbleToShoot)
             {
                 return;
             }
@@ -573,11 +584,98 @@ namespace AxesAndShoesTWO
                 (sender as PictureBox).Click += new EventHandler(pbClick);
 
                 enemyIsDead = false;
-                await Task.Run(() =>Attack());
+                await Task.Run(() => Attack());
             }
         }
         //END OF TASKS
         //START OF METHODS
+        public void QuestCheck()
+        {
+            //    list.Add(Quests.RunCatacombs);
+            //    list.Add(Quests.InspectStorage);
+            //    list.Add(Quests.RunElectricity);
+            //    list.Add(Quests.ThreathenHorkymi);
+            //    list.Add(Quests.BringBackARareItem);
+            //    list.Add(Quests.RunEngine);
+            //    list.Add(Quests.MurderKorky);
+            //    list.Add(Quests.ObtainAGasMask);
+            //    list.Add(Quests.RunVault);
+            //    list.Add(Quests.RunRogerHouse);
+            //    list.Add(Quests.Decide);
+
+            //if(CurrentQuest == 7)
+            //{
+            //    foreach(Control c in PlayerClothes.Controls)
+            //    {
+            //        if((c is PictureBox))
+            //        {
+            //            if((c as PictureBox).Tag.ToString() == "40")
+            //            {
+            //                CurrentQuest = 6;
+            //            }
+            //        }
+            //    }
+            //    foreach(Control c in InventorySpace.Controls)
+            //    {
+            //        if(c is PictureBox)
+            //        {
+            //            if ((c as PictureBox).Tag.ToString() == "40")
+            //            {
+            //                CurrentQuest = 6;
+            //            }
+            //        }
+            //    }
+            //} else 
+            if (true) //murdered Korky
+            {
+
+            }
+            else
+            if (true) //threathened horkymi
+            {
+                CurrentQuest = 4;
+            }
+            else
+            if (CurrentPlayer.CurrentKeys.Contains(KeysRoom.EngineRoom))
+            {
+                CurrentQuest = 3;
+            } else
+            if (hasCheckedStorage)
+            {
+                CurrentQuest = 2;
+            } else
+            if (CurrentPlayer.CurrentKeys.Contains(KeysRoom.ElectricityRoom))
+            {
+                CurrentQuest = 1;
+            }
+
+        }
+        public List<Image> MapLoad() 
+        {
+            List<Image> list = new List<Image>();
+            list.Add(Properties.Resources.catacombsicon);
+            list.Add(Properties.Resources.electricityroomicon);
+            list.Add(Properties.Resources.engineroomicon);
+            list.Add(Properties.Resources.vaultdooricon);
+            list.Add(Properties.Resources.rogershrinedooricon);
+            list.Add(Properties.Resources.boryshqroomicon);
+            list.Add(Properties.Resources.storageroomicon);
+            list.Add(Properties.Resources.medicslabicon);
+            list.Add(Properties.Resources.armoryroomicon);
+            list.Add(Properties.Resources.mainroomicon);
+            return list;
+        }
+        public List<KeysRoom> KeysLoad()
+        {
+            List<KeysRoom> list = new List<KeysRoom>();
+            list.Add(KeysRoom.Catacombs);
+            list.Add(KeysRoom.ElectricityRoom);
+            list.Add(KeysRoom.EngineRoom);
+            list.Add(KeysRoom.VaultDoor);
+            list.Add(KeysRoom.RogersShrineDoor);
+            list.Add(KeysRoom.BorysHQDoor);
+            return list;
+        }
         public void DeathScreen()
         {
             Log("At the start of  foreach");
@@ -695,18 +793,35 @@ namespace AxesAndShoesTWO
                 sw.WriteLine(DateTime.Now + ": " + message);
             }
         }
+
+        public List<Quests> QuestsLoad()
+        {
+            List<Quests> list = new List<Quests>();
+            list.Add(Quests.RunCatacombs);
+            list.Add(Quests.InspectStorage);
+            list.Add(Quests.RunElectricity);
+            list.Add(Quests.ThreathenHorkymi);
+            list.Add(Quests.BringBackARareItem);
+            list.Add(Quests.RunEngine);
+            list.Add(Quests.MurderKorky);
+            list.Add(Quests.ObtainAGasMask);
+            list.Add(Quests.RunVault);
+            list.Add(Quests.RunRogerHouse);
+            list.Add(Quests.Decide);
+            return list;
+
+        }
+
         public List<Characters> CharactersLoad()
         {
             List<Characters> list = new List<Characters>();
-            Characters SgtBory = new Characters("Sgt. Blueberry", Properties.Resources.voiceLineTestBedImage);
-            Characters EndBossBory = new Characters("Blueberry", Properties.Resources.voiceLineTestBedImage);
-            Characters Korky = new Characters("Mr. Korky", Properties.Resources.voiceLineTestBedImage);
-            Characters Medved = new Characters("Medved", Properties.Resources.voiceLineTestBedImage);
-            Characters Horkymi = new Characters("Horkymi", Properties.Resources.voiceLineTestBedImage);
-            Characters Mako = new Characters("Mako", Properties.Resources.voiceLineTestBedImage);
-            Characters ChiefPear = new Characters("Chief Pear", Properties.Resources.voiceLineTestBedImage);
-
-
+            Characters SgtBory = new Characters("Sgt. Blueberry", Properties.Resources.dialog_bory);
+            Characters EndBossBory = new Characters("Blueberry", Properties.Resources.dialog_bossbory);
+            Characters Korky = new Characters("Mr. Korky", Properties.Resources.dialog_korky);
+            Characters Medved = new Characters("Medved", Properties.Resources.dialog_bear);
+            Characters Horkymi = new Characters("Horkymi", Properties.Resources.dialog_horkymi);
+            Characters Mako = new Characters("Mako", Properties.Resources.dialog_mako);
+            Characters ChiefPear = new Characters("Chief Pear", Properties.Resources.dialog_chiefpear);
             list.Add(SgtBory);
             list.Add(EndBossBory);
             list.Add(Korky);
@@ -818,20 +933,37 @@ namespace AxesAndShoesTWO
         {
             List<Rooms> list = new List<Rooms>();
 
-            list.Add(new Rooms(1, "Catacombs", "NULL", KeysRoom.Catacombs, KeysRoom.ElectricityRoom, Properties.Resources.roomTest));
-            list.Add(new Rooms(2, "Electricity Room", "NULL", KeysRoom.ElectricityRoom, KeysRoom.EngineRoom, Properties.Resources.electricityRoom));
-            list.Add(new Rooms(3, "Engine Room", "NULL", KeysRoom.EngineRoom, KeysRoom.VaultDoor, Properties.Resources.engineRoom));
-            list.Add(new Rooms(4, "Vault Air-Lock", "NULL", KeysRoom.VaultDoor, KeysRoom.RogersShrineDoor, Properties.Resources.vaultDoor));
-            list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.rogersShrine));
-            list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.borysHQ));
+            list.Add(new Rooms(1, "Catacombs", "NULL", KeysRoom.Catacombs, KeysRoom.ElectricityRoom, Properties.Resources.Catacombs));
+            list.Add(new Rooms(2, "Electricity Room", "NULL", KeysRoom.ElectricityRoom, KeysRoom.EngineRoom, Properties.Resources.ElectricityRoom1));
+            list.Add(new Rooms(3, "Engine Room", "NULL", KeysRoom.EngineRoom, KeysRoom.VaultDoor, Properties.Resources.EngineRoom1));
+            list.Add(new Rooms(4, "Vault Air-Lock", "NULL", KeysRoom.VaultDoor, KeysRoom.RogersShrineDoor, Properties.Resources.VaultDoor1));
+            list.Add(new Rooms(5, "Roger's Shrine", "NULL", KeysRoom.RogersShrineDoor, KeysRoom.BorysHQDoor, Properties.Resources.RogersShrineDoor));
+            list.Add(new Rooms(6, "Blueberry's HeadQuarters Room", "NULL", KeysRoom.BorysHQDoor, KeysRoom.BorysHQDoor, Properties.Resources.BorysHQDoor));
 
-            list.Add(new Rooms(7, "Storage room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.blackPanel));
-            list.Add(new Rooms(8, "Medic's lab", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.medicslab));
-            list.Add(new Rooms(9, "Armory", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.armory));
-            list.Add(new Rooms(10, "Main room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.mainRoom));
+            list.Add(new Rooms(7, "Storage room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.StorageRoom));
+            list.Add(new Rooms(8, "Medic's lab", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.MedicsLab1));
+            list.Add(new Rooms(9, "Armory", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.ArmoryRoom));
+            list.Add(new Rooms(10, "Main room", "NULL", KeysRoom.Catacombs, KeysRoom.Catacombs, Properties.Resources.MainRoom1));
 
             return list;
 
+        }
+        public bool CanSpawnARoom(Rooms GivenRoom)
+        {
+            if (GivenRoom.ID == 4 || GivenRoom.ID == 5)
+            {
+                if((PlayerClothes.Controls[0] as PictureBox).Tag.ToString() == "40" && AllRooms.IndexOf(GivenRoom) < CurrentPlayer.CurrentKeys.Count)
+                {
+                    return true;
+                }
+                return false;
+            }
+            if (AllRooms.IndexOf(GivenRoom) < CurrentPlayer.CurrentKeys.Count)
+            {
+                return true;
+            }
+            
+            return false;
         }
         public void RefreshLabel()
         {
@@ -875,7 +1007,7 @@ namespace AxesAndShoesTWO
                 case 8:
                     CurrentRoom.BackgroundImage = AllRooms[7].Img;
                     CurrentRoom.Visible = true;
-
+                    hasCheckedStorage = true;
                     break;
             }
             
@@ -887,6 +1019,15 @@ namespace AxesAndShoesTWO
                 GoTo(GivenRoom); //timhle jen serazuju spawning a goto room, jsou to dve jine funkce logicky lmfao :)
                 return;
             }
+            if(!CanSpawnARoom(GivenRoom))
+            {
+                MessageBox.Show("NELZE!");
+                return;
+            }
+
+
+            CurrentRoom.Visible = true;
+
             PHotBar.Visible = true;
             AmmoLabel.Visible = true;
             statsPanel.Visible = true;
@@ -1037,7 +1178,6 @@ namespace AxesAndShoesTWO
             {
                 MessageBox.Show("mistnost jeste neni dodelana..");
             }
-            CurrentRoom.Visible = true;
         }
         private void inventoryCheck(object sender, EventArgs e)
         {
@@ -1160,7 +1300,6 @@ namespace AxesAndShoesTWO
             {
                 if (AllItems[Convert.ToInt32(lastPb.Tag) - 1] is Guns)
                 {
-                    
                     pictureBox.Image = lastPb.Image;
                     pictureBox.Tag = lastPb.Tag;
                     lastPb.BackgroundImage = Properties.Resources.backgroundItem;
@@ -1248,7 +1387,6 @@ namespace AxesAndShoesTWO
                 {
                     string[] args = CharacterInteractions[currentInteraction].Split(' ');
                     characterInteractLabel.Text = String.Empty;
-                    characterInteractLabelName.Text = Chars[Convert.ToInt32(args[1])].Name;
                     characterInteractPanel.BackgroundImage = Chars[Convert.ToInt32(args[1])].img;
                 }
                 else
@@ -1366,14 +1504,16 @@ namespace AxesAndShoesTWO
     {
         RunCatacombs,
         InspectStorage,
-        RunElectriity,
+        RunElectricity,
         ThreathenHorkymi,
         BringBackARareItem,
         RunEngine,
         MurderKorky,
         ObtainAGasMask,
-        RunVault
-        //to be done
+        RunVault,
+        RunRogerHouse,
+        Decide
+        
     };
     public enum TypeOfCons
     {
