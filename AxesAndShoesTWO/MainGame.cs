@@ -47,6 +47,13 @@ namespace AxesAndShoesTWO
         public List<KeysRoom> AllKeys = new List<KeysRoom>();
         public List<Image> mapImages = new List<Image>();
 
+        
+        public Panel MedicPart = new Panel();
+        public Button HealButton = new Button();
+
+        public Panel ArmoryPart = new Panel();
+        public PictureBox SlotSell = new PictureBox();
+        public Button ConfirmSell = new Button();   
 
         public Panel InventoryToStorage = new Panel();
         public Panel InventorySpace = new Panel();
@@ -227,19 +234,26 @@ namespace AxesAndShoesTWO
             mainGamePanel.Controls.Add(quitButton);
             mainGamePanel.Controls.Add(creditsButton);
 
-            mapPanel.BackgroundImage = Properties.Resources.mapBackGround;
+            mapPanel.BackgroundImage = Properties.Resources.map_background;
             mapPanel.Size = new Size(WidthSet, HeightSet);
             mapPanel.Location = new Point(0, 0);
             mapPanel.Visible = false;
 
-            for (int i = 0; i != 11; i++)
+            for (int i = 0; i != 10; i++)
             {
                 PictureBox pb = new PictureBox();
                 pb.BackColor = Color.Transparent;
                 pb.Tag = i.ToString();
                 pb.Size = new Size(WidthSet / 8, HeightSet / 4);
-                pb.Location = new Point(WidthSet / 8 * i, HeightSet / 4);
-                pb.Image = Properties.Resources.mapButton;
+                if(i >= 6)
+                {
+                    pb.Location = new Point(WidthSet / 8 * (i - 6), HeightSet / 2);
+                } else
+                {
+                    pb.Location = new Point(WidthSet / 8 * i, HeightSet / 4);
+
+                }
+                pb.Image = mapImages[i];
                 pb.Click += new EventHandler(mapButtonClick);
                 mapPanel.Controls.Add(pb);
             }
@@ -289,6 +303,38 @@ namespace AxesAndShoesTWO
             StorageSpace.Size = new Size(WidthSet / 2, HeightSet);
             StorageSpace.Location = new Point(WidthSet / 2, 0);
             StorageSpace.BackColor = Color.Transparent;
+            StorageSpace.Visible = false;
+
+            ArmoryPart.Size = new Size(WidthSet / 2, Height);
+            ArmoryPart.Location = new Point(WidthSet / 2, 0);
+            ArmoryPart.BackColor = Color.Transparent;
+            ArmoryPart.Visible = false;
+
+            SlotSell.Size = new Size(WidthSet / 20, HeightSet / 10);
+            SlotSell.Location = new Point(WidthSet / 4 - WidthSet/40, HeightSet / 8);
+            SlotSell.BackgroundImage =Properties.Resources.backgroundItem;
+            SlotSell.Tag = "0";
+            SlotSell.Image = null;
+
+            ConfirmSell.Size = new Size(WidthSet / 10, HeightSet / 10);
+            ConfirmSell.Location = new Point(WidthSet / 4 - WidthSet / 20, Height / 4);
+            ConfirmSell.Text = "Sell";
+            ConfirmSell.Click += new EventHandler(Sell);
+
+            ArmoryPart.Controls.Add(ConfirmSell);
+            ArmoryPart.Controls.Add(SlotSell);
+
+            MedicPart.Size = new Size(WidthSet / 2, HeightSet);
+            MedicPart.Location = new Point(WidthSet / 2, 0);
+            MedicPart.BackColor = Color.Transparent;
+            MedicPart.Visible = false;
+
+            HealButton.Text = "Heal";
+            HealButton.Size = new Size(WidthSet / 10, HeightSet / 10);
+            HealButton.Location = new Point(WidthSet/4 -WidthSet/20, HeightSet/4);
+            HealButton.Click += new EventHandler(Heal);
+
+            MedicPart.Controls.Add(HealButton);
 
             DropsPanel.Size = new Size(WidthSet / 2, HeightSet);
             DropsPanel.Location = new Point(WidthSet / 2, 0);
@@ -307,6 +353,8 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Controls.Add(InventorySpace);
             InventoryToStorage.Controls.Add(StorageSpace);
             InventoryToStorage.Controls.Add(DropsPanel);
+            InventoryToStorage.Controls.Add(ArmoryPart);
+            InventoryToStorage.Controls.Add(MedicPart);
 
             int helpInt = 0;
             for (int i = 0; i != 5; i++)
@@ -365,10 +413,28 @@ namespace AxesAndShoesTWO
                     pb.BackgroundImageLayout = ImageLayout.Stretch;
                     pb.MouseDown += new MouseEventHandler(MouseClickEvent);
                     StorageSpace.Controls.Add(pb);
-                    DropsPanel.Controls.Add(pb);
                 }
             }
             InventoryToStorage.Visible = false;
+            for (int i = 0; i != 5; i++)
+            {
+                for (int j = 0; j != 5; j++)
+                {
+                    PictureBox pb = new PictureBox();
+                    pb.BackgroundImage = Properties.Resources.backgroundItem;
+                    pb.Size = new Size(WidthSet / 20, HeightSet / 10);
+                    pb.Location = new Point((WidthSet / 20) * j + WidthSet / 16, (HeightSet / 10) * i + HeightSet / 4);
+                    pb.Tag = "0";
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pb.BackgroundImageLayout = ImageLayout.Stretch;
+                    pb.MouseDown += new MouseEventHandler(MouseClickEvent);
+                    DropsPanel.Controls.Add(pb);
+
+                }
+            }
+
+
+
 
             //Test Batch
             InventorySpace.Controls[0].Tag = "1";
@@ -994,20 +1060,30 @@ namespace AxesAndShoesTWO
         }
         public void GoTo(Rooms GivenRoom)
         {
-            CurrentRoomR = GivenRoom;
+
             switch (GivenRoom.ID)
             {
                 case 7:
-
                     CloseInventory();
                     CloseMap();
                     OpenInventory();
                     StorageSpace.Visible = true;
+                    hasCheckedStorage = true;
+                    InventoryToStorage.BackgroundImage = Properties.Resources.StorageRoom;
                     break;
                 case 8:
-                    CurrentRoom.BackgroundImage = AllRooms[7].Img;
-                    CurrentRoom.Visible = true;
-                    hasCheckedStorage = true;
+                    CloseInventory();
+                    CloseMap();
+                    OpenInventory();
+                    MedicPart.Visible = true;
+                    InventoryToStorage.BackgroundImage = Properties.Resources.MedicsLab1;
+                    break;
+                case 9:
+                    CloseInventory();
+                    CloseMap();
+                    OpenInventory();
+                    ArmoryPart.Visible = true;
+                    InventoryToStorage.BackgroundImage = Properties.Resources.ArmoryRoom;
                     break;
             }
             
@@ -1090,6 +1166,7 @@ namespace AxesAndShoesTWO
                 PHotBar.Visible = true;
                 statsPanel.Visible = true;
                 AmmoLabel.Visible = true;
+            InventoryToStorage.BackgroundImage = Properties.Resources.inventoryBI;
         }
         public void CloseInventory()
         {
@@ -1108,6 +1185,37 @@ namespace AxesAndShoesTWO
 
         //END OF METHODS
         //START OF EVENTS
+
+        private void Sell(object sender, EventArgs e )
+        {
+            string tag = (ArmoryPart.Controls[0] as PictureBox).Tag.ToString();
+            if (tag!="0")
+            {
+                int tagInt = Convert.ToInt32(tag);
+                switch(AllItems[tagInt-1].Rarity)
+                {
+                    case Rarity.Common:
+                        CurrentMoney += 3;
+                        break;
+                    case Rarity.Uncommon:
+
+                        CurrentMoney += 6;
+                        break;
+                    case Rarity.Rare:
+
+                        CurrentMoney += 10;
+                        break;
+                    case Rarity.Epic:
+
+                        CurrentMoney += 25;
+                        break;
+                    case Rarity.Legendary:
+
+                        CurrentMoney += 125;
+                        break;
+                }
+            }
+        }
         private void useEvent(object sender, EventArgs e)
         {
             try
