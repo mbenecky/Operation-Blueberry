@@ -63,6 +63,7 @@ namespace AxesAndShoesTWO
         public Panel PlayerClothes = new Panel();
         public PictureBox PHotBar = new PictureBox();
         public Label AmmoLabel = new Label();
+        public PictureBox AmmoPic = new PictureBox();
 
         public Panel CurrentRoom = new Panel();
         public Rooms CurrentRoomR = null;
@@ -71,6 +72,9 @@ namespace AxesAndShoesTWO
         public Label loadLabel = new Label();
         public Panel loadPanel = new Panel();
         public Panel mainGamePanel = new Panel();
+
+        public Label MoneyLabel = new Label();
+        public PictureBox MoneyPicBox = new PictureBox();
 
         public Panel MainRoom = new Panel();
         //dodelat pictureboxy jako NPCs
@@ -121,7 +125,17 @@ namespace AxesAndShoesTWO
             AllKeys = KeysLoad();
             mapImages = MapLoad();
 
-
+            MoneyLabel.Text = CurrentMoney.ToString();
+            MoneyLabel.Location = new Point(WidthSet/6,HeightSet-HeightSet/12);
+            MoneyLabel.Size = new Size(WidthSet / 14, HeightSet / 10);
+            MoneyPicBox.Location = new Point(WidthSet/12, HeightSet-HeightSet/10);
+            MoneyLabel.Font = new Font(MoneyLabel.Font.FontFamily, 32, FontStyle.Bold);
+            MoneyLabel.BackColor = Color.White;
+            MoneyLabel.ForeColor = Color.Black;
+            MoneyPicBox.Size = new Size(WidthSet/14, HeightSet/10);
+            MoneyPicBox.BackColor = Color.Transparent;
+            MoneyPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            MoneyPicBox.Image = Properties.Resources.coin;
 
             pGuns = new Guns();
             pKeys = new List<KeysRoom>();
@@ -178,7 +192,7 @@ namespace AxesAndShoesTWO
 
             PictureBox newGameButton = new PictureBox();
             PictureBox quitButton = new PictureBox();//options nehodlam delat nevim co bych tam optionoval a je lepsi kdyz hrac nevi
-            PictureBox creditsButton = new PictureBox();
+         
 
 
 
@@ -218,21 +232,13 @@ namespace AxesAndShoesTWO
             quitButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
             quitButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
 
-            creditsButton.Size = newGameButton.Size;
-            creditsButton.Location = new Point(quitButton.Location.X, quitButton.Location.Y + HeightSet / 6 - 5);
-            creditsButton.Image = Properties.Resources.credits_button;
-            creditsButton.BackColor = Color.Transparent;
-            creditsButton.Name = "creditsButton";
-            creditsButton.SizeMode = PictureBoxSizeMode.StretchImage;
-            creditsButton.MouseEnter += new EventHandler(globalMouseEnterEvent);
-            creditsButton.MouseLeave += new EventHandler(globalMouseLeaveEvent);
+            
 
 
             mainGamePanel.BackgroundImage = Properties.Resources.menu;
 
             mainGamePanel.Controls.Add(newGameButton);
             mainGamePanel.Controls.Add(quitButton);
-            mainGamePanel.Controls.Add(creditsButton);
 
             mapPanel.BackgroundImage = Properties.Resources.map_background;
             mapPanel.Size = new Size(WidthSet, HeightSet);
@@ -311,19 +317,22 @@ namespace AxesAndShoesTWO
             ArmoryPart.Visible = false;
 
             SlotSell.Size = new Size(WidthSet / 20, HeightSet / 10);
-            SlotSell.Location = new Point(WidthSet / 4 - WidthSet/40, HeightSet / 8);
+            SlotSell.Location = new Point(WidthSet / 4 - WidthSet/40, HeightSet / 4);
             SlotSell.BackgroundImage =Properties.Resources.backgroundItem;
+            SlotSell.BackgroundImageLayout = ImageLayout.Stretch;
+            SlotSell.SizeMode = PictureBoxSizeMode.StretchImage;
             SlotSell.Tag = "0";
             SlotSell.Image = null;
+            SlotSell.Click += new EventHandler(inventoryCheck);
 
             ConfirmSell.Size = new Size(WidthSet / 10, HeightSet / 10);
-            ConfirmSell.Location = new Point(WidthSet / 4 - WidthSet / 20, Height / 4);
+            ConfirmSell.Location = new Point(WidthSet / 4 - WidthSet / 20, Height / 2);
             ConfirmSell.Text = "Sell";
             ConfirmSell.Click += new EventHandler(Sell);
 
-            ArmoryPart.Controls.Add(ConfirmSell);
+            
             ArmoryPart.Controls.Add(SlotSell);
-
+            ArmoryPart.Controls.Add(ConfirmSell);
             MedicPart.Size = new Size(WidthSet / 2, HeightSet);
             MedicPart.Location = new Point(WidthSet / 2, 0);
             MedicPart.BackColor = Color.Transparent;
@@ -374,7 +383,6 @@ namespace AxesAndShoesTWO
                     helpInt++;
                 }
             }
-
             for (int i = 0; i != 4; i++)
             {
                 PictureBox pb = new PictureBox();
@@ -470,6 +478,8 @@ namespace AxesAndShoesTWO
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
 
+            this.Controls.Add(MoneyLabel);
+            this.Controls.Add(MoneyPicBox);
             this.Controls.Add(PHotBar);
             this.Controls.Add(statsPanel);
             this.Controls.Add(AmmoLabel);
@@ -1166,6 +1176,8 @@ namespace AxesAndShoesTWO
                 PHotBar.Visible = true;
                 statsPanel.Visible = true;
                 AmmoLabel.Visible = true;
+            ArmoryPart.Visible = false;
+            MedicPart.Visible = false;
             InventoryToStorage.BackgroundImage = Properties.Resources.inventoryBI;
         }
         public void CloseInventory()
@@ -1189,7 +1201,7 @@ namespace AxesAndShoesTWO
         private void Sell(object sender, EventArgs e )
         {
             string tag = (ArmoryPart.Controls[0] as PictureBox).Tag.ToString();
-            if (tag!="0")
+            if (tag != "0") 
             {
                 int tagInt = Convert.ToInt32(tag);
                 switch(AllItems[tagInt-1].Rarity)
@@ -1214,6 +1226,20 @@ namespace AxesAndShoesTWO
                         CurrentMoney += 125;
                         break;
                 }
+                 (ArmoryPart.Controls[0] as PictureBox).Image = null;
+                (ArmoryPart.Controls[0] as PictureBox).Tag = "0";
+
+                MoneyLabel.Text = CurrentMoney.ToString();
+            }
+        }
+        private void Heal(object sender, EventArgs e)
+        {
+            if(CurrentMoney >= 10)
+            {
+                CurrentMoney -= 10;
+                CurrentPlayer.Health += 30;
+                CurrentPlayer.HealthWA += 30;
+                ChangeStats();
             }
         }
         private void useEvent(object sender, EventArgs e)
