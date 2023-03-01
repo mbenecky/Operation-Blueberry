@@ -125,17 +125,6 @@ namespace AxesAndShoesTWO
             AllKeys = KeysLoad();
             mapImages = MapLoad();
 
-            MoneyLabel.Text = CurrentMoney.ToString();
-            MoneyLabel.Location = new Point(WidthSet/6,HeightSet-HeightSet/12);
-            MoneyLabel.Size = new Size(WidthSet / 14, HeightSet / 10);
-            MoneyPicBox.Location = new Point(WidthSet/12, HeightSet-HeightSet/10);
-            MoneyLabel.Font = new Font(MoneyLabel.Font.FontFamily, 32, FontStyle.Bold);
-            MoneyLabel.BackColor = Color.White;
-            MoneyLabel.ForeColor = Color.Black;
-            MoneyPicBox.Size = new Size(WidthSet/14, HeightSet/10);
-            MoneyPicBox.BackColor = Color.Transparent;
-            MoneyPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            MoneyPicBox.Image = Properties.Resources.coin;
 
             pGuns = new Guns();
             pKeys = new List<KeysRoom>();
@@ -201,10 +190,9 @@ namespace AxesAndShoesTWO
             PHotBar.Size = new Size(WidthSet / 20, HeightSet / 10);
             PHotBar.Location = new Point(WidthSet / 2 - WidthSet / 40, HeightSet - HeightSet / 10);
             PHotBar.Click += new EventHandler(inventoryCheck);
-            PHotBar.Tag = "7";
             PHotBar.Name = "Hotbar";
-            PHotBar.Image = Properties.Resources.gunTest;
-            AmmoLabel.Text = CurrentPlayer.HotBar.CurrentAmountOfRounds.ToString();
+            PHotBar.Tag = "0";
+            AmmoLabel.Text = 0.ToString();
             AmmoLabel.ForeColor = Color.White;
             AmmoLabel.BackColor = Color.Black;
             AmmoLabel.Font = new Font(AmmoLabel.Font.FontFamily, HeightSet / 30, FontStyle.Bold);
@@ -350,11 +338,24 @@ namespace AxesAndShoesTWO
             DropsPanel.BackColor = Color.Transparent;
             DropsPanel.Visible = false;
 
-            PlayerClothes.Size = new Size(WidthSet / 20, HeightSet / 10 * 4);
-            PlayerClothes.Location = new Point(WidthSet / 8, HeightSet / 4);
+            PlayerClothes.Size = new Size(WidthSet / 6, HeightSet / 10 * 4);
+            PlayerClothes.Location = new Point(WidthSet / 10, HeightSet / 4);
             PlayerClothes.BackColor = Color.Transparent;
             PlayerClothes.Visible = true;
             PlayerClothes.Name = "PlayerClothes";
+
+            MoneyLabel.Text = CurrentMoney.ToString();
+            MoneyLabel.Location = new Point(WidthSet/10,0);
+            MoneyLabel.Size = new Size(WidthSet / 20, HeightSet / 10);
+            MoneyLabel.Font = new Font(MoneyLabel.Font.FontFamily, 32, FontStyle.Bold);
+            MoneyLabel.BackColor = Color.Transparent;
+            MoneyLabel.ForeColor = Color.White;
+            
+            MoneyPicBox.Location = new Point(WidthSet/16,0);
+            MoneyPicBox.Size = new Size(WidthSet / 20, HeightSet / 20);
+            MoneyPicBox.BackColor = Color.Transparent;
+            MoneyPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            MoneyPicBox.Image = Properties.Resources.coin;
 
             CurrentEnemy = null;
 
@@ -406,6 +407,8 @@ namespace AxesAndShoesTWO
             (PlayerClothes.Controls[3] as PictureBox).BackgroundImage = Properties.Resources.feetPlace;
             (PlayerClothes.Controls[3] as PictureBox).Name = "Feet";
 
+            PlayerClothes.Controls.Add(MoneyLabel);
+            PlayerClothes.Controls.Add(MoneyPicBox);
             //zmena pl...
 
             for (int i = 0; i != 5; i++)
@@ -446,9 +449,9 @@ namespace AxesAndShoesTWO
 
             //Test Batch
             InventorySpace.Controls[0].Tag = "1";
-            (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.gunTest;
+            (InventorySpace.Controls[0] as PictureBox).Image = Properties.Resources.AK47;
             InventorySpace.Controls[1].Tag = "41";
-            (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.itemTest;
+            (InventorySpace.Controls[1] as PictureBox).Image = Properties.Resources.CanOfBeans;
             InventorySpace.Controls[2].Tag = "3";
             (InventorySpace.Controls[2] as PictureBox).Image = Properties.Resources.bonnieHat;
             InventorySpace.Controls[3].Tag = "4";
@@ -478,8 +481,6 @@ namespace AxesAndShoesTWO
             this.Controls.Add(characterInteractPanel);
             this.Controls.Add(mainGamePanel);
 
-            this.Controls.Add(MoneyLabel);
-            this.Controls.Add(MoneyPicBox);
             this.Controls.Add(PHotBar);
             this.Controls.Add(statsPanel);
             this.Controls.Add(AmmoLabel);
@@ -1060,6 +1061,11 @@ namespace AxesAndShoesTWO
             InventoryToStorage.Visible = true;
             DropsPanel.Visible = true;
             StorageSpace.Visible = false;
+            if(!CurrentPlayer.CurrentKeys.Contains(GivenRoom.ReceivedKey))
+            {
+                CurrentPlayer.CurrentKeys.Add(GivenRoom.ReceivedKey);
+            }
+
             int currentPicBox = 0;
             foreach (Items it in GivenRoom.Drops)
             {
@@ -1240,7 +1246,9 @@ namespace AxesAndShoesTWO
                 CurrentPlayer.Health += 30;
                 CurrentPlayer.HealthWA += 30;
                 ChangeStats();
+                MoneyLabel.Text = CurrentMoney.ToString();
             }
+
         }
         private void useEvent(object sender, EventArgs e)
         {
@@ -1526,6 +1534,7 @@ namespace AxesAndShoesTWO
                 else
                 {
                     characterInteractPanel.Visible = false;
+                    OpenMap();
                     CreateMessage("Tohle je jen Beta verze!!!!\nPro otevreni mapy - M\nPro otevreni inventare - E\nStrileni - LMB\n Reload - R\n jo a mensi oznameni, hra je nehorazne hlasita protoze neexistuje nic jako volumecontrol na soundplayeru, takze doporocuji ztisit!!!!");
                 }
                 currentInteraction++;
